@@ -18,15 +18,31 @@
          <Font size="15.0" />
       </font>
    </Label>
-   <HBox prefHeight="100.0" prefWidth="200.0">
+   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
       <children>
-         <ListView fx:id="list" prefHeight="200.0" prefWidth="200.0" />
-         <ListView fx:id="filteredList" prefHeight="200.0" prefWidth="200.0">
-            <HBox.margin>
+         <VBox alignment="CENTER" prefHeight="100.0" prefWidth="167.0">
+            <children>
+               <Label text="Эталонные файлы" />
+               <ListView fx:id="filteredList" prefHeight="200.0" prefWidth="200.0" />
+            </children>
+         </VBox>
+         <VBox alignment="CENTER" prefHeight="100.0" prefWidth="154.0">
+            <children>
+               <Label text="Файлы для обработки" />
+               <ListView fx:id="list" prefHeight="100.0" prefWidth="226.0">
+                  <opaqueInsets>
+                     <Insets left="30.0" />
+                  </opaqueInsets>
+               </ListView>
+            </children>
+            <opaqueInsets>
                <Insets left="30.0" />
-            </HBox.margin>
-         </ListView>
+            </opaqueInsets>
+         </VBox>
       </children>
+      <opaqueInsets>
+         <Insets left="20.0" />
+      </opaqueInsets>
    </HBox>
     <Label fx:id="text" text="Введите путь" />
     <TextField fx:id="input" prefHeight="0.0" prefWidth="410.0" />

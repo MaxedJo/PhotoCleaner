@@ -45,9 +45,9 @@ public class MainController{
         Directory dir = new Directory(path);
         if (dir.isDirectory()){
             pathToFiles.setText(path);
-            items = dir.getFileList();
+            items = dir.getFileList(secondaryExpansive.getText());
             list.getItems().addAll(items);
-            items = dir.getFileList(".bmp");
+            items = dir.getFileList(mainExpansive.getText());
             filteredList.getItems().addAll(items);
         } else {
             text.setText("Неправильный путь, введите путь заного");
