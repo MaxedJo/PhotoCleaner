@@ -3,15 +3,10 @@ package ru.maxed.photocleaner;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-
-import java.io.File;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class MainController{
 
@@ -42,6 +37,8 @@ public class MainController{
     protected void onOpenButtonClick() {
         counter++;
         String path = input.getText();
+        list.getItems().clear();
+        filteredList.getItems().clear();
         Directory dir = new Directory(path);
         if (dir.isDirectory()){
             pathToFiles.setText(path);

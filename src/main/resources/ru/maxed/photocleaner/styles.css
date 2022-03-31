@@ -1,7 +1,3 @@
-.label{
-    color: red;
-}
-
-#test{
-    padding-bottom: 300px;
+.button{
+    -fx-background-color: green;
 }
