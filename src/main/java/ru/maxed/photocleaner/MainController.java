@@ -3,18 +3,15 @@ package ru.maxed.photocleaner;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class MainController{
 
     @FXML
-    private ListView<String> list;
+    private ListView list;
     ObservableList<String> items = FXCollections.observableArrayList();
     @FXML
-    private  ListView<String> filteredList;
+    private  ListView filteredList;
 
     @FXML
     private Button test;
@@ -32,20 +29,25 @@ public class MainController{
     @FXML
     private Label pathToFiles;
 
-
     @FXML
     protected void onOpenButtonClick() {
         counter++;
         String path = input.getText();
-        list.getItems().clear();
-        filteredList.getItems().clear();
+        if (list != null)  list.getItems().clear();
+        if (filteredList != null) filteredList.getItems().clear();
         Directory dir = new Directory(path);
         if (dir.isDirectory()){
             pathToFiles.setText(path);
-            items = dir.getFileList(secondaryExpansive.getText());
-            list.getItems().addAll(items);
-            items = dir.getFileList(mainExpansive.getText());
-            filteredList.getItems().addAll(items);
+            items = dir.getFileList(dir.getAbsolutePath(),secondaryExpansive.getText()).sorted();
+            if (items != null) {
+                list.getItems().addAll(items);
+                list.setCellFactory(param -> new CheckListCell());
+            }
+            items = dir.getFileList(dir.getAbsolutePath(),mainExpansive.getText()).sorted();
+            if (items != null) {
+                filteredList.getItems().addAll(items);
+                filteredList.setCellFactory(param -> new CheckListCell());
+            }
         } else {
             text.setText("Неправильный путь, введите путь заного");
         }

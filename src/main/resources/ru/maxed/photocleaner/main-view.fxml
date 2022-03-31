@@ -23,7 +23,7 @@
          <VBox alignment="CENTER" prefHeight="338.0" prefWidth="364.0">
             <children>
                <Label text="Эталонные файлы" />
-               <ListView fx:id="filteredList" prefHeight="340.0" prefWidth="364.0" />
+               <ListView fx:id="filteredList" layoutX="10.0" layoutY="48.0" prefHeight="340.0" prefWidth="364.0" />
             </children>
          </VBox>
          <VBox alignment="CENTER" prefHeight="338.0" prefWidth="410.0">
