@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="PhotoCleaner" target="16" />
+      <module name="PhotoCleaner" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,5 +1,6 @@
 
 5
 @TODO,8\5\853ce47fe218c7c636f64d83eb4b6e4080f0ecfe
-@
-PhotoCleaner.iml,f\0\f005519fc0765fd0d48ae1e672aa8108550cd1a4
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302

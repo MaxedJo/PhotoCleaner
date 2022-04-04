@@ -1,9 +1,11 @@
 package ru.maxed.photocleaner;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,7 +18,6 @@ public class MainApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         //scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         stage.setScene(scene);
-
         InputStream iconStream = getClass().getResourceAsStream("icon.png");
         assert iconStream != null;
         Image image = new Image(iconStream);

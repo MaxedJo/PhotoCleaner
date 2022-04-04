@@ -1,7 +1,7 @@
-.button{
+#openButton{
     -fx-background-color: green;
 }
 
-.checkbox{
-
+#deleteButton{
+    -fx-background-color: red;
 }

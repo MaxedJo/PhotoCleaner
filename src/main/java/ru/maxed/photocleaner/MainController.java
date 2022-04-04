@@ -2,19 +2,31 @@ package ru.maxed.photocleaner;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.util.Callback;
+
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class MainController{
 
     @FXML
-    private ListView list;
-    ObservableList<String> items = FXCollections.observableArrayList();
+    private ListView<FilePane> list;
+    ObservableList<FilePane> items = FXCollections.observableArrayList();
+    ObservableList<String> stringItems = FXCollections.observableArrayList();
     @FXML
-    private  ListView filteredList;
+    private ListView<FilePane> filteredList;
 
     @FXML
-    private Button test;
+    private Button openButton;
     private int counter = 0;
 
     @FXML
@@ -28,29 +40,82 @@ public class MainController{
     private Label text;
     @FXML
     private Label pathToFiles;
+    @FXML
+    private Button cancel;
+
+    @FXML
+    private ListView<String> onDeleteList;
 
     @FXML
     protected void onOpenButtonClick() {
         counter++;
         String path = input.getText();
-        if (list != null)  list.getItems().clear();
-        if (filteredList != null) filteredList.getItems().clear();
         Directory dir = new Directory(path);
         if (dir.isDirectory()){
             pathToFiles.setText(path);
-            items = dir.getFileList(dir.getAbsolutePath(),secondaryExpansive.getText()).sorted();
-            if (items != null) {
-                list.getItems().addAll(items);
-                list.setCellFactory(param -> new CheckListCell());
+            stringItems = dir.getFileList(dir.getAbsolutePath(),secondaryExpansive.getText()).sorted();
+            for (String fileName:stringItems) {
+                FilePane pane = new FilePane(fileName);
+                items.add( pane);
             }
-            items = dir.getFileList(dir.getAbsolutePath(),mainExpansive.getText()).sorted();
             if (items != null) {
-                filteredList.getItems().addAll(items);
+                list.setCellFactory(param -> new CheckListCell());
+                list.getItems().setAll(items);
+
+            }
+            items.clear();
+            stringItems = dir.getFileList(dir.getAbsolutePath(),mainExpansive.getText()).sorted();
+            for (String fileName:stringItems) {
+                items.add( new FilePane(fileName));
+            }
+            if (items != null) {
+                filteredList.getItems().setAll(items);
                 filteredList.setCellFactory(param -> new CheckListCell());
             }
         } else {
             text.setText("Неправильный путь, введите путь заного");
         }
-        test.setText("Открыть. (Нажато " + counter + " раз.)");
+        openButton.setText("Открыть. (Нажато " + counter + " раз.)");
     }
+
+    @FXML
+    protected  void listClickHandle(MouseEvent arg0){
+        CheckListCell cell = new CheckListCell();
+        if (arg0.getTarget().getClass() == cell.getClass()){
+            cell = (CheckListCell) arg0.getTarget();
+            System.out.println(arg0.getTarget());
+            System.out.println(cell);
+        }
+    }
+
+    @FXML
+    protected void onDeleteButtonClick() throws IOException {
+        Stage confirmWindow = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("confirm.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        confirmWindow.setScene(scene);
+        InputStream iconStream = getClass().getResourceAsStream("icon.png");
+        assert iconStream != null;
+        Image image = new Image(iconStream);
+        confirmWindow.setTitle("Подтвердите удаление");
+        confirmWindow.getIcons().add(image);
+        confirmWindow.show();
+
+    }
+
+
+
+//    @FXML
+//    protected void onConfirmButtonClick(){
+//        onDeleteList = new ListView<>();
+//        System.out.println(stringItems);
+//        onDeleteList.getItems().setAll(stringItems);
+//        System.out.println(onDeleteList.getItems());
+//    }
+//
+//    @FXML
+//    protected void onCancelButtonClick() {
+//        Stage stage = (Stage) cancel.getScene().getWindow();
+//        stage.close();
+//    }
 }
