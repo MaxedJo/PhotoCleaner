@@ -30,4 +30,3 @@ public class MainApplication extends Application {
         launch();
     }
 }
-// Иконка

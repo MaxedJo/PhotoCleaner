@@ -19,6 +19,14 @@ public class FilePane extends BorderPane {
         this.setRight(check);
     }
 
+    public String getText() {
+        return text.getText();
+    }
+
+    public boolean getCheck() {
+        return check.isSelected();
+    }
+
     @Override
     public String toString() {
         return "{" +

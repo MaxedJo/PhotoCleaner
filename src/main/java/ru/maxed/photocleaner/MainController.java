@@ -20,10 +20,12 @@ public class MainController{
 
     @FXML
     private ListView<FilePane> list;
+    private static ListView<FilePane> listCopy;
     ObservableList<FilePane> items = FXCollections.observableArrayList();
     ObservableList<String> stringItems = FXCollections.observableArrayList();
     @FXML
     private ListView<FilePane> filteredList;
+    private static ListView<FilePane> filteredListCopy;
 
     @FXML
     private Button openButton;
@@ -40,11 +42,9 @@ public class MainController{
     private Label text;
     @FXML
     private Label pathToFiles;
-    @FXML
-    private Button cancel;
+    private static Label pathToFilesCopy;
 
-    @FXML
-    private ListView<String> onDeleteList;
+
 
     @FXML
     protected void onOpenButtonClick() {
@@ -90,6 +90,9 @@ public class MainController{
 
     @FXML
     protected void onDeleteButtonClick() throws IOException {
+        filteredListCopy = filteredList;
+        listCopy = list;
+        pathToFilesCopy = pathToFiles;
         Stage confirmWindow = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("confirm.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
@@ -101,21 +104,17 @@ public class MainController{
         confirmWindow.getIcons().add(image);
         confirmWindow.show();
 
+        System.out.println(listCopy.getItems());
     }
 
+    public static ListView<FilePane> getFilteredList() {
+        return filteredListCopy;
+    }
+    public static ListView<FilePane> getList() {
+        return listCopy;
+    }
+    public static String getPath(){
+        return pathToFilesCopy.getText();
+    }
 
-
-//    @FXML
-//    protected void onConfirmButtonClick(){
-//        onDeleteList = new ListView<>();
-//        System.out.println(stringItems);
-//        onDeleteList.getItems().setAll(stringItems);
-//        System.out.println(onDeleteList.getItems());
-//    }
-//
-//    @FXML
-//    protected void onCancelButtonClick() {
-//        Stage stage = (Stage) cancel.getScene().getWindow();
-//        stage.close();
-//    }
 }
