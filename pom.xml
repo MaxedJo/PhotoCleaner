@@ -170,8 +170,7 @@
                             <jre>
                                 <minVersion>1.6</minVersion>
                                 <jdkPreference>preferJdk</jdkPreference>
-                                <path>%JAVA_HOME%</path>
-                                <bundledJreAsFallback>true</bundledJreAsFallback>
+                                <path>./jdk-18,%JAVA_HOME%</path>
                             </jre>
                             <versionInfo>
                                 <fileVersion>1.0.0.0</fileVersion>

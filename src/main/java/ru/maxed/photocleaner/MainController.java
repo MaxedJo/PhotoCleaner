@@ -138,9 +138,9 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        input.setText("C:\\Users\\vvmax\\Downloads\\wireless-industry-dev-1.7.10-main\\PhotoCleaner\\TestingDir");
-        secondaryExpansive.setText(".bmp");
-        mainExpansive.setText(".png");
+        //input.setText("C:\\Users\\vvmax\\Downloads\\wireless-industry-dev-1.7.10-main\\PhotoCleaner\\TestingDir");
+        //secondaryExpansive.setText(".bmp");
+        // mainExpansive.setText(".png");
     }
 
     public static ListView<FilePane> getFilteredList() {
