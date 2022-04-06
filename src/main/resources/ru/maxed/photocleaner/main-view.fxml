@@ -73,6 +73,11 @@
                <Insets left="30.0" />
             </HBox.margin>
          </Button>
+         <Button mnemonicParsing="false" onAction="#onCopyDeleteButtonClick" text="Удалить копии">
+            <HBox.margin>
+               <Insets left="30.0" />
+            </HBox.margin>
+         </Button>
       </children>
    </HBox>
 </VBox>

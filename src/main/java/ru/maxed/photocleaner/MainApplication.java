@@ -16,7 +16,6 @@ public class MainApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        //scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         stage.setScene(scene);
         InputStream iconStream = getClass().getResourceAsStream("icon.png");
         assert iconStream != null;

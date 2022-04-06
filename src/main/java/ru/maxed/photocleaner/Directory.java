@@ -11,7 +11,7 @@ public class Directory extends File {
         super(pathname);
     }
 
-    ObservableList<String> getFileList(String mainPath, String... filter) {
+    public ObservableList<String> getFileList(String mainPath, String... filter) {
         ObservableList<String> files = FXCollections.observableArrayList();
         File[] dirFiles = this.listFiles();
         assert dirFiles != null;

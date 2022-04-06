@@ -15,7 +15,7 @@
    <bottom>
       <VBox alignment="CENTER" prefHeight="98.0" prefWidth="498.0" BorderPane.alignment="CENTER">
          <children>
-            <CheckBox mnemonicParsing="false" prefHeight="18.0" prefWidth="122.0" text="Удалить копии">
+            <CheckBox fx:id="deleteCopies" mnemonicParsing="false" prefHeight="18.0" prefWidth="122.0" text="Удалить копии">
                <VBox.margin>
                   <Insets bottom="40.0" />
                </VBox.margin>

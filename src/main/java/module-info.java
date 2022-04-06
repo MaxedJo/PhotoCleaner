@@ -8,6 +8,7 @@ module ru.maxed.photocleaner {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires org.junit.jupiter.api;
 
     opens ru.maxed.photocleaner to javafx.fxml;
     exports ru.maxed.photocleaner;

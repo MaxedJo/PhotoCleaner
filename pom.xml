@@ -11,7 +11,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junit.version>5.7.1</junit.version>
+        <junit.version>5.8.2</junit.version>
     </properties>
     <pluginRepositories>
         <pluginRepository>
@@ -83,13 +83,12 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
+            <version>5.4.2</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.version}</version>
+            <version>5.4.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -188,30 +187,6 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-              <plugin>
-                      <groupId>com.github.akman</groupId>
-                      <artifactId>jpackage-maven-plugin</artifactId>
-                      <executions>
-                          <execution>
-                              <id>jpackage-image</id>
-                              <phase>verify</phase>
-                              <goals>
-                                  <goal>jpackage</goal>
-                              </goals>
-                              <configuration>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>com.gluonhq</groupId>
-                <artifactId>gluonfx-maven-plugin</artifactId>
-                <version>1.0.12</version>
-                <configuration>
-                    <graalvmHome>C:\Program Files\Java\graalvm-ce-java17-22.0.0.2</graalvmHome>
-                    <mainClass>ru.maxed.photocleaner.App</mainClass>
-                </configuration>
             </plugin>
         </plugins>
     </build>
