@@ -31,7 +31,6 @@ public class ConfirmController implements Initializable {
 
     @FXML
     protected void onConfirmButtonClick() {
-        System.out.println(deleteCopies.isSelected());
         if (deleteCopies.isSelected()) {
             for (String str : items) {
                 File file = new File(path + "\\" + str);
@@ -41,7 +40,6 @@ public class ConfirmController implements Initializable {
                     String copyText = copy.getText();
                     int start = copyText.lastIndexOf("\\");
                     copyText =  copyText.substring(start + 1);
-                    System.out.println(text+"||"+ copyText);
                     if (copyText.equals(text)) {
                       File delCopy = new File(path+ "\\"+copy.getText());
                       delCopy.delete();
@@ -78,7 +76,6 @@ public class ConfirmController implements Initializable {
             int start = text.lastIndexOf("\\");
             filteredItems.add(text.substring(start + 1));
         }
-        System.out.println(filteredItems);
         onDeleteList.getItems().setAll(items);
     }
 }

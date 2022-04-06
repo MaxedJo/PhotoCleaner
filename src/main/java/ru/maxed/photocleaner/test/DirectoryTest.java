@@ -66,9 +66,6 @@ class DirectoryTest {
     void getFilteredFileListTest() {
         Directory newDir = new Directory(testPath);
         files = newDir.getFileList(absolutePath ,"bmp");
-        for (String str:files ) {
-            System.out.println(str);
-        }
         Assertions.assertEquals(secondaryFilesCount,files.size());
     }
 }

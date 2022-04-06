@@ -89,19 +89,19 @@ public class MainController implements Initializable {
         CheckListCell cell = new CheckListCell();
         if (arg0.getTarget().getClass() == cell.getClass()) {
             cell = (CheckListCell) arg0.getTarget();
-            System.out.println(arg0.getTarget());
-            System.out.println(cell);
+           // System.out.println(arg0.getTarget());
+           // System.out.println(cell);
         }
     }
 
     @FXML
     protected void onCopyDeleteButtonClick() {
-        for (FilePane copyOfFile : filteredList.getItems()) {
-            File copiedFile = new File(pathToFiles + "\\" + copyOfFile.getText());
+        for (FilePane copyOfFile : list.getItems()) {
+            File copiedFile = new File(pathToFiles.getText() + "\\" + copyOfFile.getText());
             String searching = copiedFile.getName();
             searching = searching.substring(0, searching.length() - secondaryExpansive.getLength()) + mainExpansive.getText();
             boolean mustDelete = true;
-            for (FilePane mainFile : list.getItems()) {
+            for (FilePane mainFile : filteredList.getItems()) {
                 String copyText = mainFile.getText();
                 int start = copyText.lastIndexOf("\\");
                 copyText = copyText.substring(start + 1);
@@ -134,8 +134,6 @@ public class MainController implements Initializable {
         confirmWindow.setTitle("Подтвердите удаление");
         confirmWindow.getIcons().add(image);
         confirmWindow.show();
-
-        System.out.println(listCopy.getItems());
     }
 
     @Override
