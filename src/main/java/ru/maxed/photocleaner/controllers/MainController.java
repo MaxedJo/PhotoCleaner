@@ -73,7 +73,6 @@ public class MainController implements Initializable {
             new ErrorStage("Неправильный путь, введите путь заного");
             return;
         }
-
         pathToFiles.setText(dir.getAbsolutePath());
         items.clear();
         stringItems = dir.getFileList(dir.getAbsolutePath(), secondaryExpansive.getText()).sorted();

@@ -26,4 +26,19 @@ public class Directory extends File {
         }
         return files;
     }
+    public ObservableList<CheckedFile> getCheckedFileList(String mainPath, String... filter) {
+        ObservableList<CheckedFile> files = FXCollections.observableArrayList();
+        File[] dirFiles = this.listFiles();
+        assert dirFiles != null;
+        for (File file : dirFiles) {
+            if (file.isDirectory()) {
+                files.addAll(new Directory(file.getAbsolutePath()).getCheckedFileList(mainPath, filter));
+            } else {
+                if (filter.length == 0 || file.getName().toLowerCase(Locale.ROOT).endsWith(filter[0].toLowerCase(Locale.ROOT))) {
+                    files.add( new CheckedFile(file.getAbsolutePath().substring(mainPath.length() + 1)));
+                }
+            }
+        }
+        return files;
+    }
 }
