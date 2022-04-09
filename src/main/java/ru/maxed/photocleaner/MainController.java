@@ -104,6 +104,7 @@ public class MainController implements Initializable {
                 String copyText = mainFile.getText();
                 int start = copyText.lastIndexOf("\\");
                 copyText = copyText.substring(start + 1);
+                System.out.println( copyText+ "||"+ searching);
                 if (copyText.equals(searching)) {
                     mustDelete = false;
                 }
