@@ -19,11 +19,11 @@ public class ConfirmController implements Initializable {
     private Button cancel;
 
     @FXML
-    private ListView onDeleteList;
-    ObservableList<String> items = FXCollections.observableArrayList();
+    private ListView preparedToDelete;
+    ObservableList<String> deleteList = FXCollections.observableArrayList();
     ObservableList<String> filteredItems = FXCollections.observableArrayList();
     ObservableList<FilePane> filePanes = FXCollections.observableArrayList();
-    String path = MainController.getPath();
+    String pathExtender = MainController.getPath()+File.separator;
 
     @FXML
     CheckBox deleteCopies;
@@ -32,27 +32,28 @@ public class ConfirmController implements Initializable {
     @FXML
     protected void onConfirmButtonClick() {
         if (deleteCopies.isSelected()) {
-            for (String str : items) {
-                File file = new File(path + File.separator + str);
-                String text = file.getName();
-                text = text.substring(0, text.length() - MainController.mainExpansiveCopy.getLength()) + MainController.secondaryExpansiveCopy.getText();
-                for (FilePane copy : filePanes) {
-                    String copyText = copy.getText();
-                    int start = copyText.lastIndexOf(File.separator);
-                    copyText = copyText.substring(start + 1);
-                    if (copyText.equals(text)) {
-                        File delCopy = new File(path + File.separator + copy.getText());
-                        delCopy.delete();
+            for (String fileToDeletePath : deleteList) {
+                File fileToDelete = new File(pathExtender + fileToDeletePath);
+                String fileToDeleteName = fileToDelete.getName();
+                fileToDeleteName = fileToDeleteName.substring(0, fileToDeleteName.length() - MainController.mainExpansiveCopy.getLength()) + MainController.secondaryExpansiveCopy.getText();
+                if (fileToDelete.getName().endsWith(MainController.mainExpansiveCopy.getText())){
+                    for (FilePane secondaryFile : filePanes) {
+                        String secondaryFileName = secondaryFile.getText();
+                        int start = secondaryFileName.lastIndexOf(File.separator);
+                        secondaryFileName = secondaryFileName.substring(start + 1);
+                        if (secondaryFileName.equals(fileToDeleteName)) {
+                            File delCopy = new File(pathExtender + secondaryFile.getText());
+                            delCopy.delete();
+                        }
+                        ;
                     }
-                    ;
-
                 }
-                file.delete();
+                fileToDelete.delete();
             }
         } else {
-            for (String str : items) {
-                File file = new File(path + File.separator + str);
-                file.delete();
+            for (String filetoDeletePath : deleteList) {
+                File fileToDelete = new File(pathExtender + filetoDeletePath);
+                fileToDelete.delete();
             }
         }
         Stage stage = (Stage) cancel.getScene().getWindow();
@@ -67,18 +68,18 @@ public class ConfirmController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         filePanes.addAll(MainController.getMainList().getItems());
         filePanes.addAll(MainController.getSecondaryList().getItems());
         for (FilePane file : filePanes) {
-            if (file.getCheck()) items.add(file.getText());
+            if (file.getCheck()) deleteList.add(file.getText());
         }
-        filePanes = MainController.getSecondaryList().getItems();
+        filePanes.clear();
+        filePanes.addAll(MainController.getSecondaryList().getItems());
         for (FilePane file : filePanes) {
             String text = file.getText();
             int start = text.lastIndexOf(File.separator);
             filteredItems.add(text.substring(start + 1));
         }
-        onDeleteList.getItems().setAll(items);
+        preparedToDelete.getItems().setAll(deleteList);
     }
 }

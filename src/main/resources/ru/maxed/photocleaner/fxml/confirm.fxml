@@ -10,7 +10,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="379.0" prefWidth="498.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.maxed.photocleaner.controllers.ConfirmController">
    <center>
-      <ListView fx:id="onDeleteList" prefHeight="227.0" prefWidth="546.0" BorderPane.alignment="CENTER" />
+      <ListView fx:id="preparedToDelete" prefHeight="227.0" prefWidth="546.0" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
       <VBox alignment="CENTER" prefHeight="98.0" prefWidth="498.0" BorderPane.alignment="CENTER">

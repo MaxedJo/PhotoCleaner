@@ -41,7 +41,7 @@ public class MainController implements Initializable {
     private Button pathChooser;
 
     @FXML
-    private TextField input;
+    private TextField pathInput;
     @FXML
     private TextField mainExpansive;
     public static TextField mainExpansiveCopy;
@@ -67,14 +67,14 @@ public class MainController implements Initializable {
             new ErrorStage("Расширение файлов не может быть одинаковым");
             return;
         }
-        String path = input.getText();
+        String path = pathInput.getText();
         Directory dir = new Directory(path);
         if (!dir.isDirectory()) {
             new ErrorStage("Неправильный путь, введите путь заного");
             return;
         }
 
-        pathToFiles.setText(path);
+        pathToFiles.setText(dir.getAbsolutePath());
         items.clear();
         stringItems = dir.getFileList(dir.getAbsolutePath(), secondaryExpansive.getText()).sorted();
         for (String fileName : stringItems) {
@@ -116,13 +116,11 @@ public class MainController implements Initializable {
                 copyText = copyText.substring(start + 1);
                 if (copyText.equals(searching)) {
                     mustDelete = false;
-                }
-                ;
+                };
             }
             if (mustDelete) {
                 copyOfFile.setCheck(true);
-            }
-            ;
+            };
         }
     }
 
@@ -130,7 +128,7 @@ public class MainController implements Initializable {
     protected void onPathChooserClick() {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         File file = directoryChooser.showDialog(pathChooser.getScene().getWindow());
-        if (file != null) input.setText(file.getAbsolutePath());
+        if (file != null) pathInput.setText(file.getAbsolutePath());
     }
 
     @FXML
@@ -157,7 +155,7 @@ public class MainController implements Initializable {
         File settingsFile = new File("settings.cfg");
         if (settingsFile.exists()) {
             Settings settings = new Settings(settingsFile);
-            input.setText(settings.getPath());
+            pathInput.setText(settings.getPath());
             secondaryExpansive.setText(settings.getSecondaryExpansive());
             mainExpansive.setText(settings.getMainExpansive());
         }
@@ -179,7 +177,7 @@ public class MainController implements Initializable {
     private javafx.event.EventHandler<WindowEvent> closeEventHandler = new javafx.event.EventHandler<WindowEvent>() {
         @Override
         public void handle(WindowEvent event) {
-            Settings settings = new Settings(input.getText(), mainExpansive.getText(), secondaryExpansive.getText());
+            Settings settings = new Settings(pathInput.getText(), mainExpansive.getText(), secondaryExpansive.getText());
             settings.save();
         }
     };

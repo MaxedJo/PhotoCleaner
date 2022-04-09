@@ -47,7 +47,7 @@
     <Label fx:id="text" text="Введите путь" />
    <HBox alignment="CENTER">
       <children>
-          <TextField fx:id="input" prefHeight="0.0" prefWidth="410.0" />
+          <TextField fx:id="pathInput" prefHeight="0.0" prefWidth="410.0" />
          <Button fx:id="pathChooser" mnemonicParsing="false" onAction="#onPathChooserClick" text="Обзор">
             <HBox.margin>
                <Insets left="20.0" />
