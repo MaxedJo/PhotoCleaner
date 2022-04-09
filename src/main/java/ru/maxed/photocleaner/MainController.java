@@ -33,7 +33,6 @@ public class MainController implements Initializable {
 
     @FXML
     private Button openButton;
-    private int counter = 0;
 
     @FXML
     private TextField input;
@@ -53,7 +52,10 @@ public class MainController implements Initializable {
 
     @FXML
     protected void onOpenButtonClick() {
-        counter++;
+        if (secondaryExpansive.getText().equals("") || mainExpansive.getText().equals("")){
+            text.setText("Пожалуйста, необходимые расширения файлов.");
+            return;
+        }
         String path = input.getText();
         Directory dir = new Directory(path);
         if (dir.isDirectory()) {
@@ -81,7 +83,6 @@ public class MainController implements Initializable {
         } else {
             text.setText("Неправильный путь, введите путь заного");
         }
-        openButton.setText("Открыть. (Нажато " + counter + " раз.)");
     }
 
     @FXML
