@@ -4,8 +4,6 @@
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
-a
-1src/main/java/ru/maxed/photocleaner/FilePane.java,4\d\4d821c3daca349918fb223a107149c90edb1100e
 p
 @.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_0_0.xml,d\5\d573492e91c6dc79296fed8d76b0037f758b777e
 t

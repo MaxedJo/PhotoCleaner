@@ -112,7 +112,8 @@ public class MainController implements Initializable {
                 ;
             }
             if (mustDelete) {
-                copiedFile.delete();
+                copyOfFile.setCheck(true);
+                //copiedFile.delete();
             }
             ;
         }
