@@ -22,7 +22,7 @@ public class ConfirmController implements Initializable {
     private ListView onDeleteList;
     ObservableList<String> items = FXCollections.observableArrayList();
     ObservableList<String> filteredItems = FXCollections.observableArrayList();
-    ObservableList<FilePane> test = FXCollections.observableArrayList();
+    ObservableList<FilePane> filePanes = FXCollections.observableArrayList();
     String path = MainController.getPath();
 
     @FXML
@@ -36,7 +36,7 @@ public class ConfirmController implements Initializable {
                 File file = new File(path + File.separator + str);
                 String text = file.getName();
                 text = text.substring(0, text.length() - MainController.mainExpansiveCopy.getLength()) + MainController.secondaryExpansiveCopy.getText();
-                for (FilePane copy : test) {
+                for (FilePane copy : filePanes) {
                     String copyText = copy.getText();
                     int start = copyText.lastIndexOf(File.separator);
                     copyText = copyText.substring(start + 1);
@@ -68,13 +68,13 @@ public class ConfirmController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        test.addAll(MainController.getFilteredList().getItems());
-        test.addAll(MainController.getList().getItems());
-        for (FilePane file : test) {
+        filePanes.addAll(MainController.getMainList().getItems());
+        filePanes.addAll(MainController.getSecondaryList().getItems());
+        for (FilePane file : filePanes) {
             if (file.getCheck()) items.add(file.getText());
         }
-        test = MainController.getList().getItems();
-        for (FilePane file : test) {
+        filePanes = MainController.getSecondaryList().getItems();
+        for (FilePane file : filePanes) {
             String text = file.getText();
             int start = text.lastIndexOf(File.separator);
             filteredItems.add(text.substring(start + 1));

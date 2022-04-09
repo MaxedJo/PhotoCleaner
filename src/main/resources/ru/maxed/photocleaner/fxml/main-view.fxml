@@ -23,13 +23,13 @@
          <VBox alignment="CENTER" prefHeight="338.0" prefWidth="364.0">
             <children>
                <Label text="Эталонные файлы" />
-               <ListView fx:id="filteredList" layoutX="10.0" layoutY="48.0" onMouseClicked="#listClickHandle" prefHeight="340.0" prefWidth="364.0" />
+               <ListView fx:id="mainList" layoutX="10.0" layoutY="48.0" onMouseClicked="#listClickHandle" prefHeight="340.0" prefWidth="364.0" />
             </children>
          </VBox>
          <VBox alignment="CENTER" prefHeight="338.0" prefWidth="410.0">
             <children>
                <Label text="Файлы для обработки" />
-               <ListView fx:id="list" prefHeight="340.0" prefWidth="410.0">
+               <ListView fx:id="secondaryList" prefHeight="340.0" prefWidth="410.0">
                   <opaqueInsets>
                      <Insets left="30.0" />
                   </opaqueInsets>
@@ -82,7 +82,7 @@
                <Insets left="30.0" />
             </HBox.margin>
          </Button>
-         <Button mnemonicParsing="false" onAction="#onCopyDeleteButtonClick" text="Выделить копии">
+         <Button mnemonicParsing="false" onAction="#onMarkFilesWithoutOriginButtonClick" text="Выделить копии">
             <HBox.margin>
                <Insets left="30.0" />
             </HBox.margin>

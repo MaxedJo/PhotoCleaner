@@ -42,7 +42,7 @@ public class Settings implements Serializable {
     public void save(){
         File settings = new File("settings.cfg");
         try {
-            if (!settings.createNewFile()) throw new IOException();
+            settings.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }

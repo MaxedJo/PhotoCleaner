@@ -6,36 +6,34 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import ru.maxed.photocleaner.entities.CheckListCell;
 import ru.maxed.photocleaner.entities.ErrorStage;
 import ru.maxed.photocleaner.entities.FilePane;
 import ru.maxed.photocleaner.entities.PhotoStage;
 import ru.maxed.photocleaner.utility.Directory;
 import ru.maxed.photocleaner.utility.Settings;
 
-
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
 
     @FXML
-    private ListView<FilePane> list;
-    private static ListView<FilePane> listCopy;
+    private ListView<FilePane> secondaryList;
+    private static ListView<FilePane> secondaryListCopy;
     ObservableList<FilePane> items = FXCollections.observableArrayList();
     ObservableList<String> stringItems = FXCollections.observableArrayList();
     @FXML
-    private ListView<FilePane> filteredList;
-    private static ListView<FilePane> filteredListCopy;
+    private ListView<FilePane> mainList;
+    private static ListView<FilePane> mainListCopy;
 
     @FXML
     private Button openButton;
@@ -58,8 +56,8 @@ public class MainController implements Initializable {
 
     @FXML
     protected void onOpenButtonClick() {
-        filteredList.getItems().clear();
-        list.getItems().clear();
+        mainList.getItems().clear();
+        secondaryList.getItems().clear();
         pathToFiles.setText("Путь к файлам");
         if (secondaryExpansive.getText().equals("") || mainExpansive.getText().equals("")) {
             new ErrorStage("Пожалуйста, введите необходимые расширения файлов.");
@@ -71,51 +69,48 @@ public class MainController implements Initializable {
         }
         String path = input.getText();
         Directory dir = new Directory(path);
-        if (dir.isDirectory()) {
-            pathToFiles.setText(path);
-            items.clear();
-            stringItems = dir.getFileList(dir.getAbsolutePath(), secondaryExpansive.getText()).sorted();
-            for (String fileName : stringItems) {
-                FilePane pane = new FilePane(fileName);
-                items.add(pane);
-            }
-            if (items != null) {
-                list.setCellFactory(param -> new CheckListCell());
-                list.getItems().setAll(items);
-
-            }
-            items.clear();
-            stringItems = dir.getFileList(dir.getAbsolutePath(), mainExpansive.getText()).sorted();
-            for (String fileName : stringItems) {
-                items.add(new FilePane(fileName));
-            }
-            if (items != null) {
-                filteredList.getItems().setAll(items);
-                filteredList.setCellFactory(param -> new CheckListCell());
-            }
-        } else {
+        if (!dir.isDirectory()) {
             new ErrorStage("Неправильный путь, введите путь заного");
+            return;
         }
-    }
 
+        pathToFiles.setText(path);
+        items.clear();
+        stringItems = dir.getFileList(dir.getAbsolutePath(), secondaryExpansive.getText()).sorted();
+        for (String fileName : stringItems) {
+            FilePane pane = new FilePane(fileName);
+            items.add(pane);
+        }
+        if (items != null) {
+            secondaryList.getItems().setAll(items);
+        }
+        items.clear();
+        stringItems = dir.getFileList(dir.getAbsolutePath(), mainExpansive.getText()).sorted();
+        for (String fileName : stringItems) {
+            items.add(new FilePane(fileName));
+        }
+        if (items != null) {
+            mainList.getItems().setAll(items);
+        }
+
+    }
+    private FilePane pane = new FilePane();
     @FXML
     protected void listClickHandle(MouseEvent arg0) {
-        CheckListCell cell = new CheckListCell();
-        if (arg0.getTarget().getClass() == cell.getClass()) {
-            cell = (CheckListCell) arg0.getTarget();
-//             System.out.println(arg0.getTarget());
-//             System.out.println(cell);
-        }
+         if (arg0.getTarget().getClass() == pane.getClass()){
+             pane = (FilePane) arg0.getTarget();
+             pane.changeCheck();
+         }
     }
 
     @FXML
-    protected void onCopyDeleteButtonClick() {
-        for (FilePane copyOfFile : list.getItems()) {
+    protected void onMarkFilesWithoutOriginButtonClick() {
+        for (FilePane copyOfFile : secondaryList.getItems()) {
             File copiedFile = new File(pathToFiles.getText() + File.separator + copyOfFile.getText());
             String searching = copiedFile.getName();
             searching = searching.substring(0, searching.length() - secondaryExpansive.getLength()) + mainExpansive.getText();
             boolean mustDelete = true;
-            for (FilePane mainFile : filteredList.getItems()) {
+            for (FilePane mainFile : mainList.getItems()) {
                 String copyText = mainFile.getText();
                 int start = copyText.lastIndexOf(File.separator);
                 copyText = copyText.substring(start + 1);
@@ -150,8 +145,8 @@ public class MainController implements Initializable {
     }
 
     private void copyStatic() {
-        filteredListCopy = filteredList;
-        listCopy = list;
+        mainListCopy = mainList;
+        secondaryListCopy = secondaryList;
         pathToFilesCopy = pathToFiles;
         secondaryExpansiveCopy = secondaryExpansive;
         mainExpansiveCopy = mainExpansive;
@@ -169,18 +164,17 @@ public class MainController implements Initializable {
     }
 
 
-    public static ListView<FilePane> getFilteredList() {
-        return filteredListCopy;
+    public static ListView<FilePane> getMainList() {
+        return mainListCopy;
     }
 
-    public static ListView<FilePane> getList() {
-        return listCopy;
+    public static ListView<FilePane> getSecondaryList() {
+        return secondaryListCopy;
     }
 
     public static String getPath() {
         return pathToFilesCopy.getText();
     }
-
 
     private javafx.event.EventHandler<WindowEvent> closeEventHandler = new javafx.event.EventHandler<WindowEvent>() {
         @Override
