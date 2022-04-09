@@ -16,5 +16,9 @@ w
 G.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_4_2.xml,b\c\bc9d8d1e75b61791c6f25a38c52dbe6214ffc458
 z
 J.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_4_2.xml,2\c\2c4203c6c060d7288b165ebd9b348e3107471581
-N
-src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7
+s
+Csrc/main/java/ru/maxed/photocleaner/test/ConfirmControllerTest.java,5\8\5858eb642a2827bd2a08669f39893cda401708e5
+b
+2src/main/java/ru/maxed/photocleaner/Directory.java,5\1\51261e958c1c3c07ced157352c3965b613639ddf
+c
+3src/main/java/ru/maxed/photocleaner/ErrorStage.java,a\5\a533e17d7a7ef9679cfc514d48a56cc8020ef212

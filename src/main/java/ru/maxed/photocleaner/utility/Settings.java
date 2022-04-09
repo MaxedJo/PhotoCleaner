@@ -1,7 +1,6 @@
-package ru.maxed.photocleaner;
+package ru.maxed.photocleaner.utility;
 
 import java.io.*;
-import java.nio.file.SecureDirectoryStream;
 
 public class Settings implements Serializable {
     private String path;
@@ -43,7 +42,7 @@ public class Settings implements Serializable {
     public void save(){
         File settings = new File("settings.cfg");
         try {
-            settings.createNewFile();
+            if (!settings.createNewFile()) throw new IOException();
         } catch (IOException e) {
             e.printStackTrace();
         }

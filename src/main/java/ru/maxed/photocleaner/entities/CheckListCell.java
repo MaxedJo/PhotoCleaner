@@ -1,16 +1,14 @@
-package ru.maxed.photocleaner;
+package ru.maxed.photocleaner.entities;
 
 import javafx.scene.control.ListCell;
 
 
-class CheckListCell extends ListCell<FilePane> {
+public class CheckListCell extends ListCell<FilePane> {
     private FilePane filePane = new FilePane();
 
     public CheckListCell() {
         super();
     }
-
-
 
     @Override
     protected void updateItem(FilePane s, boolean b) {

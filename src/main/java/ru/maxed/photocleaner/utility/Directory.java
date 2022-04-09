@@ -1,4 +1,4 @@
-package ru.maxed.photocleaner;
+package ru.maxed.photocleaner.utility;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,7 +20,6 @@ public class Directory extends File {
                 files.addAll(new Directory(file.getAbsolutePath()).getFileList(mainPath, filter));
             } else {
                 if (filter.length == 0 || file.getName().toLowerCase(Locale.ROOT).endsWith(filter[0].toLowerCase(Locale.ROOT))) {
-
                     files.add(file.getAbsolutePath().substring(mainPath.length() + 1));
                 }
             }

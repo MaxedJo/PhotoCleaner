@@ -1,4 +1,4 @@
-package ru.maxed.photocleaner;
+package ru.maxed.photocleaner.entities;
 
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;

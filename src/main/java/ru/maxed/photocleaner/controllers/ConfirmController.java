@@ -1,14 +1,14 @@
-package ru.maxed.photocleaner;
+package ru.maxed.photocleaner.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import ru.maxed.photocleaner.entities.FilePane;
 
 import java.io.File;
 import java.net.URL;
@@ -39,11 +39,12 @@ public class ConfirmController implements Initializable {
                 for (FilePane copy : test) {
                     String copyText = copy.getText();
                     int start = copyText.lastIndexOf(File.separator);
-                    copyText =  copyText.substring(start + 1);
+                    copyText = copyText.substring(start + 1);
                     if (copyText.equals(text)) {
-                      File delCopy = new File(path+File.separator+copy.getText());
-                      delCopy.delete();
-                    };
+                        File delCopy = new File(path + File.separator + copy.getText());
+                        delCopy.delete();
+                    }
+                    ;
 
                 }
                 file.delete();

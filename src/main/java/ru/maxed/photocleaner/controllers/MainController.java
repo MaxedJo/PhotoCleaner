@@ -1,8 +1,7 @@
-package ru.maxed.photocleaner;
+package ru.maxed.photocleaner.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,10 +12,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import javafx.util.Callback;
+import ru.maxed.photocleaner.entities.CheckListCell;
+import ru.maxed.photocleaner.entities.ErrorStage;
+import ru.maxed.photocleaner.entities.FilePane;
+import ru.maxed.photocleaner.entities.PhotoStage;
+import ru.maxed.photocleaner.utility.Directory;
+import ru.maxed.photocleaner.utility.Settings;
 
 
-import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -58,11 +61,11 @@ public class MainController implements Initializable {
         filteredList.getItems().clear();
         list.getItems().clear();
         pathToFiles.setText("Путь к файлам");
-        if (secondaryExpansive.getText().equals("") || mainExpansive.getText().equals("")){
+        if (secondaryExpansive.getText().equals("") || mainExpansive.getText().equals("")) {
             new ErrorStage("Пожалуйста, введите необходимые расширения файлов.");
             return;
         }
-        if (secondaryExpansive.getText().equals(mainExpansive.getText())){
+        if (secondaryExpansive.getText().equals(mainExpansive.getText())) {
             new ErrorStage("Расширение файлов не может быть одинаковым");
             return;
         }
@@ -91,7 +94,7 @@ public class MainController implements Initializable {
                 filteredList.setCellFactory(param -> new CheckListCell());
             }
         } else {
-           new ErrorStage("Неправильный путь, введите путь заного");
+            new ErrorStage("Неправильный путь, введите путь заного");
         }
     }
 
@@ -100,15 +103,15 @@ public class MainController implements Initializable {
         CheckListCell cell = new CheckListCell();
         if (arg0.getTarget().getClass() == cell.getClass()) {
             cell = (CheckListCell) arg0.getTarget();
-           // System.out.println(arg0.getTarget());
-           // System.out.println(cell);
+//             System.out.println(arg0.getTarget());
+//             System.out.println(cell);
         }
     }
 
     @FXML
     protected void onCopyDeleteButtonClick() {
         for (FilePane copyOfFile : list.getItems()) {
-            File copiedFile = new File(pathToFiles.getText() + "\\" + copyOfFile.getText());
+            File copiedFile = new File(pathToFiles.getText() + File.separator + copyOfFile.getText());
             String searching = copiedFile.getName();
             searching = searching.substring(0, searching.length() - secondaryExpansive.getLength()) + mainExpansive.getText();
             boolean mustDelete = true;
@@ -127,36 +130,37 @@ public class MainController implements Initializable {
             ;
         }
     }
+
     @FXML
-    protected void onPathChooserClick(){
-        DirectoryChooser directoryChooser=new DirectoryChooser();
+    protected void onPathChooserClick() {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
         File file = directoryChooser.showDialog(pathChooser.getScene().getWindow());
-        if (file.exists()) input.setText(file.getAbsolutePath());
+        if (file != null) input.setText(file.getAbsolutePath());
     }
 
     @FXML
     protected void onDeleteButtonClick() throws IOException {
+        copyStatic();
+        PhotoStage confirmWindow = new PhotoStage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ru/maxed/photocleaner/fxml/confirm.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        confirmWindow.setScene(scene);
+        confirmWindow.setTitle("Подтвердите удаление");
+        confirmWindow.show();
+    }
+
+    private void copyStatic() {
         filteredListCopy = filteredList;
         listCopy = list;
         pathToFilesCopy = pathToFiles;
         secondaryExpansiveCopy = secondaryExpansive;
         mainExpansiveCopy = mainExpansive;
-        Stage confirmWindow = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("confirm.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        confirmWindow.setScene(scene);
-        InputStream iconStream = getClass().getResourceAsStream("icon.png");
-        assert iconStream != null;
-        Image image = new Image(iconStream);
-        confirmWindow.setTitle("Подтвердите удаление");
-        confirmWindow.getIcons().add(image);
-        confirmWindow.show();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         File settingsFile = new File("settings.cfg");
-        if (settingsFile.exists()){
+        if (settingsFile.exists()) {
             Settings settings = new Settings(settingsFile);
             input.setText(settings.getPath());
             secondaryExpansive.setText(settings.getSecondaryExpansive());
@@ -181,12 +185,13 @@ public class MainController implements Initializable {
     private javafx.event.EventHandler<WindowEvent> closeEventHandler = new javafx.event.EventHandler<WindowEvent>() {
         @Override
         public void handle(WindowEvent event) {
-            Settings settings = new Settings(input.getText(),mainExpansive.getText(),secondaryExpansive.getText());
+            Settings settings = new Settings(input.getText(), mainExpansive.getText(), secondaryExpansive.getText());
             settings.save();
         }
     };
 
-    public javafx.event.EventHandler<WindowEvent> getCloseEventHandler(){
+
+    public javafx.event.EventHandler<WindowEvent> getCloseEventHandler() {
         return closeEventHandler;
     }
 
