@@ -54,7 +54,11 @@ public class MainController implements Initializable {
         list.getItems().clear();
         pathToFiles.setText("Путь к файлам");
         if (secondaryExpansive.getText().equals("") || mainExpansive.getText().equals("")){
-            ErrorStage errorStage = new ErrorStage("Пожалуйста, необходимые расширения файлов.");
+            new ErrorStage("Пожалуйста, введите необходимые расширения файлов.");
+            return;
+        }
+        if (secondaryExpansive.getText().equals(mainExpansive.getText())){
+            new ErrorStage("Расширение файлов не может быть одинаковым");
             return;
         }
         String path = input.getText();
@@ -82,7 +86,7 @@ public class MainController implements Initializable {
                 filteredList.setCellFactory(param -> new CheckListCell());
             }
         } else {
-            ErrorStage errorStage = new ErrorStage("Неправильный путь, введите путь заного");
+           new ErrorStage("Неправильный путь, введите путь заного");
         }
     }
 
@@ -140,9 +144,9 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //input.setText("C:\\Users\\vvmax\\Downloads\\wireless-industry-dev-1.7.10-main\\PhotoCleaner\\TestingDir");
-        //secondaryExpansive.setText(".bmp");
-        // mainExpansive.setText(".png");
+        input.setText("C:\\Users\\vvmax\\Downloads\\wireless-industry-dev-1.7.10-main\\PhotoCleaner\\TestingDir");
+        secondaryExpansive.setText(".bmp");
+         mainExpansive.setText(".png");
     }
 
     public static ListView<FilePane> getFilteredList() {

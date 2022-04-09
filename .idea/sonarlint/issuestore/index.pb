@@ -16,7 +16,5 @@ w
 G.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_4_2.xml,b\c\bc9d8d1e75b61791c6f25a38c52dbe6214ffc458
 z
 J.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_4_2.xml,2\c\2c4203c6c060d7288b165ebd9b348e3107471581
-b
-2src/main/java/ru/maxed/photocleaner/Directory.java,5\1\51261e958c1c3c07ced157352c3965b613639ddf
 N
 src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7
