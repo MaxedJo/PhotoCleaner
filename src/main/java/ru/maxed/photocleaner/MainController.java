@@ -102,9 +102,8 @@ public class MainController implements Initializable {
             boolean mustDelete = true;
             for (FilePane mainFile : filteredList.getItems()) {
                 String copyText = mainFile.getText();
-                int start = copyText.lastIndexOf("\\");
+                int start = copyText.lastIndexOf(File.separator);
                 copyText = copyText.substring(start + 1);
-                System.out.println( copyText+ "||"+ searching);
                 if (copyText.equals(searching)) {
                     mustDelete = false;
                 }
