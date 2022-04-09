@@ -33,15 +33,15 @@ public class ConfirmController implements Initializable {
     protected void onConfirmButtonClick() {
         if (deleteCopies.isSelected()) {
             for (String str : items) {
-                File file = new File(path + "\\" + str);
+                File file = new File(path + File.separator + str);
                 String text = file.getName();
                 text = text.substring(0, text.length() - MainController.mainExpansiveCopy.getLength()) + MainController.secondaryExpansiveCopy.getText();
                 for (FilePane copy : test) {
                     String copyText = copy.getText();
-                    int start = copyText.lastIndexOf("\\");
+                    int start = copyText.lastIndexOf(File.separator);
                     copyText =  copyText.substring(start + 1);
                     if (copyText.equals(text)) {
-                      File delCopy = new File(path+ "\\"+copy.getText());
+                      File delCopy = new File(path+File.separator+copy.getText());
                       delCopy.delete();
                     };
 
@@ -50,7 +50,7 @@ public class ConfirmController implements Initializable {
             }
         } else {
             for (String str : items) {
-                File file = new File(path + "\\" + str);
+                File file = new File(path + File.separator + str);
                 file.delete();
             }
         }
@@ -75,7 +75,7 @@ public class ConfirmController implements Initializable {
         test = MainController.getList().getItems();
         for (FilePane file : test) {
             String text = file.getText();
-            int start = text.lastIndexOf("\\");
+            int start = text.lastIndexOf(File.separator);
             filteredItems.add(text.substring(start + 1));
         }
         onDeleteList.getItems().setAll(items);
