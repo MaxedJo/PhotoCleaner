@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
@@ -35,6 +36,8 @@ public class MainController implements Initializable {
 
     @FXML
     private Button openButton;
+    @FXML
+    private Button pathChooser;
 
     @FXML
     private TextField input;
@@ -124,6 +127,12 @@ public class MainController implements Initializable {
             ;
         }
     }
+    @FXML
+    protected void onPathChooserClick(){
+        DirectoryChooser directoryChooser=new DirectoryChooser();
+        File file = directoryChooser.showDialog(pathChooser.getScene().getWindow());
+        if (file.exists()) input.setText(file.getAbsolutePath());
+    }
 
     @FXML
     protected void onDeleteButtonClick() throws IOException {
@@ -153,11 +162,6 @@ public class MainController implements Initializable {
             secondaryExpansive.setText(settings.getSecondaryExpansive());
             mainExpansive.setText(settings.getMainExpansive());
         }
-
-
-//        input.setText("C:\\Users\\vvmax\\Downloads\\wireless-industry-dev-1.7.10-main\\PhotoCleaner\\TestingDir");
-//        secondaryExpansive.setText(".bmp");
-//         mainExpansive.setText(".png");
     }
 
 
