@@ -67,6 +67,7 @@ public class ConfirmController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         test = MainController.getFilteredList().getItems();
+        test.addAll(MainController.getList().getItems());
         for (FilePane file : test) {
             if (file.getCheck()) items.add(file.getText());
         }

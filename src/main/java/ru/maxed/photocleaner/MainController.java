@@ -44,8 +44,6 @@ public class MainController implements Initializable {
     public static TextField secondaryExpansiveCopy;
 
     @FXML
-    private Label text;
-    @FXML
     private Label pathToFiles;
     private static Label pathToFilesCopy;
 
@@ -53,7 +51,7 @@ public class MainController implements Initializable {
     @FXML
     protected void onOpenButtonClick() {
         if (secondaryExpansive.getText().equals("") || mainExpansive.getText().equals("")){
-            text.setText("Пожалуйста, необходимые расширения файлов.");
+            ErrorStage errorStage = new ErrorStage("Пожалуйста, необходимые расширения файлов.");
             return;
         }
         String path = input.getText();
@@ -81,7 +79,7 @@ public class MainController implements Initializable {
                 filteredList.setCellFactory(param -> new CheckListCell());
             }
         } else {
-            text.setText("Неправильный путь, введите путь заного");
+            ErrorStage errorStage = new ErrorStage("Неправильный путь, введите путь заного");
         }
     }
 
@@ -113,7 +111,6 @@ public class MainController implements Initializable {
             }
             if (mustDelete) {
                 copyOfFile.setCheck(true);
-                //copiedFile.delete();
             }
             ;
         }
