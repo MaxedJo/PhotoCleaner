@@ -11,9 +11,11 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
 
+import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -144,10 +146,20 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        input.setText("C:\\Users\\vvmax\\Downloads\\wireless-industry-dev-1.7.10-main\\PhotoCleaner\\TestingDir");
-        secondaryExpansive.setText(".bmp");
-         mainExpansive.setText(".png");
+        File settingsFile = new File("settings.cfg");
+        if (settingsFile.exists()){
+            Settings settings = new Settings(settingsFile);
+            input.setText(settings.getPath());
+            secondaryExpansive.setText(settings.getSecondaryExpansive());
+            mainExpansive.setText(settings.getMainExpansive());
+        }
+
+
+//        input.setText("C:\\Users\\vvmax\\Downloads\\wireless-industry-dev-1.7.10-main\\PhotoCleaner\\TestingDir");
+//        secondaryExpansive.setText(".bmp");
+//         mainExpansive.setText(".png");
     }
+
 
     public static ListView<FilePane> getFilteredList() {
         return filteredListCopy;
@@ -159,6 +171,19 @@ public class MainController implements Initializable {
 
     public static String getPath() {
         return pathToFilesCopy.getText();
+    }
+
+
+    private javafx.event.EventHandler<WindowEvent> closeEventHandler = new javafx.event.EventHandler<WindowEvent>() {
+        @Override
+        public void handle(WindowEvent event) {
+            Settings settings = new Settings(input.getText(),mainExpansive.getText(),secondaryExpansive.getText());
+            settings.save();
+        }
+    };
+
+    public javafx.event.EventHandler<WindowEvent> getCloseEventHandler(){
+        return closeEventHandler;
     }
 
 }

@@ -22,6 +22,8 @@ public class MainApplication extends Application {
         Image image = new Image(iconStream);
         stage.setTitle("Photo cleaner");
         stage.getIcons().add(image);
+        MainController controller = fxmlLoader.getController();
+        stage.setOnCloseRequest(controller.getCloseEventHandler());
         stage.show();
     }
 
