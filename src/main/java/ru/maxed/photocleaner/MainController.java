@@ -50,6 +50,9 @@ public class MainController implements Initializable {
 
     @FXML
     protected void onOpenButtonClick() {
+        filteredList.getItems().clear();
+        list.getItems().clear();
+        pathToFiles.setText("Путь к файлам");
         if (secondaryExpansive.getText().equals("") || mainExpansive.getText().equals("")){
             ErrorStage errorStage = new ErrorStage("Пожалуйста, необходимые расширения файлов.");
             return;
