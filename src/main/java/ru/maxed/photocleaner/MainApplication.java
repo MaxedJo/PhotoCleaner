@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import ru.maxed.photocleaner.ui.controllers.MainController;
+import ru.maxed.photocleaner.ui.desktop.controllers.MainController;
 import ru.maxed.photocleaner.ui.desktop.PhotoStage;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
 
