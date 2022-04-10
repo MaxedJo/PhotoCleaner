@@ -7,6 +7,11 @@ public class CheckedFile extends File {
     private String shortName;
     private boolean mustDelete;
     private onCheckedHandler checkedHandler = null;
+    private onDeleteHander deleteHander = null;
+
+    public interface onDeleteHander{
+        void delete();
+    }
 
     public interface onCheckedHandler {
         void set(boolean value);
@@ -51,6 +56,17 @@ public class CheckedFile extends File {
         if (checkedHandler != null) {
             checkedHandler.set(mustDelete);
         }
+    }
+    @Override
+    public boolean delete(){
+        if (deleteHander != null) {
+            deleteHander.delete();
+        }
+        return super.delete();
+    }
+
+    public void setDeleteHander(onDeleteHander deleteHander) {
+        this.deleteHander = deleteHander;
     }
 
     @Override

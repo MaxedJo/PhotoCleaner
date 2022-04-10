@@ -1,4 +1,4 @@
-package ru.maxed.photocleaner.ui.controllers;
+package ru.maxed.photocleaner.ui.desktop.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -66,11 +66,11 @@ public class MainController implements Initializable {
         DirectoryReader.read(dir.getAbsolutePath(), originExtension.getText(), processedExtansion.getText(),
                 MainApplication.processedFileList, MainApplication.originFileList);
         for (CheckedFile file : MainApplication.originFileList) {
-            FilePane filePane = new FilePane(file);
+            FilePane filePane = new FilePane(file,originFileList);
             originFileList.getItems().add(filePane);
         }
         for (CheckedFile file : MainApplication.processedFileList) {
-            FilePane filePane = new FilePane(file);
+            FilePane filePane = new FilePane(file,processedFileList);
             processedFileList.getItems().add(filePane);
         }
     }
