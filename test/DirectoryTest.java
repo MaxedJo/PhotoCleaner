@@ -1,7 +1,5 @@
 package ru.maxed.photocleaner.test;
 
-import org.junit.jupiter.api.Assertions;
-import ru.maxed.photocleaner.utility.Directory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.junit.jupiter.api.BeforeEach;
@@ -58,14 +56,10 @@ class DirectoryTest {
 
     @Test
     void getFileListTest() {
-        Directory newDir = new Directory(testPath);
-        files = newDir.getFileList(absolutePath);
-        Assertions.assertEquals(fileCount,files.size());
+
     }
     @Test
     void getFilteredFileListTest() {
-        Directory newDir = new Directory(testPath);
-        files = newDir.getFileList(absolutePath ,"bmp");
-        Assertions.assertEquals(secondaryFilesCount,files.size());
+
     }
 }

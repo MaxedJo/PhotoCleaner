@@ -12,10 +12,12 @@ module ru.maxed.photocleaner {
 
     opens ru.maxed.photocleaner to javafx.fxml;
     exports ru.maxed.photocleaner;
-    exports ru.maxed.photocleaner.controllers;
-    opens ru.maxed.photocleaner.controllers to javafx.fxml;
-    exports ru.maxed.photocleaner.entities;
-    opens ru.maxed.photocleaner.entities to javafx.fxml;
-    opens ru.maxed.photocleaner.utility to javafx.fxml;
-    exports ru.maxed.photocleaner.utility;
+    exports ru.maxed.photocleaner.ui.desktop.controllers;
+    opens ru.maxed.photocleaner.ui.desktop.controllers to javafx.fxml;
+    opens ru.maxed.photocleaner.core.utility to javafx.fxml;
+    exports ru.maxed.photocleaner.core.utility;
+    exports ru.maxed.photocleaner.ui.desktop;
+    opens ru.maxed.photocleaner.ui.desktop to javafx.fxml;
+    exports ru.maxed.photocleaner.core.entities;
+    opens ru.maxed.photocleaner.core.entities to javafx.fxml;
 }

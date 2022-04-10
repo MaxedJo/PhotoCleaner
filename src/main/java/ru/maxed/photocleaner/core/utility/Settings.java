@@ -1,4 +1,4 @@
-package ru.maxed.photocleaner.utility;
+package ru.maxed.photocleaner.core.utility;
 
 import java.io.*;
 

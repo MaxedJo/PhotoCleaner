@@ -1,15 +1,16 @@
 package ru.maxed.photocleaner;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import ru.maxed.photocleaner.controllers.MainController;
-import ru.maxed.photocleaner.entities.PhotoStage;
+import ru.maxed.photocleaner.ui.desktop.controllers.MainController;
+import ru.maxed.photocleaner.ui.desktop.PhotoStage;
+import ru.maxed.photocleaner.core.entities.CheckedFile;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 public class MainApplication extends Application {
     @Override
@@ -22,8 +23,16 @@ public class MainApplication extends Application {
         stage.setOnCloseRequest(controller.getCloseEventHandler());
         stage.show();
     }
-
+    public static ObservableList<CheckedFile> originFileList  = FXCollections.observableArrayList();
+    public static ObservableList<CheckedFile> processedFileList  = FXCollections.observableArrayList();
     public static void main(String[] args) {
         launch();
+//        DirectoryReader.read("C:\\Users\\vvmax\\Downloads\\wireless-industry-dev-1.7.10-main\\PhotoCleaner\\TestingDir",
+//                ".png",".bmp", MainApplication.processedFileList,MainApplication.originFileList);
+//        FileListComparator.compareLists(MainApplication.processedFileList,MainApplication.originFileList);
+//        System.out.println(originFileList);
+//        System.out.println(processedFileList);
+//        FileListCleaner.clean(processedFileList);
+//        System.out.println(processedFileList);
     }
 }

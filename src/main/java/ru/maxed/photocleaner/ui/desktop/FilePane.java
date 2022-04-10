@@ -1,25 +1,39 @@
-package ru.maxed.photocleaner.entities;
+package ru.maxed.photocleaner.ui.desktop;
 
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import ru.maxed.photocleaner.core.entities.CheckedFile;
 
 public class FilePane extends BorderPane {
     private Label text = new Label();
+    CheckedFile checkedFile;
     private CheckBox check = new CheckBox();
-    public FilePane(String str) {
+
+
+    public FilePane(CheckedFile file) {
         super();
+        checkedFile = file;
         this.setLeft(text);
-        text.setText(str);
+        text.setText(file.getPathFromStartDir());
+        check.setSelected(file.isMustDelete());
+        this.check.setOnAction(event -> {
+            file.setMustDelete(check.isSelected());
+        });
+        file.setCheckedHandler(value -> check.setSelected(value));
         this.setRight(check);
     }
+
     public FilePane() {
         super();
         this.setLeft(text);
         this.setRight(check);
     }
 
-    public void changeCheck(){ this.check.setSelected(!this.check.isSelected());}
+    public void changeCheck() {
+        this.check.setSelected(!this.check.isSelected());
+        checkedFile.setMustDelete(check.isSelected());
+    }
 
     public void setCheck(boolean check) {
         this.check.setSelected(check);

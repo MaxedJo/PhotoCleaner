@@ -1,4 +1,4 @@
-package ru.maxed.photocleaner.entities;
+package ru.maxed.photocleaner.ui.desktop;
 
 import javafx.scene.image.Image;
 import javafx.stage.Stage;

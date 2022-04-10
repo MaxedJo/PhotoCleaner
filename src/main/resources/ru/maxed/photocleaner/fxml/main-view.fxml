@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="673.0" prefWidth="881.0" spacing="20.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.maxed.photocleaner.controllers.MainController">
+<VBox alignment="CENTER" prefHeight="673.0" prefWidth="881.0" spacing="20.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.maxed.photocleaner.ui.desktop.controllers.MainController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -23,13 +23,13 @@
          <VBox alignment="CENTER" prefHeight="338.0" prefWidth="364.0">
             <children>
                <Label text="Эталонные файлы" />
-               <ListView fx:id="mainList" layoutX="10.0" layoutY="48.0" onMouseClicked="#listClickHandle" prefHeight="340.0" prefWidth="364.0" />
+               <ListView fx:id="originFileList" layoutX="10.0" layoutY="48.0" onMouseClicked="#listClickHandle" prefHeight="340.0" prefWidth="364.0" />
             </children>
          </VBox>
          <VBox alignment="CENTER" prefHeight="338.0" prefWidth="410.0">
             <children>
                <Label text="Файлы для обработки" />
-               <ListView fx:id="secondaryList" prefHeight="340.0" prefWidth="410.0">
+               <ListView fx:id="processedFileList" prefHeight="340.0" prefWidth="410.0">
                   <opaqueInsets>
                      <Insets left="30.0" />
                   </opaqueInsets>
@@ -60,7 +60,7 @@
          <VBox alignment="CENTER" prefHeight="100.0" prefWidth="127.0">
             <children>
                <Label text="Эталон" />
-               <TextField fx:id="mainExpansive" />
+               <TextField fx:id="originExtension" />
             </children>
          </VBox>
          <VBox alignment="CENTER" prefHeight="100.0" prefWidth="118.0">
@@ -69,24 +69,45 @@
             </HBox.margin>
             <children>
                <Label text="Обработка" />
-               <TextField fx:id="secondaryExpansive" />
+               <TextField fx:id="processedExtansion" />
             </children>
          </VBox>
       </children>
    </HBox>
-   <HBox alignment="CENTER">
+   <VBox>
       <children>
-          <Button fx:id="openButton" onAction="#onOpenButtonClick" text="Открыть" />
-         <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDeleteButtonClick" text="Удалить">
-            <HBox.margin>
-               <Insets left="30.0" />
-            </HBox.margin>
-         </Button>
-         <Button mnemonicParsing="false" onAction="#onMarkFilesWithoutOriginButtonClick" text="Выделить копии">
-            <HBox.margin>
-               <Insets left="30.0" />
-            </HBox.margin>
-         </Button>
+         <HBox alignment="CENTER">
+            <children>
+               <Button mnemonicParsing="false" onAction="#onMarkFilesWithoutOriginButtonClick" text="Выделить файлы без эталона">
+                  <HBox.margin>
+                     <Insets left="30.0" />
+                  </HBox.margin>
+               </Button>
+               <Button fx:id="copySelectButton" mnemonicParsing="false" onAction="#onCopySelectButtonClick" text="Выделить копии">
+                  <HBox.margin>
+                     <Insets left="20.0" />
+                  </HBox.margin>
+               </Button>
+               <Button mnemonicParsing="false" onAction="#onClearSelectionButtonClick" text="Снять выделение">
+                  <HBox.margin>
+                     <Insets left="20.0" />
+                  </HBox.margin>
+               </Button>
+            </children>
+         </HBox>
+         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <children>
+                <Button fx:id="openButton" onAction="#onOpenButtonClick" text="Открыть" />
+               <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDeleteButtonClick" text="Удалить">
+                  <HBox.margin>
+                     <Insets left="30.0" />
+                  </HBox.margin>
+               </Button>
+            </children>
+            <VBox.margin>
+               <Insets top="10.0" />
+            </VBox.margin>
+         </HBox>
       </children>
-   </HBox>
+   </VBox>
 </VBox>
