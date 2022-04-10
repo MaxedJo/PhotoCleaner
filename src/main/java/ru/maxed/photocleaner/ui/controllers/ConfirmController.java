@@ -1,4 +1,4 @@
-package ru.maxed.photocleaner.ui.desktop.controllers;
+package ru.maxed.photocleaner.ui.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
