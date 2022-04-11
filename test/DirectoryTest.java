@@ -31,7 +31,7 @@ class DirectoryTest {
             }
         }
         for (int i = 0; i < 100; i+=2) {
-            File file = new File(testPath+"/Test"+i+".bmp");
+            File file = new File(testPath+"/Test"+i+".bMp");
             try {
                 file.createNewFile();
                 fileCount++;
@@ -44,6 +44,16 @@ class DirectoryTest {
         secondaryDir.mkdir();
         for (int i = 100; i < 200; i+=4) {
             File file = new File(testPath+"/Something/Test"+i+".bmp");
+            try {
+                file.createNewFile();
+                fileCount++;
+                secondaryFilesCount++;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        for (int i = 100; i < 200; i+=4) {
+            File file = new File(testPath+"/Something/Test"+i+".dox");
             try {
                 file.createNewFile();
                 fileCount++;

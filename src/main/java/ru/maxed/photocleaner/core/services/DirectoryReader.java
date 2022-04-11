@@ -17,7 +17,9 @@ public class DirectoryReader {
             if (file.isDirectory()) {
                 DirectoryReader.read(file.getAbsolutePath(),originExtension,processedExtension,processedFileList,originFileList);
             } else {
-                String extension = file.getName().toLowerCase(Locale.ROOT).substring(file.getName().lastIndexOf("."));
+                int extensionStartIndex = file.getName().lastIndexOf(".");
+                if (extensionStartIndex <0 ) extensionStartIndex = 0;
+                String extension = file.getName().toLowerCase(Locale.ROOT).substring(extensionStartIndex);
                 if (extension.equals(originExtension) ){
                     originFileList.add(new CheckedFile(file.getAbsolutePath()));
                 } else if (extension.equals(processedExtension)){
