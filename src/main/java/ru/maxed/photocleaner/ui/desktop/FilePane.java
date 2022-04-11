@@ -7,9 +7,9 @@ import javafx.scene.layout.BorderPane;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
 
 public class FilePane extends BorderPane {
-    private Label text = new Label();
+    private final Label text = new Label();
     private CheckedFile checkedFile;
-    private CheckBox check = new CheckBox();
+    private final CheckBox check = new CheckBox();
 
 
     public FilePane(CheckedFile file, ListView<FilePane> parentList) {
@@ -20,7 +20,7 @@ public class FilePane extends BorderPane {
         check.setSelected(file.isMustDelete());
         this.check.setOnAction(event -> file.setMustDelete(check.isSelected()));
         file.setDeleteHandler(() -> parentList.getItems().remove(this));
-        file.setCheckedHandler(value -> check.setSelected(value));
+        file.setCheckedHandler(check::setSelected);
 
         this.setRight(check);
     }
