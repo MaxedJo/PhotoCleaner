@@ -66,11 +66,11 @@ public class MainController implements Initializable {
         DirectoryReader.read(dir.getAbsolutePath(), originExtension.getText(), processedExtansion.getText(),
                 MainApplication.processedFileList, MainApplication.originFileList);
         for (CheckedFile file : MainApplication.originFileList) {
-            FilePane filePane = new FilePane(file,originFileList);
+            FilePane filePane = new FilePane(file, originFileList);
             originFileList.getItems().add(filePane);
         }
         for (CheckedFile file : MainApplication.processedFileList) {
-            FilePane filePane = new FilePane(file,processedFileList);
+            FilePane filePane = new FilePane(file, processedFileList);
             processedFileList.getItems().add(filePane);
         }
     }
@@ -103,7 +103,6 @@ public class MainController implements Initializable {
 
     @FXML
     protected void onPathChooserClick() {
-        //System.out.println(MainApplication.originFileList);
         DirectoryChooser directoryChooser = new DirectoryChooser();
         File file = directoryChooser.showDialog(pathChooser.getScene().getWindow());
         if (file != null) pathInput.setText(file.getAbsolutePath());
@@ -134,12 +133,10 @@ public class MainController implements Initializable {
         }
     }
 
-    private javafx.event.EventHandler<WindowEvent> closeEventHandler = new javafx.event.EventHandler<WindowEvent>() {
-        @Override
-        public void handle(WindowEvent event) {
-            Settings settings = new Settings(pathInput.getText(), originExtension.getText(), processedExtansion.getText());
-            settings.save();
-        }
+
+    private javafx.event.EventHandler<WindowEvent> closeEventHandler = event -> {
+        Settings settings = new Settings(pathInput.getText(), originExtension.getText(), processedExtansion.getText());
+        settings.save();
     };
 
     public javafx.event.EventHandler<WindowEvent> getCloseEventHandler() {

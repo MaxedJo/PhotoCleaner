@@ -20,9 +20,5 @@ J.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_4_2.xml,2\c
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 @
 PhotoCleaner.iml,f\0\f005519fc0765fd0d48ae1e672aa8108550cd1a4
-\
-,src/main/java/ru/maxed/photocleaner/App.java,8\0\80836a859dd70968e38b223159f2e4a69bf20935
-n
->src/main/java/ru/maxed/photocleaner/core/utility/Settings.java,7\c\7c443e171f80e6b88de3be9fc4d6e4b4ac1b0bf9
 N
 src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7

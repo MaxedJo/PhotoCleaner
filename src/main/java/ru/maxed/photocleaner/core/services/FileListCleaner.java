@@ -7,6 +7,9 @@ import ru.maxed.photocleaner.ui.desktop.ErrorStage;
 import java.util.Iterator;
 
 public class FileListCleaner {
+    private FileListCleaner(){
+        throw new IllegalStateException("Utility class");
+    }
     public static void clean(ObservableList<CheckedFile> fileList){
         Iterator<CheckedFile> iterator = fileList.iterator();
         while (iterator.hasNext()) {

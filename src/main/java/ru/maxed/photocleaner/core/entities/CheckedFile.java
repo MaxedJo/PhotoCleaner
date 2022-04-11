@@ -1,23 +1,24 @@
 package ru.maxed.photocleaner.core.entities;
 
 import java.io.File;
+import java.util.Objects;
 
 public class CheckedFile extends File {
     private static String mainPath;
-    private String shortName;
+    private final String shortName;
     private boolean mustDelete;
-    private onCheckedHandler checkedHandler = null;
-    private onDeleteHander deleteHander = null;
+    private transient OnCheckedHandle checkedHandler = null;
+    private transient OnDeleteHandler deleteHandler = null;
 
-    public interface onDeleteHander{
+    public interface OnDeleteHandler {
         void delete();
     }
 
-    public interface onCheckedHandler {
+    public interface OnCheckedHandle {
         void set(boolean value);
     }
 
-    public void setCheckedHandler(onCheckedHandler checkedHandler) {
+    public void setCheckedHandler(OnCheckedHandle checkedHandler) {
         this.checkedHandler = checkedHandler;
     }
 
@@ -25,10 +26,6 @@ public class CheckedFile extends File {
         super(pathname);
         this.shortName = this.getName().substring(0, this.getName().lastIndexOf("."));
         this.mustDelete = false;
-    }
-
-    public static String getMainPath() {
-        return mainPath;
     }
 
     public String getPathFromStartDir() {
@@ -43,10 +40,6 @@ public class CheckedFile extends File {
         return shortName;
     }
 
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
-    }
-
     public boolean isMustDelete() {
         return mustDelete;
     }
@@ -59,14 +52,14 @@ public class CheckedFile extends File {
     }
     @Override
     public boolean delete(){
-        if (deleteHander != null) {
-            deleteHander.delete();
+        if (deleteHandler != null) {
+            deleteHandler.delete();
         }
         return super.delete();
     }
 
-    public void setDeleteHander(onDeleteHander deleteHander) {
-        this.deleteHander = deleteHander;
+    public void setDeleteHandler(OnDeleteHandler deleteHandler) {
+        this.deleteHandler = deleteHandler;
     }
 
     @Override
@@ -75,5 +68,19 @@ public class CheckedFile extends File {
                 "shortName='" + shortName + '\'' +
                 ", mustDelete=" + mustDelete +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        CheckedFile that = (CheckedFile) o;
+        return mustDelete == that.mustDelete;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), mustDelete);
     }
 }

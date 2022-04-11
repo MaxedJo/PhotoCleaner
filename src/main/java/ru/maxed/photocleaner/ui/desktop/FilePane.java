@@ -8,7 +8,7 @@ import ru.maxed.photocleaner.core.entities.CheckedFile;
 
 public class FilePane extends BorderPane {
     private Label text = new Label();
-    CheckedFile checkedFile;
+    private CheckedFile checkedFile;
     private CheckBox check = new CheckBox();
 
 
@@ -19,7 +19,7 @@ public class FilePane extends BorderPane {
         text.setText(file.getPathFromStartDir());
         check.setSelected(file.isMustDelete());
         this.check.setOnAction(event -> file.setMustDelete(check.isSelected()));
-        file.setDeleteHander(()-> parentList.getItems().remove(this));
+        file.setDeleteHandler(() -> parentList.getItems().remove(this));
         file.setCheckedHandler(value -> check.setSelected(value));
 
         this.setRight(check);
@@ -36,16 +36,8 @@ public class FilePane extends BorderPane {
         checkedFile.setMustDelete(check.isSelected());
     }
 
-    public void setCheck(boolean check) {
-        this.check.setSelected(check);
-    }
-
     public String getText() {
         return text.getText();
-    }
-
-    public boolean getCheck() {
-        return check.isSelected();
     }
 
     @Override

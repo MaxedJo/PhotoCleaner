@@ -7,6 +7,9 @@ import java.io.File;
 import java.util.Locale;
 
 public class DirectoryReader {
+    private DirectoryReader(){
+        throw new IllegalStateException("Utility class");
+    }
     public static void read(String path, String originExtension,String processedExtension,ObservableList<CheckedFile> processedFileList, ObservableList<CheckedFile> originFileList){
           originExtension = originExtension.toLowerCase(Locale.ROOT);
           processedExtension = processedExtension.toLowerCase(Locale.ROOT);

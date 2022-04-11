@@ -17,7 +17,7 @@ public class ConfirmController implements Initializable {
     private Button cancel;
 
     @FXML
-    private ListView preparedToDelete;
+    private ListView<String> preparedToDelete;
 
     @FXML
     protected void onConfirmButtonClick() {

@@ -4,6 +4,9 @@ import javafx.collections.ObservableList;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
 
 public class CopyOfOriginSelector {
+    private CopyOfOriginSelector(){
+        throw new IllegalStateException("Utility class");
+    }
     public static void selectSame(ObservableList<CheckedFile> processedFileList, ObservableList<CheckedFile> originFileList){
         for (CheckedFile originFile:
              originFileList) {
