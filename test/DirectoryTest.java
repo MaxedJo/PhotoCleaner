@@ -1,4 +1,3 @@
-package ru.maxed.photocleaner.test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
