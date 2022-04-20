@@ -2,7 +2,9 @@ package ru.maxed.photocleaner.core.services;
 
 import javafx.collections.ObservableList;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
-
+/*
+Выделение копии без оригинала
+ */
 public class FileListComparator {
     private FileListComparator(){
         throw new IllegalStateException("Utility class");

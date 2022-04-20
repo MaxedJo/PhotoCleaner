@@ -5,7 +5,9 @@ import ru.maxed.photocleaner.core.entities.CheckedFile;
 
 import java.io.File;
 import java.util.Locale;
-
+/*
+Считывание списков оригиналов и копий из директории
+ */
 public class DirectoryReader {
     private DirectoryReader(){
         throw new IllegalStateException("Utility class");

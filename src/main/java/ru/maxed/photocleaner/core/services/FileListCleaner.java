@@ -5,7 +5,9 @@ import ru.maxed.photocleaner.core.entities.CheckedFile;
 import ru.maxed.photocleaner.ui.desktop.ErrorStage;
 
 import java.util.Iterator;
-
+/*
+Удаление всех помеченных файлов
+ */
 public class FileListCleaner {
     private FileListCleaner(){
         throw new IllegalStateException("Utility class");

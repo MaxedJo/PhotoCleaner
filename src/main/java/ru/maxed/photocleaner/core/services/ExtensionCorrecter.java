@@ -1,7 +1,9 @@
 package ru.maxed.photocleaner.core.services;
 
 import java.util.Locale;
-
+/*
+Корректировка введённого пользователем расширения
+ */
 public class ExtensionCorrecter {
     private ExtensionCorrecter(){
         throw new IllegalStateException("Utility class");

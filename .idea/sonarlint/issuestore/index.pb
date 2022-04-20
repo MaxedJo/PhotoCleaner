@@ -22,13 +22,13 @@ J.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_4_2.xml,2\c
 PhotoCleaner.iml,f\0\f005519fc0765fd0d48ae1e672aa8108550cd1a4
 N
 src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7
-\
-,src/main/java/ru/maxed/photocleaner/App.java,8\0\80836a859dd70968e38b223159f2e4a69bf20935
 
 Qsrc/main/java/ru/maxed/photocleaner/ui/desktop/controllers/ConfirmController.java,6\7\6741594b27a4f7d5e48018ad154c850099975d5c
-v
-Fsrc/main/java/ru/maxed/photocleaner/core/services/FileListCleaner.java,0\5\05f166997f918062775d83d4cea23ed98cf57abb
-r
-Bsrc/main/java/ru/maxed/photocleaner/core/services/MarkCleaner.java,8\5\85a92db91b6aa808c241ddd518432b1c9b162ed8
 ~
 Nsrc/main/java/ru/maxed/photocleaner/ui/desktop/controllers/MainController.java,2\3\23ef01047c81816ee42360744f3d88497f76665b
+n
+>src/main/java/ru/maxed/photocleaner/core/utility/Settings.java,7\c\7c443e171f80e6b88de3be9fc4d6e4b4ac1b0bf9
+n
+>src/main/java/ru/maxed/photocleaner/ui/desktop/ErrorStage.java,5\7\575d5ebfc9ce105bf5730af361bb7c0ef5f2da9e
+l
+<src/main/java/ru/maxed/photocleaner/ui/desktop/FilePane.java,b\0\b01357492479fa58f9507513de74ae2100df3e05

@@ -27,6 +27,11 @@ public class CheckedFile extends File {
         this.shortName = this.getName().substring(0, this.getName().lastIndexOf("."));
         this.mustDelete = false;
     }
+    public CheckedFile(String pathname,boolean delete) {
+        super(pathname);
+        this.shortName = this.getName().substring(0, this.getName().lastIndexOf("."));
+        this.mustDelete = delete;
+    }
 
     public String getPathFromStartDir() {
         return this.getAbsolutePath().replace(mainPath + File.separator, "");
