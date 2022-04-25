@@ -6,6 +6,7 @@ import javafx.scene.control.CheckBox;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
+import ru.maxed.photocleaner.core.exeptions.TestExeption;
 import ru.maxed.photocleaner.core.services.DirectoryReader;
 import ru.maxed.photocleaner.core.services.FileListCleaner;
 
@@ -32,7 +33,11 @@ class FileListCleanerTest {
                 e.printStackTrace();
             }
         }
-        FileListCleaner.clean(processedFileList);
+        try {
+            FileListCleaner.clean(processedFileList);
+        } catch (TestExeption e) {
+            e.printStackTrace();
+        }
         Assertions.assertEquals(expectedFileList, processedFileList);
         processedFileList.clear();
         DirectoryReader.read("TestingDir",".png",".bmp",processedFileList,originFileList);

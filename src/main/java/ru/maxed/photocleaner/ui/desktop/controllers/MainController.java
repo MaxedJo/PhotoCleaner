@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.WindowEvent;
 import ru.maxed.photocleaner.MainApplication;
+import ru.maxed.photocleaner.core.exeptions.TestExeption;
 import ru.maxed.photocleaner.core.services.*;
 import ru.maxed.photocleaner.ui.desktop.ErrorStage;
 import ru.maxed.photocleaner.ui.desktop.FilePane;
@@ -54,11 +55,16 @@ public class MainController implements Initializable {
         MainApplication.processedFileList.clear();
         originFileList.getItems().clear();
         processedFileList.getItems().clear();
-        if (ExtensionValidator.validate(originExtension.getText(), processedExtansion.getText())) return;
+        try {
+            ExtensionValidator.validate(originExtension.getText(), processedExtansion.getText());
+        } catch (TestExeption e) {
+            new ErrorStage(e.getMessage());
+            return;
+        }
         String path = pathInput.getText();
         File dir = new File(path);
         if (!dir.isDirectory()) {
-            new ErrorStage("Неправильный путь, введите путь заного");
+            new ErrorStage("Неправильный пусть,введите путь заного");
             return;
         }
         CheckedFile.setMainPath(path);

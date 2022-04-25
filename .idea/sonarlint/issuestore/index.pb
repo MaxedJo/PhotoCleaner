@@ -22,13 +22,7 @@ J.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_4_2.xml,2\c
 PhotoCleaner.iml,f\0\f005519fc0765fd0d48ae1e672aa8108550cd1a4
 N
 src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7
-
-Qsrc/main/java/ru/maxed/photocleaner/ui/desktop/controllers/ConfirmController.java,6\7\6741594b27a4f7d5e48018ad154c850099975d5c
-~
-Nsrc/main/java/ru/maxed/photocleaner/ui/desktop/controllers/MainController.java,2\3\23ef01047c81816ee42360744f3d88497f76665b
 n
 >src/main/java/ru/maxed/photocleaner/core/utility/Settings.java,7\c\7c443e171f80e6b88de3be9fc4d6e4b4ac1b0bf9
-n
->src/main/java/ru/maxed/photocleaner/ui/desktop/ErrorStage.java,5\7\575d5ebfc9ce105bf5730af361bb7c0ef5f2da9e
 l
 <src/main/java/ru/maxed/photocleaner/ui/desktop/FilePane.java,b\0\b01357492479fa58f9507513de74ae2100df3e05

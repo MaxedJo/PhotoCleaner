@@ -7,7 +7,9 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import ru.maxed.photocleaner.MainApplication;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
+import ru.maxed.photocleaner.core.exeptions.TestExeption;
 import ru.maxed.photocleaner.core.services.FileListCleaner;
+import ru.maxed.photocleaner.ui.desktop.ErrorStage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,8 +23,16 @@ public class ConfirmController implements Initializable {
 
     @FXML
     protected void onConfirmButtonClick() {
-        FileListCleaner.clean(MainApplication.processedFileList);
-        FileListCleaner.clean(MainApplication.originFileList);
+        try {
+            FileListCleaner.clean(MainApplication.processedFileList);
+        } catch (TestExeption e){
+            new ErrorStage(e.getMessage());
+        }
+        try {
+            FileListCleaner.clean(MainApplication.originFileList);
+        } catch (TestExeption e) {
+            new ErrorStage(e.getMessage());
+        }
         Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();
     }

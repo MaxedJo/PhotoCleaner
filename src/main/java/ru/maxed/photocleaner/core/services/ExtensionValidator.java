@@ -1,6 +1,6 @@
 package ru.maxed.photocleaner.core.services;
 
-import ru.maxed.photocleaner.ui.desktop.ErrorStage;
+import ru.maxed.photocleaner.core.exeptions.TestExeption;
 
 import java.util.Locale;
 /*
@@ -10,19 +10,15 @@ public class ExtensionValidator {
     private ExtensionValidator(){
         throw new IllegalStateException("Utility class");
     }
-    public static boolean validate(String str1,String str2) {
+    public static void validate(String str1,String str2) throws TestExeption {
         if (str1.equals("") || str2.equals("")) {
-            new ErrorStage("Пожалуйста, введите необходимые расширения файлов.");
-            return true;
+            throw new TestExeption("Пожалуйста, введите необходимые расширения файлов.");
         }
         if (str1.toLowerCase(Locale.ROOT).equals(str2.toLowerCase(Locale.ROOT))) {
-            new ErrorStage("Расширение файлов не может быть одинаковым");
-            return true;
+            throw new TestExeption("Расширение файлов не может быть одинаковым");
         }
         if (Math.max(str1.lastIndexOf("."),str2.lastIndexOf("."))>0) {
-            new ErrorStage("Неправильный формат расширения");
-            return true;
+            throw new TestExeption("Неправильный формат расширения");
         }
-        return false;
     }
 }
