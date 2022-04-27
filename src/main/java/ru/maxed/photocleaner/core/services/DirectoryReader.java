@@ -2,6 +2,7 @@ package ru.maxed.photocleaner.core.services;
 
 import javafx.collections.ObservableList;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
+import ru.maxed.photocleaner.core.exeptions.TestExeption;
 
 import java.io.File;
 import java.util.Locale;
@@ -12,7 +13,9 @@ public class DirectoryReader {
     private DirectoryReader(){
         throw new IllegalStateException("Utility class");
     }
-    public static void read(String path, String originExtension,String processedExtension,ObservableList<CheckedFile> processedFileList, ObservableList<CheckedFile> originFileList){
+    public static void read(String path,
+                            String originExtension,String processedExtension,ObservableList<CheckedFile> processedFileList,
+                            ObservableList<CheckedFile> originFileList) throws TestExeption{
           originExtension = ExtensionCorrecter.correct(originExtension);
           processedExtension = ExtensionCorrecter.correct(processedExtension);
           File directory = new File(path);
@@ -31,6 +34,9 @@ public class DirectoryReader {
                     processedFileList.add(new CheckedFile(file.getAbsolutePath()));
                 }
             }
+        }
+        if (processedFileList.size()+originFileList.size() == 0){
+            throw new TestExeption("По данному пути подходящих файлов не найдено");
         }
     }
 }

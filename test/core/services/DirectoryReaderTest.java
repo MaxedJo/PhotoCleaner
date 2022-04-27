@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.junit.jupiter.api.*;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
+import ru.maxed.photocleaner.core.exeptions.TestExeption;
 import ru.maxed.photocleaner.core.services.DirectoryReader;
 
 import java.io.File;
@@ -27,7 +28,11 @@ class DirectoryReaderTest {
 
         String processedExtension = ".bmp";
         String originExtension = ".png";
-        DirectoryReader.read(Directory.testPath,originExtension,processedExtension,processedList,originList);
+        try {
+            DirectoryReader.read(Directory.testPath,originExtension,processedExtension,processedList,originList);
+        } catch (TestExeption e) {
+            e.printStackTrace();
+        }
         Assertions.assertEquals(Directory.processedFilesCount,processedList.size());
         Assertions.assertEquals(Directory.originFileCount,originList.size());
     }
@@ -36,7 +41,11 @@ class DirectoryReaderTest {
     void readWithoutDots() {
         String processedExtension = "bmp";
         String originExtension = "png";
-        DirectoryReader.read(Directory.testPath,originExtension,processedExtension,processedList,originList);
+        try {
+            DirectoryReader.read(Directory.testPath,originExtension,processedExtension,processedList,originList);
+        } catch (TestExeption e) {
+            e.printStackTrace();
+        }
         Assertions.assertEquals(Directory.processedFilesCount,processedList.size());
         Assertions.assertEquals(Directory.originFileCount,originList.size());
     }
@@ -44,18 +53,20 @@ class DirectoryReaderTest {
     void readLowerUpper() {
         String processedExtension = ".BmP";
         String originExtension = "pnG";
-        DirectoryReader.read(Directory.testPath,originExtension,processedExtension,processedList,originList);
+        try {
+            DirectoryReader.read(Directory.testPath,originExtension,processedExtension,processedList,originList);
+        } catch (TestExeption e) {
+            e.printStackTrace();
+        }
         Assertions.assertEquals(Directory.processedFilesCount,processedList.size());
         Assertions.assertEquals(Directory.originFileCount,originList.size());
     }
 
     @Test
-    void readWrongExtension() {
+    void readEmptyLists() {
         String processedExtension = ".yui";
         String originExtension = ".";
-        DirectoryReader.read(Directory.testPath,originExtension,processedExtension,processedList,originList);
-        Assertions.assertEquals(0, processedList.size());
-        Assertions.assertEquals(0, originList.size());
+        Assertions.assertThrows(TestExeption.class,()->DirectoryReader.read(Directory.testPath,originExtension,processedExtension,processedList,originList));
     }
     @AfterAll
     static void clean(){

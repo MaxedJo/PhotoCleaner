@@ -4,16 +4,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import ru.maxed.photocleaner.MainApplication;
 import ru.maxed.photocleaner.core.exeptions.TestExeption;
 import ru.maxed.photocleaner.core.services.*;
+import ru.maxed.photocleaner.ui.desktop.ErrorAlert;
 import ru.maxed.photocleaner.ui.desktop.ErrorStage;
 import ru.maxed.photocleaner.ui.desktop.FilePane;
 import ru.maxed.photocleaner.ui.desktop.PhotoStage;
@@ -22,6 +22,7 @@ import ru.maxed.photocleaner.core.utility.Settings;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -64,13 +65,17 @@ public class MainController implements Initializable {
         String path = pathInput.getText();
         File dir = new File(path);
         if (!dir.isDirectory()) {
-            new ErrorStage("Неправильный пусть,введите путь заного");
+            new ErrorAlert("Неправильный путь,введите путь заного");
             return;
         }
         CheckedFile.setMainPath(path);
         pathToFiles.setText(dir.getAbsolutePath());
-        DirectoryReader.read(dir.getAbsolutePath(), originExtension.getText(), processedExtansion.getText(),
-                MainApplication.processedFileList, MainApplication.originFileList);
+        try {
+            DirectoryReader.read(dir.getAbsolutePath(), originExtension.getText(), processedExtansion.getText(),
+                    MainApplication.processedFileList, MainApplication.originFileList);
+        } catch (TestExeption e) {
+            new ErrorAlert(e.getMessage());
+        }
         for (CheckedFile file : MainApplication.originFileList) {
             FilePane filePane = new FilePane(file, originFileList);
             originFileList.getItems().add(filePane);

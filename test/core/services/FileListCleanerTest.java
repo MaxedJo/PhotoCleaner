@@ -40,7 +40,11 @@ class FileListCleanerTest {
         }
         Assertions.assertEquals(expectedFileList, processedFileList);
         processedFileList.clear();
-        DirectoryReader.read("TestingDir",".png",".bmp",processedFileList,originFileList);
+        try {
+            DirectoryReader.read("TestingDir",".png",".bmp",processedFileList,originFileList);
+        } catch (TestExeption e) {
+            e.printStackTrace();
+        }
         Assertions.assertEquals(expectedFileList.size(),processedFileList.size());
         Directory.recusiveDelete(dir);
     }
