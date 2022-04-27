@@ -4,25 +4,25 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import ru.maxed.photocleaner.MainApplication;
-import ru.maxed.photocleaner.core.exeptions.TestExeption;
+import ru.maxed.photocleaner.core.entities.CheckedFile;
+import ru.maxed.photocleaner.core.exeptions.TestException;
 import ru.maxed.photocleaner.core.services.*;
+import ru.maxed.photocleaner.core.utility.Settings;
 import ru.maxed.photocleaner.ui.desktop.ErrorAlert;
 import ru.maxed.photocleaner.ui.desktop.ErrorStage;
 import ru.maxed.photocleaner.ui.desktop.FilePane;
 import ru.maxed.photocleaner.ui.desktop.PhotoStage;
-import ru.maxed.photocleaner.core.entities.CheckedFile;
-import ru.maxed.photocleaner.core.utility.Settings;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -35,8 +35,6 @@ public class MainController implements Initializable {
     private ListView<FilePane> originFileList;
 
     @FXML
-    private Button openButton;
-    @FXML
     private Button pathChooser;
 
     @FXML
@@ -44,7 +42,7 @@ public class MainController implements Initializable {
     @FXML
     private TextField originExtension;
     @FXML
-    private TextField processedExtansion;
+    private TextField processedExtension;
 
     @FXML
     private Label pathToFiles;
@@ -57,8 +55,8 @@ public class MainController implements Initializable {
         originFileList.getItems().clear();
         processedFileList.getItems().clear();
         try {
-            ExtensionValidator.validate(originExtension.getText(), processedExtansion.getText());
-        } catch (TestExeption e) {
+            ExtensionValidator.validate(originExtension.getText(), processedExtension.getText());
+        } catch (TestException e) {
             new ErrorStage(e.getMessage());
             return;
         }
@@ -71,9 +69,9 @@ public class MainController implements Initializable {
         CheckedFile.setMainPath(path);
         pathToFiles.setText(dir.getAbsolutePath());
         try {
-            DirectoryReader.read(dir.getAbsolutePath(), originExtension.getText(), processedExtansion.getText(),
+            DirectoryReader.read(dir.getAbsolutePath(), originExtension.getText(), processedExtension.getText(),
                     MainApplication.processedFileList, MainApplication.originFileList);
-        } catch (TestExeption e) {
+        } catch (TestException e) {
             new ErrorAlert(e.getMessage());
         }
         for (CheckedFile file : MainApplication.originFileList) {
@@ -132,21 +130,18 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        originExtension.setText(".png");
-        processedExtansion.setText(".bmp");
-        pathInput.setText("C:\\Users\\vvmax\\Downloads\\wireless-industry-dev-1.7.10-main\\PhotoCleaner\\TestingDir");
         File settingsFile = new File("settings.cfg");
         if (settingsFile.exists()) {
             Settings settings = new Settings(settingsFile);
             pathInput.setText(settings.getPath());
-            processedExtansion.setText(settings.getSecondaryExpansive());
+            processedExtension.setText(settings.getSecondaryExpansive());
             originExtension.setText(settings.getMainExpansive());
         }
     }
 
 
-    private javafx.event.EventHandler<WindowEvent> closeEventHandler = event -> {
-        Settings settings = new Settings(pathInput.getText(), originExtension.getText(), processedExtansion.getText());
+    private final javafx.event.EventHandler<WindowEvent> closeEventHandler = event -> {
+        Settings settings = new Settings(pathInput.getText(), originExtension.getText(), processedExtension.getText());
         settings.save();
     };
 

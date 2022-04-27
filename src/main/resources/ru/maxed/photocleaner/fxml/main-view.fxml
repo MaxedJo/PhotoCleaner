@@ -69,7 +69,7 @@
             </HBox.margin>
             <children>
                <Label text="Обработка" />
-               <TextField fx:id="processedExtansion" />
+               <TextField fx:id="processedExtension" />
             </children>
          </VBox>
       </children>

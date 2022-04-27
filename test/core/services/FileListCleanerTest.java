@@ -2,18 +2,15 @@ package core.services;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.CheckBox;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
-import ru.maxed.photocleaner.core.exeptions.TestExeption;
+import ru.maxed.photocleaner.core.exeptions.TestException;
 import ru.maxed.photocleaner.core.services.DirectoryReader;
 import ru.maxed.photocleaner.core.services.FileListCleaner;
 
 import java.io.File;
 import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class FileListCleanerTest {
     ObservableList<CheckedFile> originFileList= FXCollections.observableArrayList();
@@ -35,14 +32,14 @@ class FileListCleanerTest {
         }
         try {
             FileListCleaner.clean(processedFileList);
-        } catch (TestExeption e) {
+        } catch (TestException e) {
             e.printStackTrace();
         }
         Assertions.assertEquals(expectedFileList, processedFileList);
         processedFileList.clear();
         try {
             DirectoryReader.read("TestingDir",".png",".bmp",processedFileList,originFileList);
-        } catch (TestExeption e) {
+        } catch (TestException e) {
             e.printStackTrace();
         }
         Assertions.assertEquals(expectedFileList.size(),processedFileList.size());

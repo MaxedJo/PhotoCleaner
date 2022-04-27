@@ -6,7 +6,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
-import ru.maxed.photocleaner.core.exeptions.TestExeption;
+import ru.maxed.photocleaner.core.exeptions.TestException;
 import ru.maxed.photocleaner.core.services.DirectoryReader;
 
 class DirectoryReaderTest {
@@ -31,7 +31,7 @@ class DirectoryReaderTest {
     void read(String processedExtension, String originExtension) {
         try {
             DirectoryReader.read(Directory.testPath,originExtension,processedExtension,processedList,originList);
-        } catch (TestExeption e) {
+        } catch (TestException e) {
             e.printStackTrace();
         }
         System.out.println(processedExtension);
@@ -44,7 +44,7 @@ class DirectoryReaderTest {
     void readEmptyLists() {
         String processedExtension = ".yui";
         String originExtension = ".";
-        Assertions.assertThrows(TestExeption.class,()->DirectoryReader.read(Directory.testPath,originExtension,processedExtension,processedList,originList));
+        Assertions.assertThrows(TestException.class,()->DirectoryReader.read(Directory.testPath,originExtension,processedExtension,processedList,originList));
     }
     @AfterAll
     static void clean(){

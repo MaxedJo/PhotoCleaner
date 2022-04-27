@@ -20,23 +20,3 @@ N
 src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7
 n
 >src/main/java/ru/maxed/photocleaner/core/utility/Settings.java,7\c\7c443e171f80e6b88de3be9fc4d6e4b4ac1b0bf9
-l
-<src/main/java/ru/maxed/photocleaner/ui/desktop/FilePane.java,b\0\b01357492479fa58f9507513de74ae2100df3e05
-^
-.test/core/services/FileListComparatorTest.java,3\1\317182da97bdc27c993effd74bdbe733eec0614f
-^
-.test/core/services/ExtensionCorrecterTest.java,8\1\81bdc48768778ec486559f8ffcb4fcdede786732
-`
-0test/core/services/CopyOfOriginSelectorTest.java,2\7\279d1f26c84e09ac807270d34e2793125d40dbd6
-W
-'test/core/services/MarkCleanerTest.java,0\3\0388e8eb417df8682e5ba569055396bbcae03870
-h
-8src/main/java/ru/maxed/photocleaner/MainApplication.java,d\0\d0d71af91918f99ae52ae5cdaf0623c4b5dfd162
-Q
-!test/core/services/Directory.java,1\8\18625ba6d83932bf27a5b1895ed92fa3d18a3d2e
-r
-Bsrc/main/java/ru/maxed/photocleaner/core/entities/CheckedFile.java,d\6\d623d2ee0c9df3d948690f258890ee39bc661089
-\
-,src/main/java/ru/maxed/photocleaner/App.java,8\0\80836a859dd70968e38b223159f2e4a69bf20935
-^
-.test/core/services/ExtensionValidatorTest.java,2\0\203594ef5f5a171de04276e2d81b85ca5b688773

@@ -5,10 +5,7 @@ import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
-import ru.maxed.photocleaner.core.services.CopyOfOriginSelector;
 import ru.maxed.photocleaner.core.services.FileListComparator;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class FileListComparatorTest {
     ObservableList<CheckedFile> originFileList= FXCollections.observableArrayList();

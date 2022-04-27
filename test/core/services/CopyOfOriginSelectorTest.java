@@ -2,11 +2,10 @@ package core.services;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
 import ru.maxed.photocleaner.core.services.CopyOfOriginSelector;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CopyOfOriginSelectorTest {
     ObservableList<CheckedFile> originFileList= FXCollections.observableArrayList();
