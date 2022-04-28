@@ -30,7 +30,7 @@ class DirectoryReaderTest {
     })
     void read(String processedExtension, String originExtension) {
         try {
-            DirectoryReader.read(Directory.testPath,originExtension,processedExtension,processedList,originList);
+            DirectoryReader.read(Directory.testPath,originExtension,processedExtension,processedList,originList,true);
         } catch (TestException e) {
             e.printStackTrace();
         }
@@ -44,7 +44,7 @@ class DirectoryReaderTest {
     void readEmptyLists() {
         String processedExtension = ".yui";
         String originExtension = ".";
-        Assertions.assertThrows(TestException.class,()->DirectoryReader.read(Directory.testPath,originExtension,processedExtension,processedList,originList));
+        Assertions.assertThrows(TestException.class,()->DirectoryReader.read(Directory.testPath,originExtension,processedExtension,processedList,originList,true));
     }
     @AfterAll
     static void clean(){

@@ -1,7 +1,54 @@
-#openButton{
-    -fx-background-color: green;
+#pathChooser{
+    -fx-background-image: url(images/open.png);
 }
-
+#cleanButton{
+    -fx-background-image: url(images/clean.png);
+}
+#copySelectButton{
+    -fx-background-image: url(images/copy.png);
+}
+#clearButton{
+    -fx-background-image: url(images/clear.png);
+}
 #deleteButton{
-    -fx-background-color: red;
+    -fx-background-image: url(images/delete.png);
+}
+#root{
+    -fx-min-width: 400px;
+    -fx-min-height: 350px;
+}
+#buttonBox{
+    -fx-spacing: 5px;
+    -fx-padding: 5px;
+}
+.extensionHbox{
+    -fx-spacing: 5px;
+    -fx-min-height: 35px;
+    -fx-max-height: 35px;
+}
+.label{
+    -fx-wrap-text: true;
+    -fx-min-width: 70px;
+    -fx-max-width: Infinity;
+    -fx-max-height: Infinity;
+    -fx-alignment: CENTER;
+}
+.extensionInput{
+    -fx-pref-width:170px;
+}
+.listVBox{
+    -fx-spacing: 5px;
+    -fx-padding: 5px;
+}
+.text-field{
+    -fx-min-height:32px;
+}
+.button-image{
+    -fx-background-size: 24px 24px;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-pref-width: 32px;
+    -fx-pref-height: 32px;
+    -fx-min-width: 32px;
+    -fx-min-height:32px;
 }

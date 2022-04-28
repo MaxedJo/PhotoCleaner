@@ -10,10 +10,10 @@ import java.io.InputStream;
 public class ErrorAlert extends Alert {
     public ErrorAlert(String contentText) {
         super(AlertType.ERROR, contentText, ButtonType.OK);
-        this.setHeaderText(contentText);
-        this.setContentText(null);
+        this.setHeaderText(null);
+        this.setContentText(contentText);
         this.setTitle("Ошибка");
-        InputStream iconStream = getClass().getResourceAsStream("/ru/maxed/photocleaner/icon.png");
+        InputStream iconStream = getClass().getResourceAsStream("/ru/maxed/photocleaner/images/icon.png");
         assert iconStream != null;
         Image image = new Image(iconStream);
         Stage stage = (Stage) this.getDialogPane().getScene().getWindow();

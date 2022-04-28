@@ -21,6 +21,8 @@ public class MainApplication extends Application {
         stage.setScene(scene);
         MainController controller = fxmlLoader.getController();
         stage.setOnCloseRequest(controller.getCloseEventHandler());
+        stage.setMinWidth(400);
+        stage.setMinHeight(350);
         stage.show();
     }
 

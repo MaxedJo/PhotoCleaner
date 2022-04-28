@@ -4,26 +4,25 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.WindowEvent;
+import javafx.util.Duration;
 import ru.maxed.photocleaner.MainApplication;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
 import ru.maxed.photocleaner.core.exeptions.TestException;
 import ru.maxed.photocleaner.core.services.*;
 import ru.maxed.photocleaner.core.utility.Settings;
+import ru.maxed.photocleaner.ui.desktop.ConfirmationAlert;
 import ru.maxed.photocleaner.ui.desktop.ErrorAlert;
-import ru.maxed.photocleaner.ui.desktop.ErrorStage;
 import ru.maxed.photocleaner.ui.desktop.FilePane;
 import ru.maxed.photocleaner.ui.desktop.PhotoStage;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -43,10 +42,16 @@ public class MainController implements Initializable {
     private TextField originExtension;
     @FXML
     private TextField processedExtension;
-
     @FXML
-    private Label pathToFiles;
-
+    private Tooltip deleteTooltip;
+    @FXML
+    private Tooltip clearTooltip;
+    @FXML
+    private Tooltip copyTooltip;
+    @FXML
+    private Tooltip cleanTooltip;
+    @FXML
+    private Tooltip openTooltip;
 
     @FXML
     protected void onOpenButtonClick() {
@@ -57,7 +62,7 @@ public class MainController implements Initializable {
         try {
             ExtensionValidator.validate(originExtension.getText(), processedExtension.getText());
         } catch (TestException e) {
-            new ErrorStage(e.getMessage());
+            new ErrorAlert(e.getMessage());
             return;
         }
         String path = pathInput.getText();
@@ -67,10 +72,9 @@ public class MainController implements Initializable {
             return;
         }
         CheckedFile.setMainPath(path);
-        pathToFiles.setText(dir.getAbsolutePath());
         try {
             DirectoryReader.read(dir.getAbsolutePath(), originExtension.getText(), processedExtension.getText(),
-                    MainApplication.processedFileList, MainApplication.originFileList);
+                    MainApplication.processedFileList, MainApplication.originFileList,true);
         } catch (TestException e) {
             new ErrorAlert(e.getMessage());
         }
@@ -114,22 +118,41 @@ public class MainController implements Initializable {
     protected void onPathChooserClick() {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         File file = directoryChooser.showDialog(pathChooser.getScene().getWindow());
-        if (file != null) pathInput.setText(file.getAbsolutePath());
+        if (file != null) {
+            pathInput.setText(file.getAbsolutePath());
+            onOpenButtonClick();
+        }
     }
 
     @FXML
-    protected void onDeleteButtonClick() throws IOException {
-        PhotoStage confirmWindow = new PhotoStage();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ru/maxed/photocleaner/fxml/confirm.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        confirmWindow.setScene(scene);
-        confirmWindow.setTitle("Подтвердите удаление");
-        confirmWindow.show();
+    protected void onDeleteButtonClick() {
+        ConfirmationAlert alert = new ConfirmationAlert();
+        Optional<ButtonType> option = alert.showAndWait();
+        if  (option.get() == ButtonType.OK) {
+            try {
+                FileListCleaner.clean(MainApplication.processedFileList);
+            } catch (TestException e){
+                new ErrorAlert(e.getMessage());
+            }
+            try {
+                FileListCleaner.clean(MainApplication.originFileList);
+            } catch (TestException e) {
+                new ErrorAlert(e.getMessage());
+            }
+        }
     }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        deleteTooltip.setShowDelay(new Duration(100));
+        clearTooltip.setShowDelay(new Duration(100));
+        copyTooltip.setShowDelay(new Duration(100));
+        cleanTooltip.setShowDelay(new Duration(100));
+        openTooltip.setShowDelay(new Duration(100));
+        pathInput.setPromptText("Введите путь");
+        originExtension.setPromptText("Эталонное расширение");
+        processedExtension.setPromptText("Расширение для обработки");
         File settingsFile = new File("settings.cfg");
         if (settingsFile.exists()) {
             Settings settings = new Settings(settingsFile);

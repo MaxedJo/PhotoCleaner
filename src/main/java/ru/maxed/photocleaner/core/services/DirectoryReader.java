@@ -15,7 +15,7 @@ public class DirectoryReader {
     }
     public static void read(String path,
                             String originExtension,String processedExtension,ObservableList<CheckedFile> processedFileList,
-                            ObservableList<CheckedFile> originFileList) throws TestException {
+                            ObservableList<CheckedFile> originFileList, boolean firstEntry) throws TestException {
           originExtension = ExtensionCorrecter.correct(originExtension);
           processedExtension = ExtensionCorrecter.correct(processedExtension);
           File directory = new File(path);
@@ -23,7 +23,7 @@ public class DirectoryReader {
         assert dirFiles != null;
         for (File file : dirFiles) {
             if (file.isDirectory()) {
-                DirectoryReader.read(file.getAbsolutePath(),originExtension,processedExtension,processedFileList,originFileList);
+                DirectoryReader.read(file.getAbsolutePath(),originExtension,processedExtension,processedFileList,originFileList,false);
             } else {
                 int extensionStartIndex = file.getName().lastIndexOf(".");
                 if (extensionStartIndex <0 ) continue;
@@ -35,7 +35,7 @@ public class DirectoryReader {
                 }
             }
         }
-        if (processedFileList.size()+originFileList.size() == 0){
+        if (firstEntry && (processedFileList.size()+originFileList.size() == 0)){
             throw new TestException("По данному пути подходящих файлов не найдено");
         }
     }

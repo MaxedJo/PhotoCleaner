@@ -20,3 +20,17 @@ N
 src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7
 n
 >src/main/java/ru/maxed/photocleaner/core/utility/Settings.java,7\c\7c443e171f80e6b88de3be9fc4d6e4b4ac1b0bf9
+@
+PhotoCleaner.iml,f\0\f005519fc0765fd0d48ae1e672aa8108550cd1a4
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+r
+Bsrc/main/java/ru/maxed/photocleaner/core/entities/CheckedFile.java,d\6\d623d2ee0c9df3d948690f258890ee39bc661089
+r
+Bsrc/main/java/ru/maxed/photocleaner/core/services/MarkCleaner.java,8\5\85a92db91b6aa808c241ddd518432b1c9b162ed8
+y
+Isrc/main/java/ru/maxed/photocleaner/core/services/FileListComparator.java,0\e\0e75e9b35451b2508b632d65abae69275955769c
+v
+Fsrc/main/java/ru/maxed/photocleaner/core/services/FileListCleaner.java,0\5\05f166997f918062775d83d4cea23ed98cf57abb
+u
+Esrc/main/java/ru/maxed/photocleaner/core/exeptions/TestException.java,1\1\114a7819af5d81bfc714140d3f35f699c34fce22

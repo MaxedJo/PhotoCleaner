@@ -7,7 +7,7 @@ import java.io.InputStream;
 
 public class PhotoStage extends Stage {
     public PhotoStage() {
-        InputStream iconStream = getClass().getResourceAsStream("/ru/maxed/photocleaner/icon.png");
+        InputStream iconStream = getClass().getResourceAsStream("/ru/maxed/photocleaner/images/icon.png");
         assert iconStream != null;
         Image image = new Image(iconStream);
         this.setTitle("Photo cleaner");

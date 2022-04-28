@@ -38,7 +38,7 @@ class FileListCleanerTest {
         Assertions.assertEquals(expectedFileList, processedFileList);
         processedFileList.clear();
         try {
-            DirectoryReader.read("TestingDir",".png",".bmp",processedFileList,originFileList);
+            DirectoryReader.read("TestingDir",".png",".bmp",processedFileList,originFileList,true);
         } catch (TestException e) {
             e.printStackTrace();
         }
