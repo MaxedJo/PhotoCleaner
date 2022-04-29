@@ -1,5 +1,7 @@
 package ru.maxed.photocleaner.ui.desktop.controllers;
 
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -47,16 +49,51 @@ public class MainController implements Initializable {
     @FXML
     private Tooltip cleanTooltip;
     @FXML
-    private  Button openButton;
+    private Button openButton;
     @FXML
     private Tooltip openTooltip;
-    private TextField[] inputs ;
     @FXML
-    protected void onEnter(){
+    private Tooltip refreshTooltip;
+    @FXML
+    private ToggleButton originFilter;
+    @FXML
+    private ToggleButton processedFilter;
+    private TextField[] inputs;
+
+    @FXML
+    protected void onFilterButtonClick(ActionEvent e) {
+        ToggleButton button = (ToggleButton) e.getTarget();
+        if (button.equals(originFilter)) {
+            loadList(MainApplication.originFileList,originFileList,originFilter);
+        } else if (button.equals(processedFilter)){
+            loadList(MainApplication.processedFileList,processedFileList,processedFilter);
+        }
+
+    }
+
+    private void loadList(ObservableList<CheckedFile> list, ListView<FilePane> listView, ToggleButton filter) {
+        listView.getItems().clear();
+        if (filter.isSelected()) {
+            for (CheckedFile file : list) {
+                if (file.isMustDelete()) {
+                    FilePane filePane = new FilePane(file, listView,filter);
+                    listView.getItems().add(filePane);
+                }
+            }
+        } else {
+            for (CheckedFile file : list) {
+                FilePane filePane = new FilePane(file, listView,filter);
+                listView.getItems().add(filePane);
+            }
+        }
+    }
+
+    @FXML
+    protected void onEnter() {
         boolean mustOpen = true;
         for (int i = 0; i < inputs.length; i++) {
-            if (inputs[i%inputs.length].getText().equals("")){
-                inputs[i%inputs.length].requestFocus();
+            if (inputs[i % inputs.length].getText().equals("")) {
+                inputs[i % inputs.length].requestFocus();
                 mustOpen = false;
             }
         }
@@ -68,8 +105,6 @@ public class MainController implements Initializable {
         try {
             MainApplication.originFileList.clear();
             MainApplication.processedFileList.clear();
-            originFileList.getItems().clear();
-            processedFileList.getItems().clear();
             ExtensionValidator.validate(originExtension.getText(), processedExtension.getText());
             String path = pathInput.getText();
             File dir = new File(path);
@@ -79,14 +114,8 @@ public class MainController implements Initializable {
             CheckedFile.setMainPath(path);
             DirectoryReader.read(dir.getAbsolutePath(), originExtension.getText(), processedExtension.getText(),
                     MainApplication.processedFileList, MainApplication.originFileList, true);
-            for (CheckedFile file : MainApplication.originFileList) {
-                FilePane filePane = new FilePane(file, originFileList);
-                originFileList.getItems().add(filePane);
-            }
-            for (CheckedFile file : MainApplication.processedFileList) {
-                FilePane filePane = new FilePane(file, processedFileList);
-                processedFileList.getItems().add(filePane);
-            }
+            loadList(MainApplication.processedFileList,processedFileList,processedFilter);
+            loadList(MainApplication.originFileList,originFileList,originFilter);
             openButton.getStyleClass().remove("open-button-start");
             openButton.getStyleClass().add("open-button-refresh");
         } catch (TestException e) {
@@ -148,13 +177,14 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        inputs = new TextField[]{pathInput,originExtension,processedExtension};
+        inputs = new TextField[]{pathInput, originExtension, processedExtension};
+        Tooltip[] tooltips = new Tooltip[]
+                {deleteTooltip, cleanTooltip, clearTooltip, copyTooltip, openTooltip, refreshTooltip};
         openButton.getStyleClass().add("open-button-start");
-        deleteTooltip.setShowDelay(new Duration(100));
-        clearTooltip.setShowDelay(new Duration(100));
-        copyTooltip.setShowDelay(new Duration(100));
-        cleanTooltip.setShowDelay(new Duration(100));
-        openTooltip.setShowDelay(new Duration(100));
+        for (Tooltip tooltip :
+                tooltips) {
+            tooltip.setShowDelay(new Duration(100));
+        }
         pathInput.setPromptText("Введите путь");
         originExtension.setPromptText("Эталонное расширение");
         processedExtension.setPromptText("Расширение для обработки");

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -17,7 +19,11 @@
                     <Tooltip text="Путь к папке" />
                 </tooltip>
             </TextField>
-         <Button fx:id="openButton" mnemonicParsing="false" onAction="#onOpenButtonClick" styleClass="button-image" />
+         <Button fx:id="openButton" mnemonicParsing="false" onAction="#onOpenButtonClick" styleClass="button-image">
+            <tooltip>
+               <Tooltip fx:id="refreshTooltip" text="Открыть" />
+            </tooltip>
+         </Button>
             <Button fx:id="pathChooser" onAction="#onPathChooserClick" styleClass="button-image">
                 <tooltip>
                     <Tooltip fx:id="openTooltip" text="Обзор" />
@@ -55,6 +61,12 @@
                         <children>
                             <TextField fx:id="originExtension" onAction="#onEnter" styleClass="extensionInput">
                             </TextField>
+                     <ToggleButton fx:id="originFilter" mnemonicParsing="false" onAction="#onFilterButtonClick" text="ToggleButton">
+                        <styleClass>
+                           <String fx:value="button-image" />
+                           <String fx:value="filterButton" />
+                        </styleClass>
+                     </ToggleButton>
                             <Label text="Эталонные файлы">
                                 <HBox.hgrow>ALWAYS</HBox.hgrow>
                             </Label>
@@ -71,12 +83,18 @@
                     <HBox styleClass="extensionHbox">
                         <children>
                             <TextField fx:id="processedExtension" onAction="#onEnter" styleClass="extensionInput" />
+                     <ToggleButton fx:id="processedFilter" mnemonicParsing="false" onAction="#onFilterButtonClick" text="ToggleButton">
+                        <styleClass>
+                           <String fx:value="button-image" />
+                           <String fx:value="filterButton" />
+                        </styleClass>
+                     </ToggleButton>
                             <Label text="Файлы для обработки">
                                 <HBox.hgrow>ALWAYS</HBox.hgrow>
                             </Label>
                         </children>
                     </HBox>
-                    <ListView fx:id="processedFileList">
+                    <ListView fx:id="processedFileList" onMouseClicked="#listClickHandle">
                         <VBox.vgrow>ALWAYS</VBox.vgrow>
                     </ListView>
                 </children>

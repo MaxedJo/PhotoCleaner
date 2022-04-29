@@ -19,8 +19,6 @@ J.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_4_2.xml,2\c
 n
 >src/main/java/ru/maxed/photocleaner/core/utility/Settings.java,7\c\7c443e171f80e6b88de3be9fc4d6e4b4ac1b0bf9
 r
-Bsrc/main/java/ru/maxed/photocleaner/core/entities/CheckedFile.java,d\6\d623d2ee0c9df3d948690f258890ee39bc661089
-r
 Bsrc/main/java/ru/maxed/photocleaner/core/services/MarkCleaner.java,8\5\85a92db91b6aa808c241ddd518432b1c9b162ed8
 y
 Isrc/main/java/ru/maxed/photocleaner/core/services/FileListComparator.java,0\e\0e75e9b35451b2508b632d65abae69275955769c

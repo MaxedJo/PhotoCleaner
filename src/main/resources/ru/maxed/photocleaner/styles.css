@@ -4,6 +4,12 @@
 .open-button-start{
     -fx-background-image: url(images/add.png);
 }
+.pressed{
+    -fx-background-color:grey;
+}
+.filterButton{
+    -fx-background-image: url(images/filter.png);
+}
 .open-button-refresh{
     -fx-background-image: url(images/refresh.png);
 }
