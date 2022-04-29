@@ -48,6 +48,18 @@ public class MainController implements Initializable {
     private Tooltip cleanTooltip;
     @FXML
     private Tooltip openTooltip;
+    private TextField[] inputs ;
+    @FXML
+    protected void onEnter(){
+        boolean mustOpen = true;
+        for (int i = 0; i < inputs.length; i++) {
+            if (inputs[i%inputs.length].getText().equals("")){
+                inputs[i%inputs.length].requestFocus();
+                mustOpen = false;
+            }
+        }
+        if (mustOpen) onOpenButtonClick();
+    }
 
     @FXML
     protected void onOpenButtonClick() {
@@ -110,7 +122,7 @@ public class MainController implements Initializable {
         File file = directoryChooser.showDialog(pathChooser.getScene().getWindow());
         if (file != null) {
             pathInput.setText(file.getAbsolutePath());
-            onOpenButtonClick();
+            onEnter();
         }
     }
 
@@ -132,6 +144,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        inputs = new TextField[]{pathInput,originExtension,processedExtension};
         deleteTooltip.setShowDelay(new Duration(100));
         clearTooltip.setShowDelay(new Duration(100));
         copyTooltip.setShowDelay(new Duration(100));

@@ -11,7 +11,7 @@
 <VBox fx:id="root" prefHeight="535.0" prefWidth="763.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.maxed.photocleaner.ui.desktop.controllers.MainController">
     <HBox fx:id="buttonBox">
         <children>
-            <TextField fx:id="pathInput" onAction="#onOpenButtonClick">
+            <TextField fx:id="pathInput" onAction="#onEnter">
                 <HBox.hgrow>ALWAYS</HBox.hgrow>
                 <tooltip>
                     <Tooltip text="Путь к папке" />
@@ -52,7 +52,7 @@
                 <children>
                     <HBox styleClass="extensionHbox">
                         <children>
-                            <TextField fx:id="originExtension" styleClass="extensionInput">
+                            <TextField fx:id="originExtension" onAction="#onEnter" styleClass="extensionInput">
                             </TextField>
                             <Label text="Эталонные файлы">
                                 <HBox.hgrow>ALWAYS</HBox.hgrow>
@@ -69,7 +69,7 @@
                 <children>
                     <HBox styleClass="extensionHbox">
                         <children>
-                            <TextField fx:id="processedExtension" styleClass="extensionInput" />
+                            <TextField fx:id="processedExtension" onAction="#onEnter" styleClass="extensionInput" />
                             <Label text="Файлы для обработки">
                                 <HBox.hgrow>ALWAYS</HBox.hgrow>
                             </Label>
