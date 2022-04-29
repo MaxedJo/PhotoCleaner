@@ -1,6 +1,12 @@
 #pathChooser{
     -fx-background-image: url(images/open.png);
 }
+.open-button-start{
+    -fx-background-image: url(images/add.png);
+}
+.open-button-refresh{
+    -fx-background-image: url(images/refresh.png);
+}
 #cleanButton{
     -fx-background-image: url(images/clean.png);
 }

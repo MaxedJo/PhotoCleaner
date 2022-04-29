@@ -47,6 +47,8 @@ public class MainController implements Initializable {
     @FXML
     private Tooltip cleanTooltip;
     @FXML
+    private  Button openButton;
+    @FXML
     private Tooltip openTooltip;
     private TextField[] inputs ;
     @FXML
@@ -85,6 +87,8 @@ public class MainController implements Initializable {
                 FilePane filePane = new FilePane(file, processedFileList);
                 processedFileList.getItems().add(filePane);
             }
+            openButton.getStyleClass().remove("open-button-start");
+            openButton.getStyleClass().add("open-button-refresh");
         } catch (TestException e) {
             new ErrorAlert(e.getMessage());
         }
@@ -145,6 +149,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         inputs = new TextField[]{pathInput,originExtension,processedExtension};
+        openButton.getStyleClass().add("open-button-start");
         deleteTooltip.setShowDelay(new Duration(100));
         clearTooltip.setShowDelay(new Duration(100));
         copyTooltip.setShowDelay(new Duration(100));

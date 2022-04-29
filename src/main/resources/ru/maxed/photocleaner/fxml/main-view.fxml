@@ -17,6 +17,7 @@
                     <Tooltip text="Путь к папке" />
                 </tooltip>
             </TextField>
+         <Button fx:id="openButton" mnemonicParsing="false" onAction="#onOpenButtonClick" styleClass="button-image" />
             <Button fx:id="pathChooser" onAction="#onPathChooserClick" styleClass="button-image">
                 <tooltip>
                     <Tooltip fx:id="openTooltip" text="Обзор" />
