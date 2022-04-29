@@ -15,6 +15,7 @@ import ru.maxed.photocleaner.core.exeptions.TestException;
 import ru.maxed.photocleaner.core.services.*;
 import ru.maxed.photocleaner.core.utility.Settings;
 import ru.maxed.photocleaner.ui.desktop.ConfirmationAlert;
+import ru.maxed.photocleaner.ui.desktop.Counter;
 import ru.maxed.photocleaner.ui.desktop.ErrorAlert;
 import ru.maxed.photocleaner.ui.desktop.FilePane;
 
@@ -22,6 +23,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.Timer;
 
 public class MainController implements Initializable {
 
@@ -33,6 +35,8 @@ public class MainController implements Initializable {
 
     @FXML
     private Button pathChooser;
+    @FXML
+    private Button deleteButton;
 
     @FXML
     private TextField pathInput;
@@ -76,13 +80,13 @@ public class MainController implements Initializable {
         if (filter.isSelected()) {
             for (CheckedFile file : list) {
                 if (file.isMustDelete()) {
-                    FilePane filePane = new FilePane(file, listView,filter);
+                    FilePane filePane = new FilePane(file, listView,filter,counter);
                     listView.getItems().add(filePane);
                 }
             }
         } else {
             for (CheckedFile file : list) {
-                FilePane filePane = new FilePane(file, listView,filter);
+                FilePane filePane = new FilePane(file, listView,filter,counter);
                 listView.getItems().add(filePane);
             }
         }
@@ -174,7 +178,7 @@ public class MainController implements Initializable {
 
     }
 
-
+    private Counter counter;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         inputs = new TextField[]{pathInput, originExtension, processedExtension};
@@ -185,6 +189,7 @@ public class MainController implements Initializable {
                 tooltips) {
             tooltip.setShowDelay(new Duration(100));
         }
+        counter = new Counter(deleteButton);
         pathInput.setPromptText("Введите путь");
         originExtension.setPromptText("Эталонное расширение");
         processedExtension.setPromptText("Расширение для обработки");

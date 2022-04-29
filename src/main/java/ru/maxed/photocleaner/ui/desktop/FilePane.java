@@ -13,13 +13,15 @@ public class FilePane extends BorderPane {
     private final CheckBox check = new CheckBox();
     ToggleButton filter;
     ListView<FilePane> list;
+    Counter counter;
 
-    public FilePane(CheckedFile file, ListView<FilePane> parentList, ToggleButton buttonFilter) {
+    public FilePane(CheckedFile file, ListView<FilePane> parentList, ToggleButton buttonFilter, Counter counter) {
         super();
         checkedFile = file;
         this.filter = buttonFilter;
         this.setLeft(text);
         this.list = parentList;
+        this.counter = counter;
         text.setText(file.getPathFromStartDir());
         check.setSelected(file.isMustDelete());
         this.check.setOnAction(event -> file.setMustDelete(check.isSelected()));
@@ -30,7 +32,16 @@ public class FilePane extends BorderPane {
 
     public void setSelected(boolean checked) {
         this.check.setSelected(checked);
+        changeCounter(checked);
         removeFiltered();
+    }
+
+    private void changeCounter(boolean rise) {
+        if (rise) {
+            counter.add();
+        } else {
+            counter.sub();
+        }
     }
 
     private void removeFiltered() {
@@ -48,6 +59,7 @@ public class FilePane extends BorderPane {
     public void changeCheck() {
         this.check.setSelected(!this.check.isSelected());
         checkedFile.setMustDelete(check.isSelected());
+        changeCounter(check.isSelected());
         removeFiltered();
     }
 
