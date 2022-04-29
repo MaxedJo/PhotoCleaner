@@ -1,9 +1,7 @@
 package ru.maxed.photocleaner.ui.desktop.controllers;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
@@ -17,10 +15,8 @@ import ru.maxed.photocleaner.core.utility.Settings;
 import ru.maxed.photocleaner.ui.desktop.ConfirmationAlert;
 import ru.maxed.photocleaner.ui.desktop.ErrorAlert;
 import ru.maxed.photocleaner.ui.desktop.FilePane;
-import ru.maxed.photocleaner.ui.desktop.PhotoStage;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -55,36 +51,30 @@ public class MainController implements Initializable {
 
     @FXML
     protected void onOpenButtonClick() {
-        MainApplication.originFileList.clear();
-        MainApplication.processedFileList.clear();
-        originFileList.getItems().clear();
-        processedFileList.getItems().clear();
         try {
+            MainApplication.originFileList.clear();
+            MainApplication.processedFileList.clear();
+            originFileList.getItems().clear();
+            processedFileList.getItems().clear();
             ExtensionValidator.validate(originExtension.getText(), processedExtension.getText());
-        } catch (TestException e) {
-            new ErrorAlert(e.getMessage());
-            return;
-        }
-        String path = pathInput.getText();
-        File dir = new File(path);
-        if (!dir.isDirectory()) {
-            new ErrorAlert("Неправильный путь,введите путь заного");
-            return;
-        }
-        CheckedFile.setMainPath(path);
-        try {
+            String path = pathInput.getText();
+            File dir = new File(path);
+            if (!dir.isDirectory()) {
+                throw new TestException("Неправильный путь,введите путь заного");
+            }
+            CheckedFile.setMainPath(path);
             DirectoryReader.read(dir.getAbsolutePath(), originExtension.getText(), processedExtension.getText(),
-                    MainApplication.processedFileList, MainApplication.originFileList,true);
+                    MainApplication.processedFileList, MainApplication.originFileList, true);
+            for (CheckedFile file : MainApplication.originFileList) {
+                FilePane filePane = new FilePane(file, originFileList);
+                originFileList.getItems().add(filePane);
+            }
+            for (CheckedFile file : MainApplication.processedFileList) {
+                FilePane filePane = new FilePane(file, processedFileList);
+                processedFileList.getItems().add(filePane);
+            }
         } catch (TestException e) {
             new ErrorAlert(e.getMessage());
-        }
-        for (CheckedFile file : MainApplication.originFileList) {
-            FilePane filePane = new FilePane(file, originFileList);
-            originFileList.getItems().add(filePane);
-        }
-        for (CheckedFile file : MainApplication.processedFileList) {
-            FilePane filePane = new FilePane(file, processedFileList);
-            processedFileList.getItems().add(filePane);
         }
     }
 
@@ -128,18 +118,15 @@ public class MainController implements Initializable {
     protected void onDeleteButtonClick() {
         ConfirmationAlert alert = new ConfirmationAlert();
         Optional<ButtonType> option = alert.showAndWait();
-        if  (option.get() == ButtonType.OK) {
+        if (option.isPresent() && option.get() == ButtonType.OK) {
             try {
                 FileListCleaner.clean(MainApplication.processedFileList);
-            } catch (TestException e){
-                new ErrorAlert(e.getMessage());
-            }
-            try {
                 FileListCleaner.clean(MainApplication.originFileList);
             } catch (TestException e) {
                 new ErrorAlert(e.getMessage());
             }
         }
+
     }
 
 
