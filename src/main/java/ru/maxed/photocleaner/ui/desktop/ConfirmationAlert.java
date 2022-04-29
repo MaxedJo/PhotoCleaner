@@ -1,6 +1,5 @@
 package ru.maxed.photocleaner.ui.desktop;
 
-import javafx.beans.NamedArg;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -16,10 +15,9 @@ import java.io.InputStream;
 
 public class ConfirmationAlert extends Alert {
 
-    private ListView<String> preparedToDelete = new ListView<>();
-
     public ConfirmationAlert() {
         super(AlertType.CONFIRMATION);
+        ListView<String> preparedToDelete = new ListView<>();
         preparedToDelete.setMaxHeight(10);
         InputStream iconStream = getClass().getResourceAsStream("/ru/maxed/photocleaner/images/icon.png");
         assert iconStream != null;

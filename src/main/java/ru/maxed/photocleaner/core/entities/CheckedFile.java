@@ -10,35 +10,28 @@ public class CheckedFile extends File {
     private transient OnCheckedHandle checkedHandler = null;
     private transient OnDeleteHandler deleteHandler = null;
 
-    public interface OnDeleteHandler {
-        void delete();
+    public CheckedFile(String pathname) {
+        super(pathname);
+        this.shortName = this.getName().substring(0, this.getName().lastIndexOf("."));
+        this.mustDelete = false;
     }
 
-    public interface OnCheckedHandle {
-        void set(boolean value);
+    public CheckedFile(String pathname, boolean delete) {
+        super(pathname);
+        this.shortName = this.getName().substring(0, this.getName().lastIndexOf("."));
+        this.mustDelete = delete;
+    }
+
+    public static void setMainPath(String mainPath) {
+        CheckedFile.mainPath = mainPath;
     }
 
     public void setCheckedHandler(OnCheckedHandle checkedHandler) {
         this.checkedHandler = checkedHandler;
     }
 
-    public CheckedFile(String pathname) {
-        super(pathname);
-        this.shortName = this.getName().substring(0, this.getName().lastIndexOf("."));
-        this.mustDelete = false;
-    }
-    public CheckedFile(String pathname,boolean delete) {
-        super(pathname);
-        this.shortName = this.getName().substring(0, this.getName().lastIndexOf("."));
-        this.mustDelete = delete;
-    }
-
     public String getPathFromStartDir() {
         return this.getAbsolutePath().replace(mainPath + File.separator, "");
-    }
-
-    public static void setMainPath(String mainPath) {
-        CheckedFile.mainPath = mainPath;
     }
 
     public String getShortName() {
@@ -55,8 +48,9 @@ public class CheckedFile extends File {
             checkedHandler.set(mustDelete);
         }
     }
+
     @Override
-    public boolean delete(){
+    public boolean delete() {
         if (deleteHandler != null) {
             deleteHandler.delete();
         }
@@ -87,5 +81,13 @@ public class CheckedFile extends File {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), mustDelete);
+    }
+
+    public interface OnDeleteHandler {
+        void delete();
+    }
+
+    public interface OnCheckedHandle {
+        void set(boolean value);
     }
 }

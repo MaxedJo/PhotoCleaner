@@ -23,7 +23,6 @@ import java.io.File;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.Timer;
 
 public class MainController implements Initializable {
 
@@ -44,6 +43,10 @@ public class MainController implements Initializable {
     private TextField originExtension;
     @FXML
     private TextField processedExtension;
+    private final javafx.event.EventHandler<WindowEvent> closeEventHandler = event -> {
+        Settings settings = new Settings(pathInput.getText(), originExtension.getText(), processedExtension.getText());
+        settings.save();
+    };
     @FXML
     private Tooltip deleteTooltip;
     @FXML
@@ -52,6 +55,10 @@ public class MainController implements Initializable {
     private Tooltip copyTooltip;
     @FXML
     private Tooltip cleanTooltip;
+    @FXML
+    private Tooltip originFilterTooltip;
+    @FXML
+    private Tooltip processedFilterTooltip;
     @FXML
     private Button openButton;
     @FXML
@@ -63,14 +70,16 @@ public class MainController implements Initializable {
     @FXML
     private ToggleButton processedFilter;
     private TextField[] inputs;
+    private FilePane pane = new FilePane();
+    private Counter counter;
 
     @FXML
     protected void onFilterButtonClick(ActionEvent e) {
         ToggleButton button = (ToggleButton) e.getTarget();
         if (button.equals(originFilter)) {
-            loadList(MainApplication.originFileList,originFileList,originFilter);
-        } else if (button.equals(processedFilter)){
-            loadList(MainApplication.processedFileList,processedFileList,processedFilter);
+            loadList(MainApplication.originFileList, originFileList, originFilter);
+        } else if (button.equals(processedFilter)) {
+            loadList(MainApplication.processedFileList, processedFileList, processedFilter);
         }
 
     }
@@ -80,13 +89,13 @@ public class MainController implements Initializable {
         if (filter.isSelected()) {
             for (CheckedFile file : list) {
                 if (file.isMustDelete()) {
-                    FilePane filePane = new FilePane(file, listView,filter,counter);
+                    FilePane filePane = new FilePane(file, listView, filter, counter);
                     listView.getItems().add(filePane);
                 }
             }
         } else {
             for (CheckedFile file : list) {
-                FilePane filePane = new FilePane(file, listView,filter,counter);
+                FilePane filePane = new FilePane(file, listView, filter, counter);
                 listView.getItems().add(filePane);
             }
         }
@@ -118,16 +127,14 @@ public class MainController implements Initializable {
             CheckedFile.setMainPath(path);
             DirectoryReader.read(dir.getAbsolutePath(), originExtension.getText(), processedExtension.getText(),
                     MainApplication.processedFileList, MainApplication.originFileList, true);
-            loadList(MainApplication.processedFileList,processedFileList,processedFilter);
-            loadList(MainApplication.originFileList,originFileList,originFilter);
+            loadList(MainApplication.processedFileList, processedFileList, processedFilter);
+            loadList(MainApplication.originFileList, originFileList, originFilter);
             openButton.getStyleClass().remove("open-button-start");
             openButton.getStyleClass().add("open-button-refresh");
         } catch (TestException e) {
             new ErrorAlert(e.getMessage());
         }
     }
-
-    private FilePane pane = new FilePane();
 
     @FXML
     protected void listClickHandle(MouseEvent arg0) {
@@ -178,12 +185,11 @@ public class MainController implements Initializable {
 
     }
 
-    private Counter counter;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         inputs = new TextField[]{pathInput, originExtension, processedExtension};
         Tooltip[] tooltips = new Tooltip[]
-                {deleteTooltip, cleanTooltip, clearTooltip, copyTooltip, openTooltip, refreshTooltip};
+                {deleteTooltip, cleanTooltip, clearTooltip, copyTooltip, openTooltip, refreshTooltip,originFilterTooltip,processedFilterTooltip};
         openButton.getStyleClass().add("open-button-start");
         for (Tooltip tooltip :
                 tooltips) {
@@ -201,12 +207,6 @@ public class MainController implements Initializable {
             originExtension.setText(settings.getMainExpansive());
         }
     }
-
-
-    private final javafx.event.EventHandler<WindowEvent> closeEventHandler = event -> {
-        Settings settings = new Settings(pathInput.getText(), originExtension.getText(), processedExtension.getText());
-        settings.save();
-    };
 
     public javafx.event.EventHandler<WindowEvent> getCloseEventHandler() {
         return closeEventHandler;

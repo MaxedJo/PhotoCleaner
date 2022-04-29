@@ -66,6 +66,9 @@
                            <String fx:value="button-image" />
                            <String fx:value="filterButton" />
                         </styleClass>
+                        <tooltip>
+                           <Tooltip fx:id="originFilterTooltip" text="Отфильтровать выделенное" />
+                        </tooltip>
                      </ToggleButton>
                             <Label text="Эталонные файлы">
                                 <HBox.hgrow>ALWAYS</HBox.hgrow>
@@ -88,6 +91,9 @@
                            <String fx:value="button-image" />
                            <String fx:value="filterButton" />
                         </styleClass>
+                        <tooltip>
+                           <Tooltip fx:id="processedFilterTooltip" text="Отфильтровать выделенное" />
+                        </tooltip>
                      </ToggleButton>
                             <Label text="Файлы для обработки">
                                 <HBox.hgrow>ALWAYS</HBox.hgrow>

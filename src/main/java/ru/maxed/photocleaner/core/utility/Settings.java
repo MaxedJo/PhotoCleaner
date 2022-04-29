@@ -12,11 +12,12 @@ public class Settings implements Serializable {
         this.mainExpansive = mainExpansive;
         this.secondaryExpansive = secondaryExpansive;
     }
-    public Settings(File settings){
 
-        try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(settings))) {
-            setFields( (Settings) objectInputStream.readObject());
-        } catch (Exception e){
+    public Settings(File settings) {
+
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(settings))) {
+            setFields((Settings) objectInputStream.readObject());
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -39,16 +40,16 @@ public class Settings implements Serializable {
         this.secondaryExpansive = settings.secondaryExpansive;
     }
 
-    public void save(){
+    public void save() {
         File settings = new File("settings.cfg");
         try {
             settings.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try(ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(settings))) {
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(settings))) {
             objectOutputStream.writeObject(this);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
