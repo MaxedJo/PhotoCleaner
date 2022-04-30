@@ -1,7 +1,19 @@
 package ru.maxed.photocleaner;
 
-public class App {
-    public static void main(String[] args) {
+/**
+ * Главный класс программы.
+ */
+public final class App {
+    private App() {
+        throw new IllegalStateException("Utility class");
+    }
+
+    /**
+     * Старт программы.
+     *
+     * @param args Стартовые аргументы
+     */
+    public static void main(final String[] args) {
         MainApplication.main(args);
     }
 }

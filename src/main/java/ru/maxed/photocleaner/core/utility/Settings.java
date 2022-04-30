@@ -1,58 +1,53 @@
 package ru.maxed.photocleaner.core.utility;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.Properties;
 
-public class Settings implements Serializable {
-    private String path;
-    private String mainExpansive;
-    private String secondaryExpansive;
-
-    public Settings(String path, String mainExpansive, String secondaryExpansive) {
-        this.path = path;
-        this.mainExpansive = mainExpansive;
-        this.secondaryExpansive = secondaryExpansive;
+public final class Settings implements Serializable {
+    private Settings() {
+        throw new IllegalStateException("Utility class");
     }
 
-    public Settings(File settings) {
-
-        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(settings))) {
-            setFields((Settings) objectInputStream.readObject());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public String getMainExpansive() {
-        return mainExpansive;
-    }
-
-    public String getSecondaryExpansive() {
-        return secondaryExpansive;
-    }
-
-    public void setFields(Settings settings) {
-        this.path = settings.path;
-        this.mainExpansive = settings.mainExpansive;
-        this.secondaryExpansive = settings.secondaryExpansive;
-    }
-
-    public void save() {
-        File settings = new File("settings.cfg");
-        try {
-            settings.createNewFile();
+    /**
+     * Сохранение состояния полей в файл.
+     *
+     * @param path               Пусть
+     * @param originExtension    Исходное расширение
+     * @param processedExtension Расширение файлов для обработки
+     */
+    public static void saveSettings(
+            final String path,
+            final String originExtension,
+            final String processedExtension
+    ) {
+        Properties prop = new Properties();
+        prop.setProperty("path", path);
+        prop.setProperty("originExtension", originExtension);
+        prop.setProperty("processedExtension", processedExtension);
+        try (FileOutputStream outputStream =
+                     new FileOutputStream("settings.xml")) {
+            prop.storeToXML(outputStream, "BaseSettings");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(settings))) {
-            objectOutputStream.writeObject(this);
-        } catch (Exception e) {
+    }
+
+    /**
+     * Загрузка конфигурации из файла.
+     *
+     * @return Конфигурацию в виде Properties
+     */
+    public static Properties loadSettings() {
+        Properties property = new Properties();
+        try (FileInputStream fis = new FileInputStream("settings.properties")) {
+            property.load(fis);
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
+        return property;
     }
 
 }

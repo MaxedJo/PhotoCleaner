@@ -1,7 +1,12 @@
 package ru.maxed.photocleaner.core.exeptions;
 
 public class TestException extends Exception {
-    public TestException(String message) {
+    /**
+     * Конструктор исключения.
+     *
+     * @param message Сообщение ошибки
+     */
+    public TestException(final String message) {
         super(message);
     }
 }

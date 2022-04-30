@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Objects;
 
 public class CheckedFile extends File {
+
     private static String mainPath;
     private final String shortName;
     private boolean mustDelete;

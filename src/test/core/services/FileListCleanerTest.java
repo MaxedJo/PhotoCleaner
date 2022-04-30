@@ -43,6 +43,6 @@ class FileListCleanerTest {
             e.printStackTrace();
         }
         Assertions.assertEquals(expectedFileList.size(),processedFileList.size());
-        Directory.recusiveDelete(dir);
+        Directory.recursiveDelete(dir);
     }
 }

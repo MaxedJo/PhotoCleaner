@@ -1,9 +1,4 @@
 
-5
-@TODO,8\5\853ce47fe218c7c636f64d83eb4b6e4080f0ecfe
-:
-
-.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 p
 @.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_0_0.xml,d\5\d573492e91c6dc79296fed8d76b0037f758b777e
 t
@@ -16,23 +11,7 @@ w
 G.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_4_2.xml,b\c\bc9d8d1e75b61791c6f25a38c52dbe6214ffc458
 z
 J.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_4_2.xml,2\c\2c4203c6c060d7288b165ebd9b348e3107471581
-^
-.test/core/services/ExtensionCorrecterTest.java,8\1\81bdc48768778ec486559f8ffcb4fcdede786732
-^
-.test/core/services/ExtensionValidatorTest.java,2\0\203594ef5f5a171de04276e2d81b85ca5b688773
-^
-.test/core/services/FileListComparatorTest.java,3\1\317182da97bdc27c993effd74bdbe733eec0614f
-W
-'test/core/services/MarkCleanerTest.java,0\3\0388e8eb417df8682e5ba569055396bbcae03870
-Q
-!test/core/services/Directory.java,1\8\18625ba6d83932bf27a5b1895ed92fa3d18a3d2e
-`
-0test/core/services/CopyOfOriginSelectorTest.java,2\7\279d1f26c84e09ac807270d34e2793125d40dbd6
-\
-,src/main/java/ru/maxed/photocleaner/App.java,8\0\80836a859dd70968e38b223159f2e4a69bf20935
-[
-+test/core/services/DirectoryReaderTest.java,5\7\57480bafa16e2728b924b0beba303b9d81148aca
-[
-+test/core/services/FileListCleanerTest.java,4\8\48d05f3b4e4301bbfbd912891e4ba6c596d44eb9
-h
-8src/main/java/ru/maxed/photocleaner/MainApplication.java,d\0\d0d71af91918f99ae52ae5cdaf0623c4b5dfd162
+y
+Isrc/main/java/ru/maxed/photocleaner/core/services/ExtensionValidator.java,c\3\c3cbe7e884bfb7c4c6b0db8542a753e2569dfd01
+i
+9src/main/resources/META-INF/native-image/filter-file.json,a\e\ae04f9847be1048a53985a5ae9a820db21c82a80
