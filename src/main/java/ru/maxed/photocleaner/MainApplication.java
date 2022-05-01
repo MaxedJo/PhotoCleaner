@@ -27,12 +27,12 @@ public class MainApplication extends Application {
     /**
      * Главный список для хранения "оригинальных" файлов.
      */
-    public static ObservableList<CheckedFile> originFileList =
+    private static final ObservableList<CheckedFile> ORIGIN_FILE_LIST =
             FXCollections.observableArrayList();
     /**
      * Главный список для хранение файлов "для обработки".
      */
-    public static ObservableList<CheckedFile> processedFileList =
+    private static final ObservableList<CheckedFile> PROCESSED_FILE_LIST =
             FXCollections.observableArrayList();
 
     /**
@@ -42,6 +42,24 @@ public class MainApplication extends Application {
      */
     public static void main(final String[] args) {
         launch();
+    }
+
+    /**
+     * Геттер главного списка файлов для обработки.
+     *
+     * @return Список файлов для обработки
+     */
+    public static ObservableList<CheckedFile> getProcessedFileList() {
+        return PROCESSED_FILE_LIST;
+    }
+
+    /**
+     * Геттер главного списка оригинальных файлов.
+     *
+     * @return Список оригинальных файлов
+     */
+    public static ObservableList<CheckedFile> getOriginFileList() {
+        return ORIGIN_FILE_LIST;
     }
 
     /**

@@ -8,9 +8,10 @@ import ru.maxed.photocleaner.core.entities.CheckedFile;
 import ru.maxed.photocleaner.core.services.FileListComparator;
 
 class FileListComparatorTest {
-    ObservableList<CheckedFile> originFileList= FXCollections.observableArrayList();
-    ObservableList<CheckedFile> processedFileList= FXCollections.observableArrayList();
-    ObservableList<CheckedFile> expectedFileList= FXCollections.observableArrayList();
+    final ObservableList<CheckedFile> originFileList = FXCollections.observableArrayList();
+    final ObservableList<CheckedFile> processedFileList = FXCollections.observableArrayList();
+    final ObservableList<CheckedFile> expectedFileList = FXCollections.observableArrayList();
+
     @Test
     void compareLists() {
         originFileList.add(new CheckedFile("File1.png"));
@@ -23,9 +24,9 @@ class FileListComparatorTest {
         processedFileList.add(new CheckedFile("File4.bmp"));
         expectedFileList.add(new CheckedFile("File1.Bmp"));
         expectedFileList.add(new CheckedFile("File2.Bmp"));
-        expectedFileList.add(new CheckedFile("File3.bmp",true));
+        expectedFileList.add(new CheckedFile("File3.bmp", true));
         expectedFileList.add(new CheckedFile("File4.bmp"));
-        FileListComparator.compareLists(processedFileList,originFileList);
-        Assertions.assertEquals(expectedFileList,processedFileList);
+        FileListComparator.compareLists(processedFileList, originFileList);
+        Assertions.assertEquals(expectedFileList, processedFileList);
     }
 }

@@ -6,17 +6,18 @@ import ru.maxed.photocleaner.core.services.ExtensionCorrecter;
 
 class ExtensionCorrecterTest {
     @Test
-    void correctCase(){
+    void correctCase() {
         String actual = ".BmP";
         String expected = ".bmp";
         actual = ExtensionCorrecter.correct(actual);
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
+
     @Test
-    void correctDot(){
+    void correctDot() {
         String actual = "bmp";
         String expected = ".bmp";
-        actual = ExtensionCorrecter.correct(actual);
-        Assertions.assertEquals(expected,actual);
+        ExtensionCorrecter.correct(actual);
+        Assertions.assertEquals(expected, actual);
     }
 }

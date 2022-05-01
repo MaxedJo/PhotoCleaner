@@ -43,6 +43,16 @@ public class MainController implements Initializable {
     /**
      * Список файлов для обработки.
      */
+    private final ObservableList<CheckedFile> mainProcessedFileList =
+            MainApplication.getProcessedFileList();
+    /**
+     * Список оригинальных файлов.
+     */
+    private final ObservableList<CheckedFile> mainOriginFileList =
+            MainApplication.getOriginFileList();
+    /**
+     * Список файлов для обработки.
+     */
     @FXML
     private ListView<FilePane> processedFileList;
     /**
@@ -163,13 +173,13 @@ public class MainController implements Initializable {
         ToggleButton button = (ToggleButton) e.getTarget();
         if (button.equals(originFilter)) {
             loadList(
-                    MainApplication.originFileList,
+                    mainOriginFileList,
                     originFileList,
                     originFilter
             );
         } else if (button.equals(processedFilter)) {
             loadList(
-                    MainApplication.processedFileList,
+                    mainProcessedFileList,
                     processedFileList,
                     processedFilter
             );
@@ -230,8 +240,8 @@ public class MainController implements Initializable {
     @FXML
     protected void onOpenButtonClick() {
         try {
-            MainApplication.originFileList.clear();
-            MainApplication.processedFileList.clear();
+            mainOriginFileList.clear();
+            mainProcessedFileList.clear();
             ExtensionValidator.validate(
                     originExtension.getText(), processedExtension.getText()
             );
@@ -247,17 +257,17 @@ public class MainController implements Initializable {
                     dir.getAbsolutePath(),
                     originExtension.getText(),
                     processedExtension.getText(),
-                    MainApplication.processedFileList,
-                    MainApplication.originFileList,
+                    mainProcessedFileList,
+                    mainOriginFileList,
                     true
             );
             loadList(
-                    MainApplication.processedFileList,
+                    mainProcessedFileList,
                     processedFileList,
                     processedFilter
             );
             loadList(
-                    MainApplication.originFileList,
+                    mainOriginFileList,
                     originFileList,
                     originFilter
             );
@@ -287,8 +297,8 @@ public class MainController implements Initializable {
     @FXML
     protected void onMarkFilesWithoutOriginButtonClick() {
         FileListComparator.compareLists(
-                MainApplication.processedFileList,
-                MainApplication.originFileList
+                mainProcessedFileList,
+                mainOriginFileList
         );
     }
 
@@ -298,8 +308,8 @@ public class MainController implements Initializable {
     @FXML
     protected void onCopySelectButtonClick() {
         CopyOfOriginSelector.selectSame(
-                MainApplication.processedFileList,
-                MainApplication.originFileList
+                mainProcessedFileList,
+                mainOriginFileList
         );
     }
 
@@ -308,8 +318,8 @@ public class MainController implements Initializable {
      */
     @FXML
     protected void onClearSelectionButtonClick() {
-        MarkCleaner.clean(MainApplication.originFileList);
-        MarkCleaner.clean(MainApplication.processedFileList);
+        MarkCleaner.clean(mainOriginFileList);
+        MarkCleaner.clean(mainProcessedFileList);
     }
 
     /**
@@ -335,8 +345,8 @@ public class MainController implements Initializable {
         Optional<ButtonType> option = alert.showAndWait();
         if (option.isPresent() && option.get() == ButtonType.OK) {
             try {
-                FileListCleaner.clean(MainApplication.processedFileList);
-                FileListCleaner.clean(MainApplication.originFileList);
+                FileListCleaner.clean(mainProcessedFileList);
+                FileListCleaner.clean(mainOriginFileList);
             } catch (TestException e) {
                 new ErrorAlert(e.getMessage());
             }
@@ -379,7 +389,8 @@ public class MainController implements Initializable {
         if (settingsFile.exists()) {
             Properties properties = Settings.loadSettings();
             pathInput.setText(properties.getProperty("path"));
-            processedExtension.setText(properties.getProperty("processedExtension"));
+            processedExtension
+                    .setText(properties.getProperty("processedExtension"));
             originExtension.setText(properties.getProperty("originExtension"));
         }
     }

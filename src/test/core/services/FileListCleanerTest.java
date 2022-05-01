@@ -13,19 +13,24 @@ import java.io.File;
 import java.io.IOException;
 
 class FileListCleanerTest {
-    ObservableList<CheckedFile> originFileList= FXCollections.observableArrayList();
-    ObservableList<CheckedFile> processedFileList= FXCollections.observableArrayList();
-    ObservableList<CheckedFile> expectedFileList= FXCollections.observableArrayList();
+    final ObservableList<CheckedFile> originFileList = FXCollections.observableArrayList();
+    final ObservableList<CheckedFile> processedFileList = FXCollections.observableArrayList();
+    final ObservableList<CheckedFile> expectedFileList = FXCollections.observableArrayList();
+
     @Test
     void clean() {
         File dir = new File("TestingDir");
-        dir.mkdir();
+        if (!dir.mkdir()) {
+            System.err.println("Ошибка создания");
+        }
         for (int i = 0; i < 30; i++) {
             CheckedFile file = new CheckedFile("TestingDir/Test" + i + ".bmp", i % 2 == 0);
             processedFileList.add(file);
             if (!(i % 2 == 0)) expectedFileList.add(file);
             try {
-                file.createNewFile();
+                if (!file.createNewFile()) {
+                    System.err.println("Ошибка создания");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -38,11 +43,11 @@ class FileListCleanerTest {
         Assertions.assertEquals(expectedFileList, processedFileList);
         processedFileList.clear();
         try {
-            DirectoryReader.read("TestingDir",".png",".bmp",processedFileList,originFileList,true);
+            DirectoryReader.read("TestingDir", ".png", ".bmp", processedFileList, originFileList, true);
         } catch (TestException e) {
             e.printStackTrace();
         }
-        Assertions.assertEquals(expectedFileList.size(),processedFileList.size());
+        Assertions.assertEquals(expectedFileList.size(), processedFileList.size());
         Directory.recursiveDelete(dir);
     }
 }

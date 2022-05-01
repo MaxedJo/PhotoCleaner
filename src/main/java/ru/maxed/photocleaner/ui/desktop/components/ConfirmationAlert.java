@@ -36,14 +36,14 @@ public class ConfirmationAlert extends Alert {
         this.setHeaderText("Вы действительно хотите удалить данные файлы?");
         Button cancelButton =
                 (Button) this.getDialogPane().lookupButton(ButtonType.CANCEL);
-        cancelButton.setText("Oтмена");
+        cancelButton.setText("Отмена");
         preparedToDelete.getItems().clear();
-        for (CheckedFile file : MainApplication.originFileList) {
+        for (CheckedFile file : MainApplication.getOriginFileList()) {
             if (file.isMustDelete()) {
                 preparedToDelete.getItems().add(file.getPathFromStartDir());
             }
         }
-        for (CheckedFile file : MainApplication.processedFileList) {
+        for (CheckedFile file : MainApplication.getProcessedFileList()) {
             if (file.isMustDelete()) {
                 preparedToDelete.getItems().add(file.getPathFromStartDir());
             }

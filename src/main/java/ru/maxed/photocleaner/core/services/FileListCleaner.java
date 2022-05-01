@@ -9,18 +9,29 @@ import java.util.Iterator;
 /*
 Удаление всех помеченных файлов
  */
-public class FileListCleaner {
+public final class FileListCleaner {
     private FileListCleaner() {
         throw new IllegalStateException("Utility class");
     }
 
-    public static void clean(ObservableList<CheckedFile> fileList) throws TestException {
+    /**
+     * Удаление отмеченных файлов из списка.
+     *
+     * @param fileList Список файлов
+     * @throws TestException Если не удалось удалить файл
+     */
+    public static void clean(final ObservableList<CheckedFile> fileList)
+            throws TestException {
         Iterator<CheckedFile> iterator = fileList.iterator();
         while (iterator.hasNext()) {
             final CheckedFile file = iterator.next();
             if (file.isMustDelete()) {
                 iterator.remove();
-                if (!file.delete()) throw new TestException("Не удалос удалить " + file.getName());
+                if (!file.delete()) {
+                    throw new TestException(
+                            "Не удалос удалить " + file.getName()
+                    );
+                }
             }
         }
     }

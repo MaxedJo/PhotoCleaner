@@ -5,18 +5,22 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Directory {
-    static String testPath = "TestingDir";
+    static final String testPath = "TestingDir";
     static int originFileCount = 0;
     static int processedFilesCount = 0;
     static int filesCount = 0;
 
     static void create() {
         File dir = new File(testPath);
-        dir.mkdir();
+        if (!dir.mkdir()) {
+            System.err.println("Ошибка создания");
+        }
         for (int i = 0; i < 100; i++) {
             File file = new File(testPath + "/Test" + i + ".png");
             try {
-                file.createNewFile();
+                if (!file.createNewFile()) {
+                    System.err.println("Ошибка создания");
+                }
                 originFileCount++;
                 filesCount++;
             } catch (IOException e) {
@@ -26,7 +30,9 @@ public class Directory {
         for (int i = 0; i < 100; i += 2) {
             File file = new File(testPath + "/Test" + i + ".bMp");
             try {
-                file.createNewFile();
+                if (!file.createNewFile()) {
+                    System.err.println("Ошибка создания");
+                }
                 filesCount++;
                 processedFilesCount++;
             } catch (IOException e) {
@@ -36,7 +42,9 @@ public class Directory {
         for (int i = 0; i < 11; i += 2) {
             File file = new File(testPath + "/Test" + i + ".dox.bMp");
             try {
-                file.createNewFile();
+                if (!file.createNewFile()) {
+                    System.err.println("Ошибка создания");
+                }
                 filesCount++;
                 processedFilesCount++;
             } catch (IOException e) {
@@ -44,11 +52,13 @@ public class Directory {
             }
         }
         File secondaryDir = new File(testPath + "/Something");
-        secondaryDir.mkdir();
+        if (!secondaryDir.mkdir()) System.err.println("Ошибка создания");
         for (int i = 100; i < 200; i += 4) {
             File file = new File(testPath + "/Something/Test" + i + ".bmp");
             try {
-                file.createNewFile();
+                if (!file.createNewFile()) {
+                    System.err.println("Ошибка создания");
+                }
                 filesCount++;
                 processedFilesCount++;
             } catch (IOException e) {
@@ -58,7 +68,9 @@ public class Directory {
         for (int i = 100; i < 200; i += 4) {
             File file = new File(testPath + "/Something/Test" + i + ".dox");
             try {
-                file.createNewFile();
+                if (!file.createNewFile()) {
+                    System.err.println("Ошибка создания");
+                }
                 filesCount++;
             } catch (IOException e) {
                 e.printStackTrace();
@@ -67,7 +79,9 @@ public class Directory {
         for (int i = 100; i < 200; i += 3) {
             File file = new File(testPath + "/Something/Test" + i + ".bmp.dox");
             try {
-                file.createNewFile();
+                if (!file.createNewFile()) {
+                    System.err.println("Ошибка создания");
+                }
                 filesCount++;
             } catch (IOException e) {
                 e.printStackTrace();
@@ -83,7 +97,9 @@ public class Directory {
                 recursiveDelete(f);
             }
         }
-        file.delete();
+        if (!file.delete()) {
+            System.err.println("Ошибка удаления");
+        }
     }
 
     public static void clean() {

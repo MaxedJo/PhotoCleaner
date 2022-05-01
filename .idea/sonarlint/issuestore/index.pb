@@ -11,7 +11,5 @@ w
 G.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_4_2.xml,b\c\bc9d8d1e75b61791c6f25a38c52dbe6214ffc458
 z
 J.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_4_2.xml,2\c\2c4203c6c060d7288b165ebd9b348e3107471581
-y
-Isrc/main/java/ru/maxed/photocleaner/core/services/ExtensionValidator.java,c\3\c3cbe7e884bfb7c4c6b0db8542a753e2569dfd01
 i
 9src/main/resources/META-INF/native-image/filter-file.json,a\e\ae04f9847be1048a53985a5ae9a820db21c82a80

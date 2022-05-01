@@ -3,17 +3,18 @@ package ru.maxed.photocleaner.core.services;
 import javafx.collections.ObservableList;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
 
-/*
-Очистка выделения в списке
- */
-public class MarkCleaner {
+public final class MarkCleaner {
     private MarkCleaner() {
         throw new IllegalStateException("Utility class");
     }
 
-    public static void clean(ObservableList<CheckedFile> fileList) {
-        for (CheckedFile file :
-                fileList) {
+    /**
+     * Очистка выделений в спске.
+     *
+     * @param fileList Список файлов
+     */
+    public static void clean(final ObservableList<CheckedFile> fileList) {
+        for (CheckedFile file : fileList) {
             file.setMustDelete(false);
         }
     }
