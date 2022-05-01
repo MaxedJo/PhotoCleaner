@@ -11,7 +11,9 @@ import ru.maxed.photocleaner.core.entities.CheckedFile;
 
 import java.io.InputStream;
 
-
+/**
+ * Диалоговое окно подтверждение удаления.
+ */
 public class ConfirmationAlert extends Alert {
     /**
      * Высота диалогового окна.

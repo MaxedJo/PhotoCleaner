@@ -4,6 +4,9 @@ package ru.maxed.photocleaner;
  * Главный класс программы.
  */
 public final class App {
+    /**
+     * Закрывающий конструктор.
+     */
     private App() {
         throw new IllegalStateException("Utility class");
     }

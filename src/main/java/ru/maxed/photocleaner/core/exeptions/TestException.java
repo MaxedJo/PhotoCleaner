@@ -1,5 +1,8 @@
 package ru.maxed.photocleaner.core.exeptions;
 
+/**
+ * Пользовательский класс ошибки.
+ */
 public class TestException extends Exception {
     /**
      * Конструктор исключения.

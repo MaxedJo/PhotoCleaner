@@ -3,7 +3,14 @@ package ru.maxed.photocleaner.core.services;
 import javafx.collections.ObservableList;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
 
+/**
+ * Утилитный класс для выделения файлов для обработки
+ * аналогичных выделенным оригинальным файлам.
+ */
 public final class CopyOfOriginSelector {
+    /**
+     * Закрывающий конструктор.
+     */
     private CopyOfOriginSelector() {
         throw new IllegalStateException("Utility class");
     }

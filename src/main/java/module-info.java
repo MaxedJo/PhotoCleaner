@@ -1,3 +1,6 @@
+/**
+ * Главный модуль приложения для обработки файлов фотографий.
+ */
 module ru.maxed.photocleaner {
     requires javafx.controls;
     requires javafx.fxml;

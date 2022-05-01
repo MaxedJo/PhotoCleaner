@@ -35,6 +35,9 @@ import java.util.Optional;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
+/**
+ * Контроллер главного окна приложения.
+ */
 public class MainController implements Initializable {
     /**
      * Задержка появления тултипа.
@@ -164,6 +167,7 @@ public class MainController implements Initializable {
     private Counter counter;
 
     /**
+     * Л
      * Обработчик нажатия накнопку фильтра.
      *
      * @param e Эвент действия

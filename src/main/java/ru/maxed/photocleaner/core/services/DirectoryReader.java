@@ -7,10 +7,13 @@ import ru.maxed.photocleaner.core.exeptions.TestException;
 import java.io.File;
 import java.util.Locale;
 
-/*
-Считывание списков оригиналов и копий из директории
+/**
+ * Утилитный клас для считывая=ния списков файлов из директории.
  */
 public final class DirectoryReader {
+    /**
+     * Закрывающий конструктор.
+     */
     private DirectoryReader() {
         throw new IllegalStateException("Utility class");
     }

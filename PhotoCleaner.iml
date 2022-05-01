@@ -37,19 +37,13 @@
     <orderEntry type="library" name="Maven: org.apache.maven:maven-model:3.6.3" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-utils:3.2.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven.shared:file-management:3.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.maven:maven-plugin-api:3.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.maven:maven-artifact:3.0" level="project" />
     <orderEntry type="library" name="Maven: org.sonatype.sisu:sisu-inject-plexus:1.4.2" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-component-annotations:1.5.4" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-classworlds:2.2.3" level="project" />
-    <orderEntry type="library" name="Maven: org.sonatype.sisu:sisu-inject-bean:1.4.2" level="project" />
     <orderEntry type="library" name="Maven: org.sonatype.sisu:sisu-guice:noaop:2.1.7" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven.shared:maven-shared-io:3.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.maven:maven-model-builder:3.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.maven:maven-settings:3.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven:maven-core:3.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven:maven-settings-builder:3.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.maven:maven-repository-metadata:3.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.maven:maven-aether-provider:3.0" level="project" />
     <orderEntry type="library" name="Maven: org.sonatype.aether:aether-impl:1.7" level="project" />
     <orderEntry type="library" name="Maven: org.sonatype.aether:aether-spi:1.7" level="project" />

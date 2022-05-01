@@ -5,6 +5,9 @@ import javafx.stage.Stage;
 
 import java.io.InputStream;
 
+/**
+ * Изменнёное окно приложения.
+ */
 public class PhotoStage extends Stage {
     /**
      * Создание объекта окна.

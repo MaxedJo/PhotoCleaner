@@ -3,6 +3,11 @@ package ru.maxed.photocleaner.core.entities;
 import java.io.File;
 import java.util.Objects;
 
+/**
+ * Класс для хранения файла в особом виде для быстрого
+ * доступа к различным состояниям с возможностью
+ * выделения файла.
+ */
 public class CheckedFile extends File {
     /**
      * Пусть к директории для работы с файлами.
@@ -176,6 +181,9 @@ public class CheckedFile extends File {
         return Objects.hash(super.hashCode(), mustDelete);
     }
 
+    /**
+     * Интерфейс класса для обработки удаления.
+     */
     public interface OnDeleteHandler {
         /**
          * Функция удаления.
@@ -183,6 +191,9 @@ public class CheckedFile extends File {
         void delete();
     }
 
+    /**
+     * Интерфейс класса для обработки изменения выделения.
+     */
     public interface OnCheckedHandle {
         /**
          * Функция изменения флага.

@@ -6,7 +6,13 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Properties;
 
+/**
+ * Класс работы с файлом настроек.
+ */
 public final class Settings implements Serializable {
+    /**
+     * Закрывающий конструктор.
+     */
     private Settings() {
         throw new IllegalStateException("Utility class");
     }

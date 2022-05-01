@@ -6,10 +6,13 @@ import ru.maxed.photocleaner.core.exeptions.TestException;
 
 import java.util.Iterator;
 
-/*
-Удаление всех помеченных файлов
+/**
+ * Утилитный клас удаления выделенных файлов.
  */
 public final class FileListCleaner {
+    /**
+     * Закрывающий конструктор.
+     */
     private FileListCleaner() {
         throw new IllegalStateException("Utility class");
     }

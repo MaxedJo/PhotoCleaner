@@ -8,6 +8,9 @@ import javafx.scene.layout.BorderPane;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
 import ru.maxed.photocleaner.ui.desktop.services.Counter;
 
+/**
+ * Компонент файлового элемента списка.
+ */
 public class FilePane extends BorderPane {
     /**
      * Текстовое поле элемента.

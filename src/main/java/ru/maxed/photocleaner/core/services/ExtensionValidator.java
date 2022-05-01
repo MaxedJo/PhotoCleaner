@@ -4,10 +4,13 @@ import ru.maxed.photocleaner.core.exeptions.TestException;
 
 import java.util.Locale;
 
-/*
-Проверка доступности введенного пользователем расширения
+/**
+ * Утилитый класс проверки правильности расширений.
  */
 public final class ExtensionValidator {
+    /**
+     * Закрывающий конструктор.
+     */
     private ExtensionValidator() {
         throw new IllegalStateException("Utility class");
     }

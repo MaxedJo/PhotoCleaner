@@ -7,6 +7,9 @@ import javafx.stage.Stage;
 
 import java.io.InputStream;
 
+/**
+ * Диалоговое коно ошибки.
+ */
 public class ErrorAlert extends Alert {
     /**
      * Конструктор + вывод окна оповещения об ошибке.

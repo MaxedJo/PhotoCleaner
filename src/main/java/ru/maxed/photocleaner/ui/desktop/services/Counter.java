@@ -2,6 +2,9 @@ package ru.maxed.photocleaner.ui.desktop.services;
 
 import javafx.scene.control.Button;
 
+/**
+ * Счётчик файлов, переключающий кнопку.
+ */
 public class Counter {
     /**
      * Кнопка переключаемая счётчиком.
