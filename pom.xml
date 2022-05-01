@@ -6,7 +6,7 @@
 
     <groupId>ru.maxed</groupId>
     <artifactId>PhotoCleaner</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>PhotoCleaner</name>
 
     <properties>
@@ -138,12 +138,12 @@
                                 <path>./jdk-18,%JAVA_HOME%</path>
                             </jre>
                             <versionInfo>
-                                <fileVersion>1.0.0.0</fileVersion>
+                                <fileVersion>${project.version}</fileVersion>
                                 <txtFileVersion>${project.version}</txtFileVersion>
                                 <fileDescription>${project.name}</fileDescription>
                                 <copyright>2022 https://github.com/MaxedJo</copyright>
-                                <productVersion>1.0.0.0</productVersion>
-                                <txtProductVersion>1.0.0.0</txtProductVersion>
+                                <productVersion>${project.version}</productVersion>
+                                <txtProductVersion>${project.version}</txtProductVersion>
                                 <productName>${project.name}</productName>
                                 <internalName>photocleaner</internalName>
                                 <originalFilename>PhotoCleaner.exe</originalFilename>

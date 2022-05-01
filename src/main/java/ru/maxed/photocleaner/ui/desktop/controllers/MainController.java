@@ -97,11 +97,16 @@ public class MainController implements Initializable {
      * Эвент сохранения настроек при закрытиии окна.
      */
     private final javafx.event.EventHandler<WindowEvent> closeEventHandler =
-            event -> Settings.saveSettings(
-                    pathInput.getText(),
-                    originExtension.getText(),
-                    processedExtension.getText()
-            );
+            event -> {
+                try {
+                    Settings.saveSettings(
+                            pathInput.getText(),
+                            originExtension.getText(),
+                            processedExtension.getText());
+                } catch (TestException e) {
+                    new ErrorAlert(e.getMessage());
+                }
+            };
     /**
      * Тултип кнопки удаления.
      */
@@ -391,11 +396,17 @@ public class MainController implements Initializable {
         processedExtension.setPromptText("Расширение для обработки");
         File settingsFile = new File("settings.properties");
         if (settingsFile.exists()) {
-            Properties properties = Settings.loadSettings();
-            pathInput.setText(properties.getProperty("path"));
-            processedExtension
-                    .setText(properties.getProperty("processedExtension"));
-            originExtension.setText(properties.getProperty("originExtension"));
+            try {
+                Properties properties = Settings.loadSettings();
+                pathInput.setText(properties.getProperty("path"));
+                processedExtension
+                        .setText(properties.getProperty("processedExtension"));
+                originExtension
+                        .setText(properties.getProperty("originExtension"));
+            } catch (TestException e) {
+                new ErrorAlert(e.getMessage());
+            }
+
         }
     }
 

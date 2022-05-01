@@ -14,6 +14,7 @@ module ru.maxed.photocleaner {
     opens ru.maxed.photocleaner.core.utility to javafx.fxml;
     exports ru.maxed.photocleaner.core.utility;
     exports ru.maxed.photocleaner.core.entities;
+    exports ru.maxed.photocleaner.core.exeptions;
     opens ru.maxed.photocleaner.core.entities to javafx.fxml;
     exports ru.maxed.photocleaner.ui.desktop.components;
     opens ru.maxed.photocleaner.ui.desktop.components to javafx.fxml;

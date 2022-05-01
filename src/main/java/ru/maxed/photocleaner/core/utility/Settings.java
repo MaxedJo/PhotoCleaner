@@ -1,5 +1,7 @@
 package ru.maxed.photocleaner.core.utility;
 
+import ru.maxed.photocleaner.core.exeptions.TestException;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -28,7 +30,7 @@ public final class Settings implements Serializable {
             final String path,
             final String originExtension,
             final String processedExtension
-    ) {
+    ) throws TestException {
         Properties prop = new Properties();
         prop.setProperty("path", path);
         prop.setProperty("originExtension", originExtension);
@@ -37,7 +39,7 @@ public final class Settings implements Serializable {
                      new FileOutputStream("settings.xml")) {
             prop.storeToXML(outputStream, "BaseSettings");
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new TestException(e.toString());
         }
     }
 
@@ -46,12 +48,12 @@ public final class Settings implements Serializable {
      *
      * @return Конфигурацию в виде Properties
      */
-    public static Properties loadSettings() {
+    public static Properties loadSettings() throws TestException {
         Properties property = new Properties();
         try (FileInputStream fis = new FileInputStream("settings.properties")) {
             property.load(fis);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new TestException(e.toString());
         }
         return property;
     }
