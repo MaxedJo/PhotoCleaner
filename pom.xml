@@ -6,7 +6,7 @@
 
     <groupId>ru.maxed</groupId>
     <artifactId>PhotoCleaner</artifactId>
-    <version>1.0</version>
+    <version>1.0.0.0</version>
     <name>PhotoCleaner</name>
 
     <properties>
@@ -133,7 +133,7 @@
                             </classPath>
                             <icon>icon.ico</icon>
                             <jre>
-                                <minVersion>1.6</minVersion>
+                                <minVersion>18</minVersion>
                                 <jdkPreference>preferJdk</jdkPreference>
                                 <path>./jdk-18,%JAVA_HOME%</path>
                             </jre>

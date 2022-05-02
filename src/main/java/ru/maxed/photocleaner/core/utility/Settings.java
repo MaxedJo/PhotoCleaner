@@ -52,8 +52,8 @@ public final class Settings implements Serializable {
      */
     public static Properties loadSettings() throws TestException {
         Properties property = new Properties();
-        try (FileInputStream fis = new FileInputStream("settings.properties")) {
-            property.load(fis);
+        try (FileInputStream fis = new FileInputStream("settings.xml")) {
+            property.loadFromXML(fis);
         } catch (IOException e) {
             throw new TestException(e.toString());
         }

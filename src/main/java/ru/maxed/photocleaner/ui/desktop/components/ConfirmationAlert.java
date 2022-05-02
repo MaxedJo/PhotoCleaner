@@ -18,7 +18,7 @@ public class ConfirmationAlert extends Alert {
     /**
      * Высота диалогового окна.
      */
-    private static final int DIALOG_HEIGHT = 100;
+    private static final int DIALOG_HEIGHT = 300;
 
     /**
      * Конструктор окна подтверждения удаления.
