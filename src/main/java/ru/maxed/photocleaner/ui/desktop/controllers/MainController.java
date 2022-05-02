@@ -104,7 +104,7 @@ public class MainController implements Initializable {
                             originExtension.getText(),
                             processedExtension.getText());
                 } catch (TestException e) {
-                    new ErrorAlert(e.getMessage());
+                    (new ErrorAlert(e.getMessage())).showAndWait();
                 }
             };
     /**
@@ -283,7 +283,7 @@ public class MainController implements Initializable {
             openButton.getStyleClass().remove("open-button-start");
             openButton.getStyleClass().add("open-button-refresh");
         } catch (TestException e) {
-            new ErrorAlert(e.getMessage());
+            (new ErrorAlert(e.getMessage())).showAndWait();
         }
     }
 
@@ -357,7 +357,7 @@ public class MainController implements Initializable {
                 FileListCleaner.clean(mainProcessedFileList);
                 FileListCleaner.clean(mainOriginFileList);
             } catch (TestException e) {
-                new ErrorAlert(e.getMessage());
+                (new ErrorAlert(e.getMessage())).showAndWait();
             }
         }
 
@@ -366,6 +366,12 @@ public class MainController implements Initializable {
     /**
      * Функция инициализации стартовых значений.
      *
+     * @param location  The location used to resolve relative paths
+     *                  for the root object, or
+     *                  {@code null} if the location is not known.
+     * @param resources The resources used to localize the root object,
+     *                  or {@code null} if
+     *                  the root object was not localized.
      * @see Initializable#initialize(URL, ResourceBundle)
      */
     @Override
@@ -404,9 +410,8 @@ public class MainController implements Initializable {
                 originExtension
                         .setText(properties.getProperty("originExtension"));
             } catch (TestException e) {
-                new ErrorAlert(e.getMessage());
+                (new ErrorAlert(e.getMessage())).showAndWait();
             }
-
         }
     }
 

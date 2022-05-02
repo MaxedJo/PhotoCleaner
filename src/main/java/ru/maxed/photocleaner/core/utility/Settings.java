@@ -25,6 +25,7 @@ public final class Settings implements Serializable {
      * @param path               Пусть
      * @param originExtension    Исходное расширение
      * @param processedExtension Расширение файлов для обработки
+     * @throws TestException I/O Ошибка
      */
     public static void saveSettings(
             final String path,
@@ -47,6 +48,7 @@ public final class Settings implements Serializable {
      * Загрузка конфигурации из файла.
      *
      * @return Конфигурацию в виде Properties
+     * @throws TestException I/O Ошибка
      */
     public static Properties loadSettings() throws TestException {
         Properties property = new Properties();

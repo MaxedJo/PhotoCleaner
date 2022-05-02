@@ -34,12 +34,6 @@ public final class MainApplication extends Application {
      */
     private static final ObservableList<CheckedFile> PROCESSED_FILE_LIST =
             FXCollections.observableArrayList();
-    /**
-     * Закрывающий конструктор.
-     */
-    private MainApplication() {
-        throw new IllegalStateException("Utility class");
-    }
 
     /**
      * Запуск оконной версии приложения.

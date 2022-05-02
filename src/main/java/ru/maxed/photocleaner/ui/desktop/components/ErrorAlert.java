@@ -28,7 +28,6 @@ public class ErrorAlert extends Alert {
         Image image = new Image(iconStream);
         Stage stage = (Stage) this.getDialogPane().getScene().getWindow();
         stage.getIcons().add(image);
-        this.showAndWait();
     }
 
 }
