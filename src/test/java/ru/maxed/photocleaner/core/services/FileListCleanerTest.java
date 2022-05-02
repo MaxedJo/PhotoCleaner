@@ -1,4 +1,4 @@
-package core.services;
+package ru.maxed.photocleaner.core.services;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
 import ru.maxed.photocleaner.core.exeptions.TestException;
-import ru.maxed.photocleaner.core.services.DirectoryReader;
-import ru.maxed.photocleaner.core.services.FileListCleaner;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +19,7 @@ class FileListCleanerTest {
     void clean() {
         File dir = new File("TestingDir");
         if (!dir.mkdir()) {
-            System.err.println("Ошибка создания");
+            System.err.println("File creation error");
         }
         for (int i = 0; i < 30; i++) {
             CheckedFile file = new CheckedFile("TestingDir/Test" + i + ".bmp", i % 2 == 0);
@@ -29,7 +27,7 @@ class FileListCleanerTest {
             if (!(i % 2 == 0)) expectedFileList.add(file);
             try {
                 if (!file.createNewFile()) {
-                    System.err.println("Ошибка создания");
+                    System.err.println("File creation error");
                 }
             } catch (IOException e) {
                 e.printStackTrace();

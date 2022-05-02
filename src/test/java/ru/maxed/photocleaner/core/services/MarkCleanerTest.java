@@ -1,11 +1,10 @@
-package core.services;
+package ru.maxed.photocleaner.core.services;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
-import ru.maxed.photocleaner.core.services.MarkCleaner;
 
 class MarkCleanerTest {
     final ObservableList<CheckedFile> originFileList = FXCollections.observableArrayList();

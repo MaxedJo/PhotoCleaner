@@ -5,7 +5,6 @@ module ru.maxed.photocleaner {
     requires javafx.controls;
     requires javafx.fxml;
 
-    requires org.junit.jupiter.api;
 
     opens ru.maxed.photocleaner to javafx.fxml;
     exports ru.maxed.photocleaner;

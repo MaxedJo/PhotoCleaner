@@ -1,4 +1,4 @@
-package core.services;
+package ru.maxed.photocleaner.core.services;
 
 import java.io.File;
 import java.io.IOException;

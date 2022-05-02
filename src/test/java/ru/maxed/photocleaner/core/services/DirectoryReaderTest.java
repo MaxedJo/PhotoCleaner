@@ -1,4 +1,4 @@
-package core.services;
+package ru.maxed.photocleaner.core.services;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,7 +11,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
 import ru.maxed.photocleaner.core.exeptions.TestException;
-import ru.maxed.photocleaner.core.services.DirectoryReader;
 
 class DirectoryReaderTest {
     ObservableList<CheckedFile> originList = FXCollections.observableArrayList();
@@ -45,7 +44,6 @@ class DirectoryReaderTest {
         } catch (TestException e) {
             e.printStackTrace();
         }
-        System.out.println(processedExtension);
         Assertions.assertEquals(Directory.processedFilesCount, processedList.size());
         Assertions.assertEquals(Directory.originFileCount, originList.size());
     }
