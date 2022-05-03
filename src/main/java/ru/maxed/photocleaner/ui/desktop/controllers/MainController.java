@@ -1,3 +1,6 @@
+// This is an open source non-commercial project. Dear PVS-Studio, please check it.
+
+// PVS-Studio Static Code Analyzer for C, C++, C#, and Java: https://pvs-studio.com
 package ru.maxed.photocleaner.ui.desktop.controllers;
 
 import javafx.collections.ObservableList;
@@ -193,7 +196,6 @@ public class MainController implements Initializable {
                     processedFilter
             );
         }
-
     }
 
     /**
