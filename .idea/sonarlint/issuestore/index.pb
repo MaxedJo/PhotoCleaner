@@ -31,13 +31,7 @@ Jsrc/test/java/ru/maxed/photocleaner/core/services/FileListCleanerTest.java,4\d
 Msrc/test/java/ru/maxed/photocleaner/core/services/FileListComparatorTest.java,a\5\a503c0b425aea6db754b4e691f3f075981f8fa53
 v
 Fsrc/test/java/ru/maxed/photocleaner/core/services/MarkCleanerTest.java,c\f\cf0a554a064d4b011e38babab7b74f0084e26ac8
-7
-pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 }
 Msrc/test/java/ru/maxed/photocleaner/core/services/ExtensionValidatorTest.java,a\c\ac82bec856ff0fc0c990af8983470d5712d9a99f
-@
-PhotoCleaner.iml,f\0\f005519fc0765fd0d48ae1e672aa8108550cd1a4
-N
-src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7
 n
 >src/main/java/ru/maxed/photocleaner/core/utility/Settings.java,7\c\7c443e171f80e6b88de3be9fc4d6e4b4ac1b0bf9

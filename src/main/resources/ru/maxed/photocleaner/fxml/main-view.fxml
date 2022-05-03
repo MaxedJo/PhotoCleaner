@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--suppress JavaFxUnresolvedFxIdReference -->
+
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -9,52 +11,47 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import java.lang.String?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="root" prefHeight="535.0" prefWidth="763.0" stylesheets="@../styles.css"
-      xmlns="http://javafx.com/javafx/17" fx:controller="ru.maxed.photocleaner.ui.desktop.controllers.MainController">
+
+<VBox fx:id="root" prefHeight="535.0" prefWidth="763.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.maxed.photocleaner.ui.desktop.controllers.MainController">
     <!--suppress JavaFxUnresolvedFxIdReference -->
     <HBox fx:id="buttonBox">
         <TextField fx:id="pathInput" onAction="#onEnter">
             <HBox.hgrow>ALWAYS</HBox.hgrow>
             <tooltip>
-                <Tooltip text="Путь к папке"/>
+                <Tooltip text="Путь к папке" />
             </tooltip>
         </TextField>
         <Button fx:id="openButton" mnemonicParsing="false" onAction="#onOpenButtonClick" styleClass="button-image">
             <tooltip>
-                <Tooltip fx:id="refreshTooltip" text="Открыть"/>
+                <Tooltip text="Открыть" />
             </tooltip>
         </Button>
         <Button fx:id="pathChooser" onAction="#onPathChooserClick" styleClass="button-image">
             <tooltip>
-                <Tooltip fx:id="openTooltip" text="Обзор"/>
+                <Tooltip text="Обзор" />
             </tooltip>
         </Button>
         <!--suppress JavaFxUnresolvedFxIdReference -->
-        <Button fx:id="cleanButton" mnemonicParsing="false" onAction="#onMarkFilesWithoutOriginButtonClick"
-                styleClass="button-image">
+        <Button fx:id="cleanButton" mnemonicParsing="false" onAction="#onMarkFilesWithoutOriginButtonClick" styleClass="button-image">
             <tooltip>
-                <Tooltip fx:id="cleanTooltip" text="Выделить файлы без эталона"/>
+                <Tooltip text="Выделить файлы без эталона" />
             </tooltip>
         </Button>
         <!--suppress JavaFxUnresolvedFxIdReference -->
-        <Button fx:id="copySelectButton" mnemonicParsing="false" onAction="#onCopySelectButtonClick"
-                styleClass="button-image">
+        <Button fx:id="copySelectButton" mnemonicParsing="false" onAction="#onCopySelectButtonClick" styleClass="button-image">
             <tooltip>
-                <Tooltip fx:id="copyTooltip" text="Выделить копии"/>
+                <Tooltip text="Выделить копии" />
             </tooltip>
         </Button>
         <!--suppress JavaFxUnresolvedFxIdReference -->
-        <Button fx:id="clearButton" mnemonicParsing="false" onAction="#onClearSelectionButtonClick"
-                styleClass="button-image">
+        <Button fx:id="clearButton" mnemonicParsing="false" onAction="#onClearSelectionButtonClick" styleClass="button-image">
             <tooltip>
-                <Tooltip fx:id="clearTooltip" text="Снять выделение"/>
+                <Tooltip text="Снять выделение" />
             </tooltip>
         </Button>
-        <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDeleteButtonClick"
-                styleClass="button-image">
+        <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDeleteButtonClick" styleClass="button-image">
             <tooltip>
-                <Tooltip fx:id="deleteTooltip" text="Удалить"/>
+                <Tooltip text="Удалить" />
             </tooltip>
         </Button>
     </HBox>
@@ -67,14 +64,13 @@
             <HBox styleClass="extensionHbox">
                 <TextField fx:id="originExtension" onAction="#onEnter" styleClass="extensionInput">
                 </TextField>
-                <ToggleButton fx:id="originFilter" mnemonicParsing="false" onAction="#onFilterButtonClick"
-                              text="ToggleButton">
+                <ToggleButton fx:id="originFilter" mnemonicParsing="false" onAction="#onFilterButtonClick" text="ToggleButton">
                     <styleClass>
-                        <String fx:value="button-image"/>
-                        <String fx:value="filterButton"/>
+                        <String fx:value="button-image" />
+                        <String fx:value="filterButton" />
                     </styleClass>
                     <tooltip>
-                        <Tooltip fx:id="originFilterTooltip" text="Отфильтровать выделенное"/>
+                        <Tooltip text="Отфильтровать выделенное" />
                     </tooltip>
                 </ToggleButton>
                 <Label text="Эталонные файлы">
@@ -88,15 +84,14 @@
         <VBox styleClass="listVBox">
             <HBox.hgrow>ALWAYS</HBox.hgrow>
             <HBox styleClass="extensionHbox">
-                <TextField fx:id="processedExtension" onAction="#onEnter" styleClass="extensionInput"/>
-                <ToggleButton fx:id="processedFilter" mnemonicParsing="false"
-                              onAction="#onFilterButtonClick" text="ToggleButton">
+                <TextField fx:id="processedExtension" onAction="#onEnter" styleClass="extensionInput" />
+                <ToggleButton fx:id="processedFilter" mnemonicParsing="false" onAction="#onFilterButtonClick" text="ToggleButton">
                     <styleClass>
-                        <String fx:value="button-image"/>
-                        <String fx:value="filterButton"/>
+                        <String fx:value="button-image" />
+                        <String fx:value="filterButton" />
                     </styleClass>
                     <tooltip>
-                        <Tooltip fx:id="processedFilterTooltip" text="Отфильтровать выделенное"/>
+                        <Tooltip text="Отфильтровать выделенное" />
                     </tooltip>
                 </ToggleButton>
                 <Label text="Файлы для обработки">

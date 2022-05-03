@@ -1,6 +1,3 @@
-// This is an open source non-commercial project. Dear PVS-Studio, please check it.
-
-// PVS-Studio Static Code Analyzer for C, C++, C#, and Java: https://pvs-studio.com
 package ru.maxed.photocleaner.ui.desktop.controllers;
 
 import javafx.collections.ObservableList;
@@ -12,11 +9,9 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.WindowEvent;
-import javafx.util.Duration;
 import ru.maxed.photocleaner.MainApplication;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
 import ru.maxed.photocleaner.core.exeptions.TestException;
@@ -42,10 +37,6 @@ import java.util.ResourceBundle;
  * Контроллер главного окна приложения.
  */
 public class MainController implements Initializable {
-    /**
-     * Задержка появления тултипа.
-     */
-    private static final int TOOLTIP_WAIT_DURATION = 100;
     /**
      * Список файлов для обработки.
      */
@@ -110,47 +101,6 @@ public class MainController implements Initializable {
                     (new ErrorAlert(e.getMessage())).showAndWait();
                 }
             };
-    /**
-     * Тултип кнопки удаления.
-     */
-    @FXML
-    private Tooltip deleteTooltip;
-    /**
-     * Тултип кнопки выделения файлов без оригинала.
-     */
-    @FXML
-    private Tooltip clearTooltip;
-    /**
-     * Тултип кнопки выделения файлов для обработки
-     * аналогичных выделенным оригинальным файлам.
-     */
-    @FXML
-    private Tooltip copyTooltip;
-    /**
-     * Тултип кнопки очистки выделения.
-     */
-    @FXML
-    private Tooltip cleanTooltip;
-    /**
-     * Тултип кнопки фильтрации списка оригинальных файлов.
-     */
-    @FXML
-    private Tooltip originFilterTooltip;
-    /**
-     * Тултип кнопки фильтрации списка файлов для обработки.
-     */
-    @FXML
-    private Tooltip processedFilterTooltip;
-    /**
-     * Тултип кнопки считывания директории.
-     */
-    @FXML
-    private Tooltip openTooltip;
-    /**
-     * Тултип кнопки обновления.
-     */
-    @FXML
-    private Tooltip refreshTooltip;
     /**
      * Кнопка переключения фильтра файлов оригиналов.
      */
@@ -383,21 +333,7 @@ public class MainController implements Initializable {
                 originExtension,
                 processedExtension
         };
-        Tooltip[] tooltips = new Tooltip[]{
-                deleteTooltip,
-                cleanTooltip,
-                clearTooltip,
-                copyTooltip,
-                openTooltip,
-                refreshTooltip,
-                originFilterTooltip,
-                processedFilterTooltip
-        };
         openButton.getStyleClass().add("open-button-start");
-        for (Tooltip tooltip
-                : tooltips) {
-            tooltip.setShowDelay(new Duration(TOOLTIP_WAIT_DURATION));
-        }
         counter = new Counter(deleteButton);
         pathInput.setPromptText("Введите путь");
         originExtension.setPromptText("Эталонное расширение");

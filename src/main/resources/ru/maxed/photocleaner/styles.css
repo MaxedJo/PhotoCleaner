@@ -64,3 +64,6 @@
     -fx-min-width: 32px;
     -fx-min-height:32px;
 }
+.tooltip{
+    -fx-show-delay: 100ms;
+}
