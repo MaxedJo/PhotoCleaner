@@ -33,3 +33,5 @@ Fsrc/test/java/ru/maxed/photocleaner/core/services/MarkCleanerTest.java,c\f\cf0
 Msrc/test/java/ru/maxed/photocleaner/core/services/ExtensionValidatorTest.java,a\c\ac82bec856ff0fc0c990af8983470d5712d9a99f
 n
 >src/main/java/ru/maxed/photocleaner/core/utility/Settings.java,7\c\7c443e171f80e6b88de3be9fc4d6e4b4ac1b0bf9
+~
+Nsrc/main/java/ru/maxed/photocleaner/ui/desktop/controllers/MainController.java,2\3\23ef01047c81816ee42360744f3d88497f76665b
