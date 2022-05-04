@@ -11,8 +11,6 @@ Isrc/main/java/ru/maxed/photocleaner/ui/desktop/components/ErrorAlert.java,7\b\
 settings.xml,1\d\1d784fce58c3719506730fb9749600554125b511
 €
 Psrc/main/java/ru/maxed/photocleaner/ui/desktop/components/ConfirmationAlert.java,a\0\a0342f98b33c6b66cd1ac39084c0f16b154bc5ee
-9
-	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 j
 :.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml,8\5\858474d8d215ec25f84b3be6f80418553ae8d1df
 p
