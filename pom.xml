@@ -125,7 +125,6 @@
                             <dontWrapJar>false</dontWrapJar>
                             <downloadUrl>https://www.oracle.com/java/technologies/downloads/</downloadUrl>
                             <supportUrl>https://github.com/MaxedJo/PhotoCleaner/issues</supportUrl>
-                            <downloadUrl>http://java.com/download</downloadUrl>
                             <classPath>
                                 <mainClass>ru.maxed.photocleaner.App</mainClass>
                                 <preCp>anything</preCp>
