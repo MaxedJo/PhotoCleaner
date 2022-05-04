@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="maven-assembly-plugin-3.3.0">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../maven-assembly-plugin-3.3.0.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
