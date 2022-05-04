@@ -7,8 +7,6 @@ t
 Dsrc/main/java/ru/maxed/photocleaner/ui/desktop/services/Counter.java,e\7\e733e8d056bca24965754ae44e1d66ab5dc57d8e
 y
 Isrc/main/java/ru/maxed/photocleaner/ui/desktop/components/ErrorAlert.java,7\b\7ba8f30cfffdbf09790ce70374b95904eace9f04
-<
-settings.xml,1\d\1d784fce58c3719506730fb9749600554125b511
 €
 Psrc/main/java/ru/maxed/photocleaner/ui/desktop/components/ConfirmationAlert.java,a\0\a0342f98b33c6b66cd1ac39084c0f16b154bc5ee
 j
@@ -31,7 +29,3 @@ v
 Fsrc/test/java/ru/maxed/photocleaner/core/services/MarkCleanerTest.java,c\f\cf0a554a064d4b011e38babab7b74f0084e26ac8
 }
 Msrc/test/java/ru/maxed/photocleaner/core/services/ExtensionValidatorTest.java,a\c\ac82bec856ff0fc0c990af8983470d5712d9a99f
-n
->src/main/java/ru/maxed/photocleaner/core/utility/Settings.java,7\c\7c443e171f80e6b88de3be9fc4d6e4b4ac1b0bf9
-~
-Nsrc/main/java/ru/maxed/photocleaner/ui/desktop/controllers/MainController.java,2\3\23ef01047c81816ee42360744f3d88497f76665b

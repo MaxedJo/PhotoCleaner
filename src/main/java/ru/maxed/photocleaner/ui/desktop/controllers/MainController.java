@@ -338,7 +338,7 @@ public class MainController implements Initializable {
         pathInput.setPromptText("Введите путь");
         originExtension.setPromptText("Эталонное расширение");
         processedExtension.setPromptText("Расширение для обработки");
-        File settingsFile = new File("settings.properties");
+        File settingsFile = new File("settings.xml");
         if (settingsFile.exists()) {
             try {
                 Properties properties = Settings.loadSettings();
