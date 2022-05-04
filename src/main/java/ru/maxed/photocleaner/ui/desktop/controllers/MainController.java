@@ -30,7 +30,6 @@ import ru.maxed.photocleaner.ui.desktop.services.Counter;
 import java.io.File;
 import java.net.URL;
 import java.util.Optional;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 /**
@@ -92,14 +91,11 @@ public class MainController implements Initializable {
      */
     private final javafx.event.EventHandler<WindowEvent> closeEventHandler =
             event -> {
-                try {
-                    Settings.saveSettings(
-                            pathInput.getText(),
-                            originExtension.getText(),
-                            processedExtension.getText());
-                } catch (TestException e) {
-                    (new ErrorAlert(e.getMessage())).showAndWait();
-                }
+                Settings.update(Settings.PATH, pathInput.getText());
+                Settings.update(Settings.ORIGIN_EXTENSION,
+                        originExtension.getText());
+                Settings.update(Settings.PROCESSED_EXTENSION,
+                        processedExtension.getText());
             };
     /**
      * Кнопка переключения фильтра файлов оригиналов.
@@ -338,19 +334,9 @@ public class MainController implements Initializable {
         pathInput.setPromptText("Введите путь");
         originExtension.setPromptText("Эталонное расширение");
         processedExtension.setPromptText("Расширение для обработки");
-        File settingsFile = new File("settings.xml");
-        if (settingsFile.exists()) {
-            try {
-                Properties properties = Settings.loadSettings();
-                pathInput.setText(properties.getProperty("path"));
-                processedExtension
-                        .setText(properties.getProperty("processedExtension"));
-                originExtension
-                        .setText(properties.getProperty("originExtension"));
-            } catch (TestException e) {
-                (new ErrorAlert(e.getMessage())).showAndWait();
-            }
-        }
+        pathInput.setText(Settings.get(Settings.PATH));
+        originExtension.setText(Settings.get(Settings.ORIGIN_EXTENSION));
+        processedExtension.setText(Settings.get(Settings.PROCESSED_EXTENSION));
     }
 
     /**

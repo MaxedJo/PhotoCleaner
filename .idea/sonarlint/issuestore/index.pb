@@ -5,10 +5,6 @@ r
 Bsrc/main/java/ru/maxed/photocleaner/core/services/MarkCleaner.java,8\5\85a92db91b6aa808c241ddd518432b1c9b162ed8
 t
 Dsrc/main/java/ru/maxed/photocleaner/ui/desktop/services/Counter.java,e\7\e733e8d056bca24965754ae44e1d66ab5dc57d8e
-y
-Isrc/main/java/ru/maxed/photocleaner/ui/desktop/components/ErrorAlert.java,7\b\7ba8f30cfffdbf09790ce70374b95904eace9f04
-€
-Psrc/main/java/ru/maxed/photocleaner/ui/desktop/components/ConfirmationAlert.java,a\0\a0342f98b33c6b66cd1ac39084c0f16b154bc5ee
 j
 :.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml,8\5\858474d8d215ec25f84b3be6f80418553ae8d1df
 p

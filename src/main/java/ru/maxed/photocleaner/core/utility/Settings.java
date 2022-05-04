@@ -2,16 +2,37 @@ package ru.maxed.photocleaner.core.utility;
 
 import ru.maxed.photocleaner.core.exeptions.TestException;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.Properties;
 
 /**
  * Класс работы с файлом настроек.
  */
-public final class Settings implements Serializable {
+public final class Settings extends Properties {
+    /**
+     * Ключ настройки директории.
+     */
+    public static final String PATH = "path";
+    /**
+     * Ключ настройки расширения оригинального файла.
+     */
+    public static final String ORIGIN_EXTENSION = "originExtension";
+    /**
+     * Ключ настройки расширения файла для обработки.
+     */
+    public static final String PROCESSED_EXTENSION = "processedExtension";
+    /**
+     * Файл настроек.
+     */
+    private static final File SETTINGS_FILE = new File("settings.xml");
+    /**
+     * Храненилище настроек внутри программы.
+     */
+    private static final Properties PROPERTIES = new Properties();
+
     /**
      * Закрывающий конструктор.
      */
@@ -20,44 +41,48 @@ public final class Settings implements Serializable {
     }
 
     /**
-     * Сохранение состояния полей в файл.
+     * Загрузка настроек из файла.
      *
-     * @param path               Пусть
-     * @param originExtension    Исходное расширение
-     * @param processedExtension Расширение файлов для обработки
-     * @throws TestException I/O Ошибка
+     * @throws IOException Ошибка при чтении
      */
-    public static void saveSettings(
-            final String path,
-            final String originExtension,
-            final String processedExtension
-    ) throws TestException {
-        Properties prop = new Properties();
-        prop.setProperty("path", path);
-        prop.setProperty("originExtension", originExtension);
-        prop.setProperty("processedExtension", processedExtension);
-        try (FileOutputStream outputStream =
-                     new FileOutputStream("settings.xml")) {
-            prop.storeToXML(outputStream, "BaseSettings");
-        } catch (IOException e) {
-            throw new TestException(e.toString());
+    public static void load() throws IOException {
+        if (SETTINGS_FILE.exists()) {
+            PROPERTIES.loadFromXML(new FileInputStream(SETTINGS_FILE));
         }
     }
 
     /**
-     * Загрузка конфигурации из файла.
+     * Сохранение настроек.
      *
-     * @return Конфигурацию в виде Properties
-     * @throws TestException I/O Ошибка
+     * @throws TestException Ошибка при записи
      */
-    public static Properties loadSettings() throws TestException {
-        Properties property = new Properties();
-        try (FileInputStream fis = new FileInputStream("settings.xml")) {
-            property.loadFromXML(fis);
+    public static void save() throws TestException {
+        try (var fos = new FileOutputStream(SETTINGS_FILE)) {
+            PROPERTIES.storeToXML(fos, "Базовые настройки");
         } catch (IOException e) {
-            throw new TestException(e.toString());
+            throw new TestException(e.getMessage());
         }
-        return property;
     }
+
+    /**
+     * Обновление конфигурации.
+     *
+     * @param key   Настройка
+     * @param value Значение
+     */
+    public static void update(final String key, final String value) {
+        PROPERTIES.setProperty(key, value);
+    }
+
+    /**
+     * Получение знаения настройки.
+     *
+     * @param key Настройка
+     * @return Значение настройки
+     */
+    public static String get(final String key) {
+        return PROPERTIES.getProperty(key);
+    }
+
 
 }
