@@ -27,7 +27,12 @@ public final class Settings extends Properties {
     /**
      * Файл настроек.
      */
-    private static final File SETTINGS_FILE = new File("settings.xml");
+    private static final File SETTINGS_FILE = new File(
+            System.getProperty("user.home")
+                    + File.separator + ".config"
+                    + File.separator + "photocleaner"
+                    + File.separator + "settings.xml"
+    );
     /**
      * Храненилище настроек внутри программы.
      */
@@ -46,6 +51,9 @@ public final class Settings extends Properties {
      * @throws IOException Ошибка при чтении
      */
     public static void load() throws IOException {
+        //-d
+        //Запуска
+        //глобал
         if (SETTINGS_FILE.exists()) {
             PROPERTIES.loadFromXML(new FileInputStream(SETTINGS_FILE));
         }
@@ -57,6 +65,7 @@ public final class Settings extends Properties {
      * @throws TestException Ошибка при записи
      */
     public static void save() throws TestException {
+        SETTINGS_FILE.getParentFile().mkdirs();
         try (var fos = new FileOutputStream(SETTINGS_FILE)) {
             PROPERTIES.storeToXML(fos, "Базовые настройки");
         } catch (IOException e) {
