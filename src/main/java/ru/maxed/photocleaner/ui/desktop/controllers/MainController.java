@@ -228,8 +228,6 @@ public class MainController implements Initializable {
                     originFileList,
                     originFilter
             );
-            openButton.getStyleClass().remove("open-button-start");
-            openButton.getStyleClass().add("open-button-refresh");
         } catch (TestException e) {
             (new ErrorAlert(e.getMessage())).showAndWait();
         }
@@ -329,7 +327,6 @@ public class MainController implements Initializable {
                 originExtension,
                 processedExtension
         };
-        openButton.getStyleClass().add("open-button-start");
         counter = new Counter(deleteButton);
         pathInput.setPromptText("Введите путь");
         originExtension.setPromptText("Эталонное расширение");

@@ -71,7 +71,9 @@ public final class Settings extends Properties {
      * @param value Значение
      */
     public static void update(final String key, final String value) {
-        PROPERTIES.setProperty(key, value);
+        if (value != null) {
+            PROPERTIES.setProperty(key, value);
+        }
     }
 
     /**

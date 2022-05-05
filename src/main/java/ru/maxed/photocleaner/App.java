@@ -31,6 +31,7 @@ public final class App {
             }
             i++;
         }
+
         MainApplication.main(args);
         Settings.save();
     }
