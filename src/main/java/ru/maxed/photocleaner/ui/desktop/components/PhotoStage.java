@@ -18,7 +18,7 @@ public class PhotoStage extends Stage {
         );
         assert iconStream != null;
         Image image = new Image(iconStream);
-        this.setTitle("Photo cleaner");
+        this.setTitle("Photo Сleaner");
         this.getIcons().add(image);
     }
 

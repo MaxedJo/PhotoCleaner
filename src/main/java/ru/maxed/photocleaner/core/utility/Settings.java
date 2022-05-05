@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -25,24 +26,50 @@ public final class Settings extends Properties {
      */
     public static final String PROCESSED_EXTENSION = "processedExtension";
     /**
-     * Файл настроек.
-     */
-    private static final File SETTINGS_FILE = new File(
-            System.getProperty("user.home")
-                    + File.separator + ".config"
-                    + File.separator + "photocleaner"
-                    + File.separator + "settings.xml"
-    );
-    /**
      * Храненилище настроек внутри программы.
      */
     private static final Properties PROPERTIES = new Properties();
+    /**
+     * Имя файла настроек.
+     */
+    private static final String SETTINGS_FILE_NAME = "settings.xml";
+    /**
+     * Места хранения настроек
+     * в соответствии с режимом.
+     */
+    private static final Map<Mode, String> SETTINGS_PLACES = Map.of(
+            Mode.ABS, SETTINGS_FILE_NAME,
+            Mode.REL, Settings.PATH
+                    + File.separator + SETTINGS_FILE_NAME,
+            Mode.GLOBAL, System.getProperty("user.home")
+                    + File.separator + ".config"
+                    + File.separator + "photocleaner"
+                    + File.separator + SETTINGS_FILE_NAME
+    );
+    /**
+     * Файл настроек.
+     */
+    private static File settingsFile = new File(
+            System.getProperty("user.home")
+                    + File.separator + ".config"
+                    + File.separator + "photocleaner"
+                    + File.separator + SETTINGS_FILE_NAME
+    );
 
     /**
      * Закрывающий конструктор.
      */
     private Settings() {
         throw new IllegalStateException("Utility class");
+    }
+
+    /**
+     * Изменение директории хранения настроек.
+     *
+     * @param mode Режим хранения
+     */
+    public static void changeDist(final Mode mode) {
+        settingsFile = new File(SETTINGS_PLACES.get(mode));
     }
 
     /**
@@ -54,8 +81,8 @@ public final class Settings extends Properties {
         //-d
         //Запуска
         //глобал
-        if (SETTINGS_FILE.exists()) {
-            PROPERTIES.loadFromXML(new FileInputStream(SETTINGS_FILE));
+        if (settingsFile.exists()) {
+            PROPERTIES.loadFromXML(new FileInputStream(settingsFile));
         }
     }
 
@@ -65,8 +92,11 @@ public final class Settings extends Properties {
      * @throws TestException Ошибка при записи
      */
     public static void save() throws TestException {
-        SETTINGS_FILE.getParentFile().mkdirs();
-        try (var fos = new FileOutputStream(SETTINGS_FILE)) {
+        File parent = settingsFile.getParentFile();
+        if (parent != null && !parent.exists()) {
+            parent.mkdirs();
+        }
+        try (var fos = new FileOutputStream(settingsFile)) {
             PROPERTIES.storeToXML(fos, "Базовые настройки");
         } catch (IOException e) {
             throw new TestException(e.getMessage());
@@ -93,6 +123,24 @@ public final class Settings extends Properties {
      */
     public static String get(final String key) {
         return PROPERTIES.getProperty(key);
+    }
+
+    /**
+     * Режим хранения настроек.
+     */
+    public enum Mode {
+        /**
+         * Хранение в папке запуска.
+         */
+        ABS,
+        /**
+         * Хранение в рабочей директории.
+         */
+        REL,
+        /**
+         * Глобальное хранение.
+         */
+        GLOBAL
     }
 
 
