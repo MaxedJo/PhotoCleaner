@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.Properties;
 
@@ -37,24 +38,20 @@ public final class Settings extends Properties {
      * Места хранения настроек
      * в соответствии с режимом.
      */
-    private static final Map<Mode, String> SETTINGS_PLACES = Map.of(
-            Mode.ABS, SETTINGS_FILE_NAME,
-            Mode.REL, Settings.PATH
-                    + File.separator + SETTINGS_FILE_NAME,
-            Mode.GLOBAL, System.getProperty("user.home")
-                    + File.separator + ".config"
-                    + File.separator + "photocleaner"
-                    + File.separator + SETTINGS_FILE_NAME
-    );
+    private static final Map<Mode, File> SETTINGS_PLACES =
+            new EnumMap<>(Mode.class);
+    /**
+     * Инициализированы ли настройки.
+     */
+    private static boolean isInitialised = false;
     /**
      * Файл настроек.
      */
-    private static File settingsFile = new File(
-            System.getProperty("user.home")
-                    + File.separator + ".config"
-                    + File.separator + "photocleaner"
-                    + File.separator + SETTINGS_FILE_NAME
-    );
+    private static File settingsFile;
+    /**
+     * Режим сохранени насроек.
+     */
+    private static Mode mode = Mode.GLOBAL;
 
     /**
      * Закрывающий конструктор.
@@ -63,13 +60,29 @@ public final class Settings extends Properties {
         throw new IllegalStateException("Utility class");
     }
 
+    private static void init() {
+        SETTINGS_PLACES.put(Mode.ABS, new File(SETTINGS_FILE_NAME));
+        SETTINGS_PLACES.put(Mode.GLOBAL, new File(
+                System.getProperty("user.home")
+                        + File.separator + ".config"
+                        + File.separator + "photocleaner"
+                        + File.separator + SETTINGS_FILE_NAME
+        ));
+        SETTINGS_PLACES.put(Mode.REL, new File(
+                PROPERTIES.getProperty(Settings.PATH)
+                        + File.separator + SETTINGS_FILE_NAME
+        ));
+        settingsFile = SETTINGS_PLACES.get(Mode.GLOBAL);
+        isInitialised = true;
+    }
+
     /**
      * Изменение директории хранения настроек.
      *
-     * @param mode Режим хранения
+     * @param modeInit Режим хранения
      */
-    public static void changeDist(final Mode mode) {
-        settingsFile = new File(SETTINGS_PLACES.get(mode));
+    public static void changeDist(final Mode modeInit) {
+        mode = modeInit;
     }
 
     /**
@@ -81,10 +94,21 @@ public final class Settings extends Properties {
         //-d
         //Запуска
         //глобал
+        if (!isInitialised) {
+            init();
+        }
+        settingsFile = SETTINGS_PLACES.get(mode);
         if (settingsFile.exists()) {
             PROPERTIES.loadFromXML(new FileInputStream(settingsFile));
+            return;
+        }
+        if (mode.equals(Mode.REL) && SETTINGS_PLACES.get(Mode.ABS).exists()) {
+            PROPERTIES.loadFromXML(
+                    new FileInputStream(SETTINGS_PLACES.get(Mode.ABS))
+            );
         }
     }
+
 
     /**
      * Сохранение настроек.
@@ -92,9 +116,15 @@ public final class Settings extends Properties {
      * @throws TestException Ошибка при записи
      */
     public static void save() throws TestException {
+        settingsFile = SETTINGS_PLACES.get(mode);
         File parent = settingsFile.getParentFile();
         if (parent != null && !parent.exists()) {
-            parent.mkdirs();
+            boolean isCreated = parent.mkdirs();
+            if (!isCreated) {
+                throw new TestException(
+                        "Не удалось создать расположение для папки настроек"
+                );
+            }
         }
         try (var fos = new FileOutputStream(settingsFile)) {
             PROPERTIES.storeToXML(fos, "Базовые настройки");
@@ -112,6 +142,11 @@ public final class Settings extends Properties {
     public static void update(final String key, final String value) {
         if (value != null) {
             PROPERTIES.setProperty(key, value);
+            if (key.equals(Settings.PATH)) {
+                SETTINGS_PLACES.put(Mode.REL, new File(
+                        value + File.separator + SETTINGS_FILE_NAME
+                ));
+            }
         }
     }
 

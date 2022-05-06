@@ -40,6 +40,7 @@ public final class App {
             }
             i++;
         }
+        // Version.main(args);
         MainApplication.main(args);
         Settings.save();
     }
