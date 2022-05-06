@@ -35,6 +35,9 @@ public final class App {
                     Settings.changeDist(Settings.Mode.ABS);
                     Settings.load();
                 } else if (set.equals(Settings.Mode.REL.toString())) {
+                    if (path != null) {
+                        Settings.update(Settings.PATH, path);
+                    }
                     Settings.changeDist(Settings.Mode.REL);
                     Settings.load();
                 }

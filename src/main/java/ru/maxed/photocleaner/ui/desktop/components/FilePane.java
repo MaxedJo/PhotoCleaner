@@ -6,7 +6,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
-import ru.maxed.photocleaner.ui.desktop.services.Counter;
+import ru.maxed.photocleaner.ui.desktop.services.filecount.CounterShare;
 
 /**
  * Компонент файлового элемента списка.
@@ -31,7 +31,7 @@ public class FilePane extends BorderPane {
     /**
      * Счётчик количества выделенных файлов.
      */
-    private Counter deleteCounter;
+    private CounterShare deleteCounter;
     /**
      * Файл привязанный к данному компоненту.
      */
@@ -49,7 +49,7 @@ public class FilePane extends BorderPane {
             final CheckedFile file,
             final ListView<FilePane> parentList,
             final ToggleButton buttonFilter,
-            final Counter counter
+            final CounterShare counter
     ) {
         super();
         checkedFile = file;
@@ -60,7 +60,10 @@ public class FilePane extends BorderPane {
         text.setText(file.getPathFromStartDir());
         check.setSelected(file.isMustDelete());
         this.check.setOnAction(event -> file.setMustDelete(check.isSelected()));
-        file.setDeleteHandler(() -> parentList.getItems().remove(this));
+        file.setDeleteHandler(() -> {
+            parentList.getItems().remove(this);
+            counter.update(false);
+        });
         file.setCheckedHandler(this::setSelected);
         this.setRight(check);
     }
@@ -72,6 +75,7 @@ public class FilePane extends BorderPane {
         super();
         this.setLeft(text);
         this.setRight(check);
+        check.setOnAction(e -> changeCheck());
     }
 
     /**
@@ -80,9 +84,12 @@ public class FilePane extends BorderPane {
      * @param checked Состояние выделения.
      */
     public void setSelected(final boolean checked) {
+        if (check.isSelected() != checked || checkedFile.isMustDelete() != checked) {
+            changeCounter(checked);
+        }
         this.check.setSelected(checked);
-        changeCounter(checked);
         removeFiltered();
+
     }
 
     /**
@@ -92,9 +99,9 @@ public class FilePane extends BorderPane {
      */
     private void changeCounter(final boolean rise) {
         if (rise) {
-            deleteCounter.add();
+            deleteCounter.update(true);
         } else {
-            deleteCounter.sub();
+            deleteCounter.update(false);
         }
     }
 
@@ -113,7 +120,6 @@ public class FilePane extends BorderPane {
     public void changeCheck() {
         this.check.setSelected(!this.check.isSelected());
         checkedFile.setMustDelete(check.isSelected());
-        changeCounter(check.isSelected());
         removeFiltered();
     }
 

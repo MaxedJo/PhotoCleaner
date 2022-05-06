@@ -64,3 +64,6 @@
 .tooltip{
     -fx-show-delay: 100ms;
 }
+.counter-label{
+    -fx-alignment:CENTER_RIGHT;
+}

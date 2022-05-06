@@ -106,10 +106,10 @@ public class CheckedFile extends File implements Comparable<File> {
      * @param mustDeleteValue Выделить файл?
      */
     public void setMustDelete(final boolean mustDeleteValue) {
-        this.mustDelete = mustDeleteValue;
         if (checkedHandler != null) {
             checkedHandler.set(mustDeleteValue);
         }
+        this.mustDelete = mustDeleteValue;
     }
 
     /**

@@ -80,6 +80,7 @@
             <ListView fx:id="originFileList" onMouseClicked="#listClickHandle">
                 <VBox.vgrow>ALWAYS</VBox.vgrow>
             </ListView>
+            <Label fx:id="originListCounter" styleClass="counter-label" text="Выделено 0 из 0" />
         </VBox>
         <VBox styleClass="listVBox">
             <HBox.hgrow>ALWAYS</HBox.hgrow>
@@ -101,6 +102,7 @@
             <ListView fx:id="processedFileList" onMouseClicked="#listClickHandle">
                 <VBox.vgrow>ALWAYS</VBox.vgrow>
             </ListView>
+            <Label fx:id="processedListCounter" styleClass="counter-label" text="Выделено 0 из 0" />
         </VBox>
     </HBox>
 </VBox>

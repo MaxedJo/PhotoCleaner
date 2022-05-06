@@ -19,4 +19,6 @@ module ru.maxed.photocleaner {
     opens ru.maxed.photocleaner.ui.desktop.components to javafx.fxml;
     exports ru.maxed.photocleaner.ui.desktop.services;
     opens ru.maxed.photocleaner.ui.desktop.services to javafx.fxml;
+    exports ru.maxed.photocleaner.ui.desktop.services.filecount;
+    opens ru.maxed.photocleaner.ui.desktop.services.filecount to javafx.fxml;
 }
