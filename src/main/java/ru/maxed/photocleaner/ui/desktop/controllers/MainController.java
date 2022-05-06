@@ -209,7 +209,7 @@ public class MainController implements Initializable {
                         "Неправильный путь,введите путь заного"
                 );
             }
-            CheckedFile.setMainPath(path);
+            CheckedFile.setMainPath(dir.getAbsolutePath());
             DirectoryReader.read(
                     dir.getAbsolutePath(),
                     originExtension.getText(),

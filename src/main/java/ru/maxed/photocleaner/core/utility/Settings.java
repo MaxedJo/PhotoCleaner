@@ -118,13 +118,16 @@ public final class Settings extends Properties {
     public static void save() throws TestException {
         settingsFile = SETTINGS_PLACES.get(mode);
         File parent = settingsFile.getParentFile();
-        if (parent != null && !parent.exists()) {
+        if (parent != null && !parent.exists() && mode == Mode.GLOBAL) {
             boolean isCreated = parent.mkdirs();
             if (!isCreated) {
                 throw new TestException(
                         "Не удалось создать расположение для папки настроек"
                 );
             }
+        }
+        if (mode == Mode.REL && (parent == null || !parent.exists())) {
+            return;
         }
         try (var fos = new FileOutputStream(settingsFile)) {
             PROPERTIES.storeToXML(fos, "Базовые настройки");
@@ -142,7 +145,7 @@ public final class Settings extends Properties {
     public static void update(final String key, final String value) {
         if (value != null) {
             PROPERTIES.setProperty(key, value);
-            if (key.equals(Settings.PATH)) {
+            if (key.equals(Settings.PATH) && !value.equals("")) {
                 SETTINGS_PLACES.put(Mode.REL, new File(
                         value + File.separator + SETTINGS_FILE_NAME
                 ));

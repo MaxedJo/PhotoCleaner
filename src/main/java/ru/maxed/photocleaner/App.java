@@ -23,11 +23,12 @@ public final class App {
      */
     public static void main(final String[] args)
             throws TestException, IOException {
+        String path = null;
         Settings.load();
         int i = 0;
         while (i < args.length - 1) {
             if ("-d".equals(args[i])) {
-                Settings.update(Settings.PATH, args[++i]);
+                path = args[++i];
             } else if ("-s".equals(args[i])) {
                 String set = args[++i];
                 if (set.equals(Settings.Mode.ABS.toString())) {
@@ -40,7 +41,9 @@ public final class App {
             }
             i++;
         }
-        // Version.main(args);
+        Settings.update(Settings.PATH, path);
+//        ResourceBundle UI_LANGUAGE = ResourceBundle.getBundle("lang", CharsetControl.UTF_8);
+//        System.out.println(UI_LANGUAGE.getString("name"));
         MainApplication.main(args);
         Settings.save();
     }

@@ -35,6 +35,7 @@ public final class DirectoryReader {
                             final ObservableList<CheckedFile> processedFileList,
                             final ObservableList<CheckedFile> originFileList,
                             final boolean firstEntry) throws TestException {
+
         String correctedOriginExtension =
                 ExtensionCorrecter.correct(originExtension);
         String correctedProcessedExtension =
