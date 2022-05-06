@@ -8,7 +8,7 @@ import java.util.Objects;
  * доступа к различным состояниям с возможностью
  * выделения файла.
  */
-public class CheckedFile extends File {
+public class CheckedFile extends File implements Comparable<File> {
     /**
      * Пусть к директории для работы с файлами.
      */
@@ -179,6 +179,17 @@ public class CheckedFile extends File {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), mustDelete);
+    }
+
+    /**
+     * Функция для сравнения.
+     *
+     * @param file файл
+     * @return -1 - меньше 0-равны 1- больше
+     */
+    @Override
+    public int compareTo(final File file) {
+        return this.getName().compareTo(file.getName());
     }
 
     /**

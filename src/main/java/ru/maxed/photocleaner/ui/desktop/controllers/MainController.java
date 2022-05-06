@@ -218,6 +218,12 @@ public class MainController implements Initializable {
                     mainOriginFileList,
                     true
             );
+            mainOriginFileList.setAll(
+                    mainOriginFileList.stream().sorted().toList()
+            );
+            mainProcessedFileList.setAll(
+                    mainProcessedFileList.stream().sorted().toList()
+            );
             loadList(
                     mainProcessedFileList,
                     processedFileList,
