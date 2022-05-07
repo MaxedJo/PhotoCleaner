@@ -6,7 +6,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
-import ru.maxed.photocleaner.ui.desktop.services.filecount.CounterShare;
+import ru.maxed.photocleaner.ui.desktop.services.CounterShare;
 
 /**
  * Компонент файлового элемента списка.

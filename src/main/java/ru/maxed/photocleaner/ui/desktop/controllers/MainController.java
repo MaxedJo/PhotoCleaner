@@ -27,9 +27,9 @@ import ru.maxed.photocleaner.core.utility.Settings;
 import ru.maxed.photocleaner.ui.desktop.components.ConfirmationAlert;
 import ru.maxed.photocleaner.ui.desktop.components.ErrorAlert;
 import ru.maxed.photocleaner.ui.desktop.components.FilePane;
-import ru.maxed.photocleaner.ui.desktop.services.filecount.Counter;
-import ru.maxed.photocleaner.ui.desktop.services.filecount.CounterShare;
-import ru.maxed.photocleaner.ui.desktop.services.filecount.LabelCounterControl;
+import ru.maxed.photocleaner.ui.desktop.services.Counter;
+import ru.maxed.photocleaner.ui.desktop.services.CounterShare;
+import ru.maxed.photocleaner.ui.desktop.services.LabelCounterControl;
 
 import java.io.File;
 import java.net.URL;

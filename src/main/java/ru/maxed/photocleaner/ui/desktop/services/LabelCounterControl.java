@@ -1,4 +1,4 @@
-package ru.maxed.photocleaner.ui.desktop.services.filecount;
+package ru.maxed.photocleaner.ui.desktop.services;
 
 import javafx.scene.control.Label;
 

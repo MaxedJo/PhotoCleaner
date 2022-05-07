@@ -4,6 +4,8 @@ import ru.maxed.photocleaner.core.exeptions.TestException;
 import ru.maxed.photocleaner.core.utility.Settings;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Главный класс программы.
@@ -45,6 +47,9 @@ public final class App {
             i++;
         }
         Settings.update(Settings.PATH, path);
+        Locale locale = new Locale("ru");
+        ResourceBundle rb = ResourceBundle.getBundle("lang", locale);
+        System.out.println(rb.getString("name"));
 //        ResourceBundle UI_LANGUAGE = ResourceBundle.getBundle("lang", CharsetControl.UTF_8);
 //        System.out.println(UI_LANGUAGE.getString("name"));
         MainApplication.main(args);
