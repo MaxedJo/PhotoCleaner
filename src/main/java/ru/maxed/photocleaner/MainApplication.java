@@ -69,6 +69,8 @@ public final class MainApplication extends Application {
      */
     @Override
     public void start(final Stage stage) throws IOException {
+        Application.setUserAgentStylesheet(STYLESHEET_CASPIAN);
+        //Application.setUserAgentStylesheet(STYLESHEET_MODENA);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
                 "/ru/maxed/photocleaner/fxml/main-view.fxml"
         ));
