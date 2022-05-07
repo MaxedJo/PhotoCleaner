@@ -14,6 +14,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.WindowEvent;
+import ru.maxed.photocleaner.ListKey;
 import ru.maxed.photocleaner.MainApplication;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
 import ru.maxed.photocleaner.core.exeptions.TestException;
@@ -28,8 +29,6 @@ import ru.maxed.photocleaner.ui.desktop.components.ConfirmationAlert;
 import ru.maxed.photocleaner.ui.desktop.components.ErrorAlert;
 import ru.maxed.photocleaner.ui.desktop.components.FilePane;
 import ru.maxed.photocleaner.ui.desktop.services.Counter;
-import ru.maxed.photocleaner.ui.desktop.services.CounterShare;
-import ru.maxed.photocleaner.ui.desktop.services.LabelCounterControl;
 
 import java.io.File;
 import java.net.URL;
@@ -50,8 +49,7 @@ public class MainController implements Initializable {
      */
     private final ObservableList<CheckedFile> mainOriginFileList =
             MainApplication.getOriginFileList();
-    CounterShare origin = new CounterShare();
-    CounterShare processed = new CounterShare();
+    int test = 0;
     /**
      * Список файлов для обработки.
      */
@@ -129,8 +127,6 @@ public class MainController implements Initializable {
     private Label processedListCounter;
     @FXML
     private Label originListCounter;
-    private LabelCounterControl originLabelControl;
-    private LabelCounterControl processedLabelControl;
 
     /**
      * Обработчик нажатия накнопку фильтра.
@@ -145,14 +141,14 @@ public class MainController implements Initializable {
                     mainOriginFileList,
                     originFileList,
                     originFilter,
-                    origin
+                    ListKey.ORIGIN
             );
         } else if (button.equals(processedFilter)) {
             loadList(
                     mainProcessedFileList,
                     processedFileList,
                     processedFilter,
-                    processed
+                    ListKey.PROCESSED
             );
         }
     }
@@ -168,21 +164,21 @@ public class MainController implements Initializable {
             final ObservableList<CheckedFile> list,
             final ListView<FilePane> listView,
             final ToggleButton filter,
-            final CounterShare counter
+            final ListKey key
     ) {
         listView.getItems().clear();
         if (filter.isSelected()) {
             for (CheckedFile file : list) {
                 if (file.isMustDelete()) {
                     FilePane filePane =
-                            new FilePane(file, listView, filter, counter);
+                            new FilePane(file, listView, filter, b -> mainCounter.change(b, key));
                     listView.getItems().add(filePane);
                 }
             }
         } else {
             for (CheckedFile file : list) {
                 FilePane filePane =
-                        new FilePane(file, listView, filter, counter);
+                        new FilePane(file, listView, filter, b -> mainCounter.change(b, key));
                 listView.getItems().add(filePane);
             }
         }
@@ -242,13 +238,13 @@ public class MainController implements Initializable {
                     mainProcessedFileList,
                     processedFileList,
                     processedFilter,
-                    processed
+                    ListKey.PROCESSED
             );
             loadList(
                     mainOriginFileList,
                     originFileList,
                     originFilter,
-                    origin
+                    ListKey.ORIGIN
             );
         } catch (TestException e) {
             (new ErrorAlert(e.getMessage())).showAndWait();
@@ -349,13 +345,9 @@ public class MainController implements Initializable {
                 originExtension,
                 processedExtension
         };
-        originLabelControl = new LabelCounterControl(originListCounter);
-        processedLabelControl = new LabelCounterControl(processedListCounter);
-        mainCounter = new Counter(deleteButton);
-        origin.add(originLabelControl, mainCounter);
-        processed.add(processedLabelControl, mainCounter);
-        addListeners(originFileList, originLabelControl);
-        addListeners(processedFileList, processedLabelControl);
+        mainCounter = new Counter(deleteButton, originListCounter, processedListCounter);
+        addListeners(originFileList, ListKey.ORIGIN);
+        addListeners(processedFileList, ListKey.PROCESSED);
         pathInput.setPromptText("Введите путь");
         originExtension.setPromptText("Эталонное расширение");
         processedExtension.setPromptText("Расширение для обработки");
@@ -364,14 +356,14 @@ public class MainController implements Initializable {
         processedExtension.setText(Settings.get(Settings.PROCESSED_EXTENSION));
     }
 
-    private void addListeners(final ListView<FilePane> list, final LabelCounterControl label) {
+    private void addListeners(final ListView<FilePane> list, ListKey key) {
         list.getItems().addListener((ListChangeListener.Change<? extends FilePane> change) -> {
             while (change.next()) {
-                for (int i = 0; i <= change.getRemovedSize(); i++) {
-                    label.subMax();
+                for (int i = 0; i < change.getRemovedSize(); i++) {
+                    mainCounter.changeMax(false, key);
                 }
-                for (int i = 0; i <= change.getAddedSize(); i++) {
-                    label.addMax();
+                for (int i = 0; i < change.getAddedSize(); i++) {
+                    mainCounter.changeMax(true, key);
                 }
             }
         });
