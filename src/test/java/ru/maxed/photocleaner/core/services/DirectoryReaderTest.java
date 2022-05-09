@@ -23,7 +23,7 @@ class DirectoryReaderTest {
 
     @AfterAll
     static void clean() {
-//        Directory.clean();
+        Directory.clean();
     }
 
     @BeforeEach

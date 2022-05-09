@@ -50,9 +50,7 @@ public final class App {
         Locale locale = new Locale("ru");
         ResourceBundle rb = ResourceBundle.getBundle("lang", locale);
         System.out.println(rb.getString("name"));
-//        ResourceBundle UI_LANGUAGE = ResourceBundle.getBundle("lang", CharsetControl.UTF_8);
-//        System.out.println(UI_LANGUAGE.getString("name"));
-        MainApplication.main(args);
+        // MainApplication.main(args);
         Settings.save();
     }
 }
