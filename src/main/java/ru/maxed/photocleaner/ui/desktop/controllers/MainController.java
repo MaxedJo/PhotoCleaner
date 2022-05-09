@@ -5,7 +5,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.WindowEvent;
@@ -40,7 +42,6 @@ public class MainController implements Initializable {
      */
     private final ObservableList<CheckedFile> mainOriginFileList =
             MainApplication.getOriginFileList();
-    int test = 0;
     /**
      * Список файлов для обработки.
      */
@@ -92,6 +93,7 @@ public class MainController implements Initializable {
                 Settings.update(Settings.PROCESSED_EXTENSION,
                         processedExtension.getText());
             };
+    private Node[] chooser;
     /**
      * Кнопка переключения фильтра файлов оригиналов.
      */
@@ -175,16 +177,33 @@ public class MainController implements Initializable {
         }
     }
 
+    @FXML
+    protected void switchTarget(KeyEvent keyEvent) {
+        switch (keyEvent.getCode()) {
+            case ENTER -> onEnter();
+            case TAB -> onTab(keyEvent);
+        }
+    }
+
+    private void onTab(KeyEvent keyEvent) {
+        for (int i = 0; i < chooser.length; i++) {
+            if (chooser[i].equals(keyEvent.getTarget())) {
+                chooser[(i + 1) % chooser.length].requestFocus();
+                break;
+            }
+        }
+    }
+
     /**
      * Переключение между полями ввода ("Enter").
      */
-    @FXML
     protected void onEnter() {
         boolean mustOpen = true;
         for (int i = 0; i < inputs.length; i++) {
-            if (inputs[i % inputs.length].getText().equals("")) {
+            if (inputs[i % inputs.length].getText().equals("") || inputs[i % inputs.length].getText() == null) {
                 inputs[i % inputs.length].requestFocus();
                 mustOpen = false;
+                break;
             }
         }
         if (mustOpen) {
@@ -337,6 +356,13 @@ public class MainController implements Initializable {
                 originExtension,
                 processedExtension
         };
+        chooser = new Node[]
+                {
+                        pathInput,
+                        originExtension,
+                        processedExtension,
+                        openButton
+                };
         mainCounter = new Counter(deleteButton, originListCounter, processedListCounter);
         addListeners(originFileList, ListKey.ORIGIN);
         addListeners(processedFileList, ListKey.PROCESSED);

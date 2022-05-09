@@ -6,10 +6,10 @@
 <?import javafx.scene.layout.*?>
 <?import java.lang.String?>
 <VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="root" prefHeight="535.0" prefWidth="763.0" stylesheets="@../styles.css"
-      xmlns="http://javafx.com/javafx/17" fx:controller="ru.maxed.photocleaner.ui.desktop.controllers.MainController">
+      xmlns="http://javafx.com/javafx/16" fx:controller="ru.maxed.photocleaner.ui.desktop.controllers.MainController">
     <!--suppress JavaFxUnresolvedFxIdReference -->
     <HBox fx:id="buttonBox">
-        <TextField fx:id="pathInput" onAction="#onEnter">
+        <TextField fx:id="pathInput" onKeyPressed="#switchTarget">
             <HBox.hgrow>ALWAYS</HBox.hgrow>
             <tooltip>
                 <Tooltip text="%destination"/>
@@ -20,7 +20,8 @@
                 <Tooltip text="%explore"/>
             </tooltip>
         </Button>
-        <Button fx:id="openButton" mnemonicParsing="false" onAction="#onOpenButtonClick" styleClass="button-image">
+        <Button fx:id="openButton" mnemonicParsing="false" onAction="#onOpenButtonClick" onKeyPressed="#switchTarget"
+                styleClass="button-image">
             <tooltip>
                 <Tooltip text="%refresh"/>
             </tooltip>
@@ -59,7 +60,7 @@
         <VBox fx:id="originListBox" styleClass="listVBox">
             <HBox.hgrow>ALWAYS</HBox.hgrow>
             <HBox styleClass="extensionHbox">
-                <TextField fx:id="originExtension" onAction="#onEnter" styleClass="extensionInput">
+                <TextField fx:id="originExtension" onKeyPressed="#switchTarget" styleClass="extensionInput">
                 </TextField>
                 <ToggleButton fx:id="originFilter" mnemonicParsing="false" onAction="#onFilterButtonClick"
                               text="ToggleButton">
@@ -83,7 +84,7 @@
         <VBox styleClass="listVBox">
             <HBox.hgrow>ALWAYS</HBox.hgrow>
             <HBox styleClass="extensionHbox">
-                <TextField fx:id="processedExtension" onAction="#onEnter" styleClass="extensionInput"/>
+                <TextField fx:id="processedExtension" onKeyPressed="#switchTarget" styleClass="extensionInput"/>
                 <ToggleButton fx:id="processedFilter" mnemonicParsing="false" onAction="#onFilterButtonClick"
                               text="ToggleButton">
                     <styleClass>
