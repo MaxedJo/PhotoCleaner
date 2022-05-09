@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
+import ru.maxed.photocleaner.core.utility.Settings;
 import ru.maxed.photocleaner.ui.desktop.components.PhotoStage;
 import ru.maxed.photocleaner.ui.desktop.controllers.MainController;
 
@@ -69,11 +70,10 @@ public final class MainApplication extends Application {
      */
     @Override
     public void start(final Stage stage) throws IOException {
-        Application.setUserAgentStylesheet(STYLESHEET_CASPIAN);
-        //Application.setUserAgentStylesheet(STYLESHEET_MODENA);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
                 "/ru/maxed/photocleaner/fxml/main-view.fxml"
         ));
+        fxmlLoader.setResources(Settings.getLangBundle());
         Scene scene = new Scene(fxmlLoader.load());
         PhotoStage.cast(stage);
         stage.setScene(scene);

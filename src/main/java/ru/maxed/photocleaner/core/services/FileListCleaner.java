@@ -1,6 +1,7 @@
 package ru.maxed.photocleaner.core.services;
 
 import javafx.collections.ObservableList;
+import ru.maxed.photocleaner.LangLib;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
 import ru.maxed.photocleaner.core.exeptions.TestException;
 
@@ -32,7 +33,7 @@ public final class FileListCleaner {
                 iterator.remove();
                 if (!file.delete()) {
                     throw new TestException(
-                            "Не удалос удалить " + file.getName()
+                            LangLib.DELETE_ERROR + " " + file.getName()
                     );
                 }
             }

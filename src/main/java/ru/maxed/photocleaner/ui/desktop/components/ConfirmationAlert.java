@@ -6,6 +6,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import ru.maxed.photocleaner.LangLib;
 import ru.maxed.photocleaner.MainApplication;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
 
@@ -34,11 +35,11 @@ public class ConfirmationAlert extends Alert {
         Image image = new Image(iconStream);
         Stage stage = (Stage) this.getDialogPane().getScene().getWindow();
         stage.getIcons().add(image);
-        this.setTitle("Подтверждение");
-        this.setHeaderText("Вы действительно хотите удалить данные файлы?");
+        this.setTitle(LangLib.CONFIRMATION.toString());
+        this.setHeaderText(LangLib.DELETE_CONFIRM_MESSAGE.toString());
         Button cancelButton =
                 (Button) this.getDialogPane().lookupButton(ButtonType.CANCEL);
-        cancelButton.setText("Отмена");
+        cancelButton.setText(LangLib.CANCEL.toString());
         preparedToDelete.getItems().clear();
         for (CheckedFile file : MainApplication.getOriginFileList()) {
             if (file.isMustDelete()) {

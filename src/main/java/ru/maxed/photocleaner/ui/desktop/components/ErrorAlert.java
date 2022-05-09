@@ -4,6 +4,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import ru.maxed.photocleaner.LangLib;
 
 import java.io.InputStream;
 
@@ -20,7 +21,7 @@ public class ErrorAlert extends Alert {
         super(AlertType.ERROR, contentText, ButtonType.OK);
         this.setHeaderText(null);
         this.setContentText(contentText);
-        this.setTitle("Ошибка");
+        this.setTitle(LangLib.ERROR.toString());
         InputStream iconStream = getClass().getResourceAsStream(
                 "/ru/maxed/photocleaner/images/icon.png"
         );

@@ -2,6 +2,7 @@ package ru.maxed.photocleaner.ui.desktop.components;
 
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import ru.maxed.photocleaner.LangLib;
 
 import java.io.InputStream;
 
@@ -18,7 +19,7 @@ public class PhotoStage extends Stage {
         );
         assert iconStream != null;
         Image image = new Image(iconStream);
-        this.setTitle("Photo Сleaner");
+        this.setTitle(LangLib.TITLE.toString());
         this.getIcons().add(image);
     }
 

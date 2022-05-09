@@ -1,14 +1,13 @@
 package ru.maxed.photocleaner.core.utility;
 
+import ru.maxed.photocleaner.LangLib;
 import ru.maxed.photocleaner.core.exeptions.TestException;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.EnumMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * Класс работы с файлом настроек.
@@ -18,6 +17,7 @@ public final class Settings extends Properties {
      * Ключ настройки директории.
      */
     public static final String PATH = "path";
+    public static final String LANG = "languageCode";
     /**
      * Ключ настройки расширения оригинального файла.
      */
@@ -40,6 +40,7 @@ public final class Settings extends Properties {
      */
     private static final Map<Mode, File> SETTINGS_PLACES =
             new EnumMap<>(Mode.class);
+    private static ResourceBundle lang = ResourceBundle.getBundle("lang", new Locale(System.getProperty("user.language")));
     /**
      * Инициализированы ли настройки.
      */
@@ -58,6 +59,18 @@ public final class Settings extends Properties {
      */
     private Settings() {
         throw new IllegalStateException("Utility class");
+    }
+
+    public static ResourceBundle getLangBundle() {
+        return lang;
+    }
+
+    public static void langLoad(Locale locale) {
+        lang = ResourceBundle.getBundle("lang", locale);
+    }
+
+    public static String getLocalized(String key) {
+        return lang.getString(key);
     }
 
     private static void init() {
@@ -91,9 +104,6 @@ public final class Settings extends Properties {
      * @throws IOException Ошибка при чтении
      */
     public static void load() throws IOException {
-        //-d
-        //Запуска
-        //глобал
         if (!isInitialised) {
             init();
         }
@@ -107,6 +117,8 @@ public final class Settings extends Properties {
                     new FileInputStream(SETTINGS_PLACES.get(Mode.ABS))
             );
         }
+        if (PROPERTIES.getProperty(LANG) != null)
+            langLoad(new Locale(PROPERTIES.getProperty(LANG)));
     }
 
 
@@ -122,7 +134,7 @@ public final class Settings extends Properties {
             boolean isCreated = parent.mkdirs();
             if (!isCreated) {
                 throw new TestException(
-                        "Не удалось создать расположение для папки настроек"
+                        LangLib.CONFIG_DESTINATION_ERROR.toString()
                 );
             }
         }
@@ -130,7 +142,7 @@ public final class Settings extends Properties {
             return;
         }
         try (var fos = new FileOutputStream(settingsFile)) {
-            PROPERTIES.storeToXML(fos, "Базовые настройки");
+            PROPERTIES.storeToXML(fos, LangLib.CONFIG_MESSAGE.toString());
         } catch (IOException e) {
             throw new TestException(e.getMessage());
         }

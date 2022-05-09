@@ -1,6 +1,7 @@
 package ru.maxed.photocleaner.core.services;
 
 import javafx.collections.ObservableList;
+import ru.maxed.photocleaner.LangLib;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
 import ru.maxed.photocleaner.core.exeptions.TestException;
 
@@ -72,7 +73,7 @@ public final class DirectoryReader {
         if (firstEntry
                 && (processedFileList.size() + originFileList.size() == 0)) {
             throw new TestException(
-                    "По данному пути подходящих файлов не найдено"
+                    LangLib.FILES_NOT_FOUND_ERROR.toString()
             );
         }
     }

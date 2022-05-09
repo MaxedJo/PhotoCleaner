@@ -32,12 +32,12 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>18-ea+2</version>
+            <version>18.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>18-ea+2</version>
+            <version>18.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -60,8 +60,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <source>17</source>
+                    <target>17</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -97,7 +97,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <finalName>${project.artifactId}-${buildNumber}-shaded</finalName>
+                    <finalName>${project.artifactId}-shaded</finalName>
                     <shadedArtifactAttached>true</shadedArtifactAttached>
                     <shadedClassifierName>shaded</shadedClassifierName>
                     <transformers>
@@ -121,7 +121,7 @@
                         </goals>
                         <configuration>
                             <headerType>gui</headerType>
-                            <jar>${project.build.directory}/${project.artifactId}-${buildNumber}-shaded.jar</jar>
+                            <jar>${project.build.directory}/${project.artifactId}-shaded.jar</jar>
                             <outfile>${project.build.directory}/${project.name}.exe</outfile>
                             <dontWrapJar>false</dontWrapJar>
                             <downloadUrl>https://www.oracle.com/java/technologies/downloads/</downloadUrl>

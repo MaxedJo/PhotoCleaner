@@ -5,7 +5,6 @@ import ru.maxed.photocleaner.core.utility.Settings;
 
 import java.io.IOException;
 import java.util.Locale;
-import java.util.ResourceBundle;
 
 /**
  * Главный класс программы.
@@ -43,14 +42,15 @@ public final class App {
                     Settings.changeDist(Settings.Mode.REL);
                     Settings.load();
                 }
+            } else if ("-l".equals(args[i])) {
+                String set = args[++i];
+                Settings.update(Settings.LANG, set);
+                Settings.langLoad(new Locale(set));
             }
             i++;
         }
         Settings.update(Settings.PATH, path);
-        Locale locale = new Locale("ru");
-        ResourceBundle rb = ResourceBundle.getBundle("lang", locale);
-        System.out.println(rb.getString("name"));
-        // MainApplication.main(args);
+        MainApplication.main(args);
         Settings.save();
     }
 }

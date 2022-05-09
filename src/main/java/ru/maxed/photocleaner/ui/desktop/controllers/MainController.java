@@ -5,25 +5,16 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.WindowEvent;
+import ru.maxed.photocleaner.LangLib;
 import ru.maxed.photocleaner.ListKey;
 import ru.maxed.photocleaner.MainApplication;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
 import ru.maxed.photocleaner.core.exeptions.TestException;
-import ru.maxed.photocleaner.core.services.CopyOfOriginSelector;
-import ru.maxed.photocleaner.core.services.DirectoryReader;
-import ru.maxed.photocleaner.core.services.ExtensionValidator;
-import ru.maxed.photocleaner.core.services.FileListCleaner;
-import ru.maxed.photocleaner.core.services.FileListComparator;
-import ru.maxed.photocleaner.core.services.MarkCleaner;
+import ru.maxed.photocleaner.core.services.*;
 import ru.maxed.photocleaner.core.utility.Settings;
 import ru.maxed.photocleaner.ui.desktop.components.ConfirmationAlert;
 import ru.maxed.photocleaner.ui.desktop.components.ErrorAlert;
@@ -216,7 +207,7 @@ public class MainController implements Initializable {
             File dir = new File(path);
             if (!dir.isDirectory()) {
                 throw new TestException(
-                        "Неправильный путь,введите путь заного"
+                        LangLib.ERROR_WRONG_PATH.toString()
                 );
             }
             CheckedFile.setMainPath(dir.getAbsolutePath());
@@ -348,9 +339,9 @@ public class MainController implements Initializable {
         mainCounter = new Counter(deleteButton, originListCounter, processedListCounter);
         addListeners(originFileList, ListKey.ORIGIN);
         addListeners(processedFileList, ListKey.PROCESSED);
-        pathInput.setPromptText("Введите путь");
-        originExtension.setPromptText("Эталонное расширение");
-        processedExtension.setPromptText("Расширение для обработки");
+        pathInput.setPromptText(LangLib.PATH_PLACEHOLDER.toString());
+        originExtension.setPromptText(LangLib.ORIGIN_EXTENSION_PLACEHOLDER.toString());
+        processedExtension.setPromptText(LangLib.PROCESSED_EXTENSION_PLACEHOLDER.toString());
         pathInput.setText(Settings.get(Settings.PATH));
         originExtension.setText(Settings.get(Settings.ORIGIN_EXTENSION));
         processedExtension.setText(Settings.get(Settings.PROCESSED_EXTENSION));

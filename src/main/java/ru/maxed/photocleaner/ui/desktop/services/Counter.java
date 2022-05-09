@@ -6,7 +6,10 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import ru.maxed.photocleaner.LangLib;
 import ru.maxed.photocleaner.ListKey;
+
+import java.text.MessageFormat;
 
 public class Counter {
 
@@ -21,7 +24,7 @@ public class Counter {
 
         @Override
         protected String computeValue() {
-            return "Выделено " + processedCounter.get() + " из " + processedMax.get();
+            return MessageFormat.format(LangLib.COUNTER_LABEL.toString(), processedCounter.get(), processedMax.get());
         }
     };
     StringBinding originLabelText = new StringBinding() {
@@ -31,7 +34,7 @@ public class Counter {
 
         @Override
         protected String computeValue() {
-            return "Выделено " + originCounter.get() + " из " + originMax.get();
+            return MessageFormat.format(LangLib.COUNTER_LABEL.toString(), originCounter.get(), originMax.get());
         }
     };
     IntegerBinding mainCounter = new IntegerBinding() {
