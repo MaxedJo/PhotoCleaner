@@ -77,6 +77,7 @@ public class FilePane extends BorderPane {
         check.setOnAction(e -> changeCheck());
     }
 
+
     /**
      * Сеттер состояния выделения.
      *

@@ -55,6 +55,11 @@ public class Counter {
         handledButton.setDisable(true);
     }
 
+    public void reInit() {
+        processedCounter.set(0);
+        originCounter.set(0);
+    }
+
     public void change(Boolean rise, ListKey key) {
         int value = Boolean.TRUE.equals(rise) ? 1 : -1;
         if (key.equals(ListKey.ORIGIN)) {

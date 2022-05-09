@@ -49,7 +49,6 @@ public final class App {
             }
             i++;
         }
-        Settings.update(Settings.PATH, path);
         MainApplication.main(args);
         Settings.save();
     }

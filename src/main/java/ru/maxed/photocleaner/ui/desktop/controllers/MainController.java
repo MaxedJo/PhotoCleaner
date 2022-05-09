@@ -225,6 +225,7 @@ public class MainController implements Initializable {
             mainProcessedFileList.setAll(
                     mainProcessedFileList.stream().sorted().toList()
             );
+            mainCounter.reInit();
             loadList(
                     mainProcessedFileList,
                     processedFileList,
