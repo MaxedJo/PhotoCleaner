@@ -1,0 +1,16 @@
+[Desktop Action move-file]
+
+Exec=photoclean -d "%U" -s REL
+
+
+Name=Photo Cleaner
+Icon=document-send
+
+[Desktop Entry]
+Actions=move-file
+
+MimeType=inode/directory;
+
+ServiceTypes=KonqPopupMenu/Plugin
+Type=Service
+X-KDE-Priority=TopLevel
