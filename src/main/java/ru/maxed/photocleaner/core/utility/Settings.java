@@ -2,6 +2,7 @@ package ru.maxed.photocleaner.core.utility;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import org.apache.commons.lang3.StringUtils;
 import ru.maxed.photocleaner.LangLib;
 import ru.maxed.photocleaner.core.exeptions.TestException;
 
@@ -14,6 +15,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
+
 
 /**
  * Класс работы с файлом настроек.
@@ -78,14 +80,14 @@ public final class Settings extends Properties {
     public static String get(final String key, Mode modeKey) {
         switch (modeKey) {
             case REL -> {
-                if (PROPERTIES_RELATIVE.getProperty(key) == null || PROPERTIES_RELATIVE.getProperty(key).isBlank()) {
+                if (StringUtils.isBlank(PROPERTIES_RELATIVE.getProperty(key))) {
                     return get(key, Mode.ABS);
                 } else {
                     return PROPERTIES_RELATIVE.getProperty(key);
                 }
             }
             case ABS -> {
-                if (PROPERTIES_ABSOLUTE.getProperty(key) == null || PROPERTIES_ABSOLUTE.getProperty(key).isBlank()) {
+                if (StringUtils.isBlank(PROPERTIES_ABSOLUTE.getProperty(key))) {
                     return get(key, Mode.GLOBAL);
                 } else {
                     return PROPERTIES_ABSOLUTE.getProperty(key);

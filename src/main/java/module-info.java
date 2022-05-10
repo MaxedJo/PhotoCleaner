@@ -4,9 +4,7 @@
 module ru.maxed.photocleaner {
     requires javafx.controls;
     requires javafx.fxml;
-
-
-    opens ru.maxed.photocleaner to javafx.fxml;
+    requires org.apache.commons.lang3;
     exports ru.maxed.photocleaner;
     exports ru.maxed.photocleaner.ui.desktop.controllers;
     opens ru.maxed.photocleaner.ui.desktop.controllers to javafx.fxml;

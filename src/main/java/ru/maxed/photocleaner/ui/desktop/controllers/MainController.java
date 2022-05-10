@@ -16,6 +16,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.WindowEvent;
+import org.apache.commons.lang3.StringUtils;
 import ru.maxed.photocleaner.LangLib;
 import ru.maxed.photocleaner.ListKey;
 import ru.maxed.photocleaner.MainApplication;
@@ -210,7 +211,7 @@ public class MainController implements Initializable {
     protected void onEnter() {
         boolean mustOpen = true;
         for (int i = 0; i < inputs.length; i++) {
-            if (inputs[i % inputs.length].getText().equals("") || inputs[i % inputs.length].getText() == null) {
+            if (StringUtils.isBlank(inputs[i % inputs.length].getText())) {
                 inputs[i % inputs.length].requestFocus();
                 mustOpen = false;
                 break;
