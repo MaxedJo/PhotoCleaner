@@ -6,7 +6,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
@@ -16,7 +21,12 @@ import ru.maxed.photocleaner.ListKey;
 import ru.maxed.photocleaner.MainApplication;
 import ru.maxed.photocleaner.core.entities.CheckedFile;
 import ru.maxed.photocleaner.core.exeptions.TestException;
-import ru.maxed.photocleaner.core.services.*;
+import ru.maxed.photocleaner.core.services.CopyOfOriginSelector;
+import ru.maxed.photocleaner.core.services.DirectoryReader;
+import ru.maxed.photocleaner.core.services.ExtensionValidator;
+import ru.maxed.photocleaner.core.services.FileListCleaner;
+import ru.maxed.photocleaner.core.services.FileListComparator;
+import ru.maxed.photocleaner.core.services.MarkCleaner;
 import ru.maxed.photocleaner.core.utility.Settings;
 import ru.maxed.photocleaner.ui.desktop.components.ConfirmationAlert;
 import ru.maxed.photocleaner.ui.desktop.components.ErrorAlert;
@@ -87,7 +97,7 @@ public class MainController implements Initializable {
      */
     private final javafx.event.EventHandler<WindowEvent> closeEventHandler =
             event -> {
-                Settings.update(Settings.PATH, pathInput.getText());
+                Settings.changeDest(pathInput.getText());
                 Settings.update(Settings.ORIGIN_EXTENSION,
                         originExtension.getText());
                 Settings.update(Settings.PROCESSED_EXTENSION,
